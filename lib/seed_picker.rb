@@ -1,6 +1,6 @@
-require "seed_picker/version"
-require 'seed_picker/cli.rb'
-
-module SeedPicker
-  # Your code goes here...
-end
+require_relative "./seed_picker/version"
+require_relative './seed_picker/cli.rb'
+#
+# module SeedPicker
+#   # Your code goes here...
+# end

@@ -1,5 +1,6 @@
 require_relative "./seed_picker/version"
-require_relative './seed_picker/cli.rb'
+require_relative "./seed_picker/seeds"
+require_relative "./seed_picker/cli"
 #
 # module SeedPicker
 #   # Your code goes here...

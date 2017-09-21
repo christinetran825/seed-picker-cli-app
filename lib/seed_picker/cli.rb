@@ -1,7 +1,7 @@
 class SeedPicker::CLI
 
   def call
-    #SeedPicker::Scraper.new.
+    # SeedPicker::Scraper.new
     puts "Welcome to Baker Creek Heirloom Seeds RareSeeds. \n Here is a collection of our Vegetable seeds:"
     list_seeds
     choose_letter
@@ -17,11 +17,12 @@ class SeedPicker::CLI
   end
 
   def list_seeds
-    # user seeds a list of vegetable seeds
+    # user sees a list of vegetable seeds
     ## scrape the seeds into groups starting with the seeds' name's first letter
     puts "A: Amaranth, Artichoke & Cardoon, Asparagus"
     puts "B: Beans, Beetroot, Bok Choy, Broccoli, Brussels Sprouts"
     puts "C: Cabbage, Carrots, Cauliflower, Celery & Celeriac, Chicory, Chinese Cabbage, Collards, Corn, Cowpeas, Cucumbers"
+    @seeds = SeedPicker::Scraper
   end
 
   def choose_letter

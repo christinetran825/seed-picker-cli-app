@@ -1,32 +1,38 @@
 class SeedPicker::Scraper
 
-  # binding.pry
+  binding.pry
+  #doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/"))
+  # doc.css(".sitebody .grid_4").first.css("h3.itemTitle").first.css("a").attr('href').value #Link of Parent seed
+  # doc.css(".sitebody .grid_4").first.css("h3.itemTitle").first.css("a").text ##Name of Parent Seed
+  # doc.css(".sitebody .grid_4").collect.with_index do |the_seeds, idx|
+  #   seed_link = the_seeds.css("h3.itemTitle a").attr('href').value
+  #   seed_name = the_seeds.css("h3.itemTitle a").text
+  #   "(#{idx}). #{seed_name}"
+  # end
 
   def get_page
-    # binding.pry
-    doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/"))
-
-    # doc.css(".sitebody").first.css(".grid_4").first.css(".itemTitle a").attr('href').value #Link of Parent seed
-    # doc.css(".sitebody").first.css(".grid_4").first.css(".itemTitle a").text ##Name of Parent Seed
+    Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/"))
   end
 
   def get_seeds
-    self.get_page.css(".itemTitle a")
+    self.get_page.css(".sitebody .grid_4")
   end
 
   def make_seeds
-    self.get_seeds.collect do |seeds|
-      grouped_seeds = SeedPicker::Seeds.new
-      grouped_seeds.parent_seed_link = seeds['href'] #Link of Parent seed
-      grouped_seeds.parent_seed_name = seeds.text #Name of Parent seed
+    # binding.pry
+    self.get_seeds.collect.with_index do |the_seeds, idx|
+      # grouped_seeds = SeedPicker::Seeds.new
+      seed_link = the_seeds.css("h3.itemTitle a").attr('href').value
+      seed_name = the_seeds.css("h3.itemTitle a").text
+      idx += 1
+      "(#{idx}). #{seed_name}"
     end
   end
 
   def print_seeds
     self.make_seeds
-    SeedPicker::Seeds.all.each do |grouped_seeds|
-      puts "Seed Link: #{grouped_seeds.parent_seed_link}"
-      puts "Seed Name: #{grouped_seeds.parent_seed_name}"
+    SeedPicker::Seeds.all.each do |collection_of_seeds|
+      collection_of_seeds
     end
   end
 

@@ -24,18 +24,32 @@ class SeedPicker::Scraper
       # grouped_seeds = SeedPicker::Seeds.new
       seed_link = the_seeds.css("h3.itemTitle a").attr('href').value
       seed_name = the_seeds.css("h3.itemTitle a").text
-      idx += 1
-      "(#{idx}). #{seed_name}"
+      seed_name
+      # idx += 1
+      # "(#{idx}). #{seed_name}"
     end
   end
+
+SeedPicker::Scraper.new.make_seeds
+SeedPicker::Scraper.new.make_seeds[0]
 
   def print_seeds
     self.make_seeds
-    SeedPicker::Seeds.all.each do |collection_of_seeds|
-      collection_of_seeds
+
+    self.make_seeds.collect.with_index do |parent_seeds, idx|
+      parent_seeds[0]
     end
+
+    # self.make_seeds.collect.with_index do |parent_seeds, idx|
+    #   parent_seeds.split(",")
+    #   # idx += 1
+    #   # "(#{idx}). #{seed_name}"
+    # end
   end
+
+
 
 end
 
-SeedPicker::Scraper.new.print_seeds
+
+# SeedPicker::Scraper.new.print_seeds

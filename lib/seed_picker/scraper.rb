@@ -30,26 +30,13 @@ class SeedPicker::Scraper
     end
   end
 
-SeedPicker::Scraper.new.make_seeds
-SeedPicker::Scraper.new.make_seeds[0]
-
   def print_seeds
-    self.make_seeds
-
-    self.make_seeds.collect.with_index do |parent_seeds, idx|
+    self.make_seeds.group_by do |parent_seeds, idx|
       parent_seeds[0]
     end
-
-    # self.make_seeds.collect.with_index do |parent_seeds, idx|
-    #   parent_seeds.split(",")
-    #   # idx += 1
-    #   # "(#{idx}). #{seed_name}"
-    # end
   end
-
-
 
 end
 
 
-# SeedPicker::Scraper.new.print_seeds
+SeedPicker::Scraper.new.print_seeds

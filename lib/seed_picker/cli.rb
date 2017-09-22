@@ -1,7 +1,7 @@
 class SeedPicker::CLI
 
   def call
-    # SeedPicker::Scraper.new
+    SeedPicker::Scraper.new.print_seeds
     puts "Welcome to Baker Creek Heirloom Seeds RareSeeds. \n Here is a collection of our Vegetable seeds:"
     list_seeds
     choose_letter
@@ -22,7 +22,7 @@ class SeedPicker::CLI
     puts "A: Amaranth, Artichoke & Cardoon, Asparagus"
     puts "B: Beans, Beetroot, Bok Choy, Broccoli, Brussels Sprouts"
     puts "C: Cabbage, Carrots, Cauliflower, Celery & Celeriac, Chicory, Chinese Cabbage, Collards, Corn, Cowpeas, Cucumbers"
-    @seeds = SeedPicker::Scraper
+
   end
 
   def choose_letter
@@ -46,7 +46,7 @@ class SeedPicker::CLI
     # user is prompted with a choice
     puts "Which vegetable seed would you like to view? Please enter a number, enter back to go back to the group of seeds, or enter exit to exit."
     # user inputs the number corresponding to the parent seed they want to view
-    input = gets.chomp
+    input = gets.chomp.to_i
 
     # build the list
     # user has option to go back = returns to choose_letter
@@ -59,7 +59,7 @@ class SeedPicker::CLI
     # user chooses the variety seed within the number/integer input
     # user is prompted with a choice
     puts "Which variety of {choose_parent_seed_input} would you like to view? Please enter a number, enter back to go back to the group of seeds, or enter exit to exit."
-    input = gets.chomp
+    input = gets.chomp.to_i
 
     # user inputs the number corresponding to the variety they want to view
     # user has option to go back = returns to choose_parent_seed
@@ -71,7 +71,7 @@ class SeedPicker::CLI
     # user chooses to view another seed or leave the site
     # user is prompted a question
     puts "Do you want to choose another seed? Enter Y or N."
-    input = gets.to_s.chomp
+    input = gets.chomp.to_s.upcase
       if input != "N"
         list_seeds
       else

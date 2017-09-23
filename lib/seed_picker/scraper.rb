@@ -1,6 +1,12 @@
 class SeedPicker::Scraper
 
-  binding.pry
+  # binding.pry
+
+    # Go to Main Vegetable Seed page, find the parent seed
+    # extract properties, group seeds by first letter of name
+    # instantiate a new seed
+
+    #go to variety vegetable seed
 
   # Main Vegetable Seed page
   # doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/"))
@@ -63,6 +69,5 @@ class SeedPicker::Scraper
   # end
 
 end
-SeedPicker::Scraper.new.make_links
 
 SeedPicker::Scraper.new.print_seeds

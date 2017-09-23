@@ -1,14 +1,12 @@
 class SeedPicker::CLI
 
   def call
-    SeedPicker::Scraper.new.print_seeds
     puts "Welcome to Baker Creek Heirloom Seeds RareSeeds. \n Here is a collection of our Vegetable seeds:"
     list_seeds
     choose_letter
     choose_parent_seed
     choose_variety
     choose_another_seed
-    list_seeds
     goodbye
   end
 
@@ -22,7 +20,7 @@ class SeedPicker::CLI
     puts "A: Amaranth, Artichoke & Cardoon, Asparagus"
     puts "B: Beans, Beetroot, Bok Choy, Broccoli, Brussels Sprouts"
     puts "C: Cabbage, Carrots, Cauliflower, Celery & Celeriac, Chicory, Chinese Cabbage, Collards, Corn, Cowpeas, Cucumbers"
-
+    SeedPicker::Scraper.new.print_seeds
   end
 
   def choose_letter

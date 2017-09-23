@@ -58,9 +58,13 @@ class SeedPicker::CLI
 
   def choose_list_of_variety
     puts ""
+    puts "^ - ^ Description"
+    puts "     -------- A - 1: Amaranth --------"
+    puts "     Description of seed"
+    puts ""
     puts "^ - ^ Please choose a variety by its number. Type back to go back to the group of seeds. Type exit to exit." # user is prompted with a choice
     puts ""
-    puts "     -------- A - 1: Amaranth --------" # user sees a list of all parent seeds with an index of 1.
+    puts "     -------- A - 1: Amaranth - Varieties --------" # user sees a list of all parent seeds with an index of 1.
     puts "     1. Aurelia's Verde"
     puts "     2. Dreadlocks Amaranth"
     puts "     3. Elena's Rojo Amaranth"
@@ -102,7 +106,7 @@ class SeedPicker::CLI
     else "DONE"
       goodbye
     end
-    
+
   end
 
   def goodbye

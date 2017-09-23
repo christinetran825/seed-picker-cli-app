@@ -1,34 +1,44 @@
 class SeedPicker::Seeds
 
-  attr_accessor :name, :description, :price, :url
+  attr_accessor :parent_name, :variety_name, :description, :price, :url
 
   @@all =[]
 
-  def initialize(name=nil, description=nil, price=nil, url=nil)
-    @name = name
+  def initialize(parent_name=nil, variety_name=nil, description=nil, price=nil, url=nil)
+    @parent_name = parent_name
+    @variety_name = variety_name
     @description = description
     @price = price
     @url = url
   end
 
-  def doc
-    @doc ||= Nokogiri::HTML(open(self.url))
-  end
+  # def self.scrape_seeds
+  #   # Go to Main Vegetable Seed page, find the parent seed
+  #   # extract properties, group seeds by first letter of name
+  #   # instantiate a new seed
+  #     #go to variety vegetable seed
+  #   seeds = []
+  #   seeds << self.scrape_parent_seeds
+  #   seeds << self.scrape_variety_seeds
+  #   seeds
+  # end
+  #
+  # def self.scrape_parent_seeds
+  #   SeedPicker::Scraper.new.print_seeds
+  # end
 
-  def self.today
-    seed_1 = self.new
-    seed_1 = name = "the first seed"
-    seed_1 = description "place text"
-    seed_1 = price "$2.50"
-    seed_1 = url = "the link"
 
-    seed_2 = self.new
-    seed_2 = name = "the 2nd seed"
-    seed_2 = description "place another text"
-    seed_2 = price "$4.50"
-    seed_2 = url = "the other link"
-
-    [seed_1, seed_2]
-  end
+  # def self.scrape_variety_seeds
+  #   set = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/amaranth/"))
+  #
+  #   seed = self.new
+  #   seed.description = set.css(".sitebody .grid_9 .mainContent").first.css("div#CT_Main_0_pnlHeading .sectionDesc p").first.text #description
+  #   # seed.parent_name = set.css(".sitebody .grid_9 .mainContent .hawksearch").first.css('title').text #parent seed name
+  #   seed.variety_name = set.css(".sitebody .grid_9 .mainContent .hawksearch .grid_4").first.css("h3.itemTitle a").text #variety name
+  #   seed.price = set.css(".sitebody .grid_9 .mainContent .hawksearch .grid_4").first.css(".itemMiniCart .itemPrice").text #variety price
+  #
+  #   seed
+  #
+  # end
 
 end

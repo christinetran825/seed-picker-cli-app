@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
-require './lib/seed_picker'
+require_relative '../lib/seed_picker'
 SeedPicker::CLI.new.call

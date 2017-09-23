@@ -29,7 +29,7 @@ class SeedPicker::Seeds
     doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/"))
 
     seed = self.new
-    # doc.css(".sitebody .grid_4 h3.itemTitle").first.css("a").attr('href').value #Link of Parent seed
+    seed.url = doc.css(".sitebody .grid_4 h3.itemTitle").first.css("a").attr('href').value #Link of Parent seed
     # doc.css(".sitebody .grid_4 h3.itemTitle").first.css("a").inner_text ##Name of Parent Seed
     seed.parent_seed_name = doc.css(".sitebody .grid_4 h3.itemTitle a").collect.with_index do |the_seeds, idx|
       # seed_link = the_seeds['href']
@@ -38,12 +38,12 @@ class SeedPicker::Seeds
     end
 
     seed
-    
+
   end
 
 
   def self.scrape_variety_seeds
-    set = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/amaranth/"))
+    set = Nokogiri::HTML(open(url))
 
     seed = self.new
     seed.parent_seed_description = set.css(".sitebody .grid_9 .mainContent").first.css("div#CT_Main_0_pnlHeading .sectionDesc p").first.text #description

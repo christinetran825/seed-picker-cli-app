@@ -36,6 +36,9 @@ class SeedPicker::Seeds
       seed_name = the_seeds.inner_text
       "(#{idx}). #{seed_name}"
     end
+
+    seed
+    
   end
 
 
@@ -43,10 +46,10 @@ class SeedPicker::Seeds
     set = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/amaranth/"))
 
     seed = self.new
-    # set.css(".sitebody .grid_9 .mainContent").first.css("div#CT_Main_0_pnlHeading .sectionDesc p").first.text #description
+    seed.parent_seed_description = set.css(".sitebody .grid_9 .mainContent").first.css("div#CT_Main_0_pnlHeading .sectionDesc p").first.text #description
     # set.css(".sitebody .grid_9 .mainContent .hawksearch").first.css('title').text #parent seed name
-    # set.css(".sitebody .grid_9 .mainContent .hawksearch .grid_4").first.css("h3.itemTitle a").text #variety name
-    # set.css(".sitebody .grid_9 .mainContent .hawksearch .grid_4").first.css(".itemMiniCart .itemPrice").text #variety price
+    seed.variety_name = set.css(".sitebody .grid_9 .mainContent .hawksearch .grid_4").first.css("h3.itemTitle a").text #variety name
+    seed.variety_name_price = set.css(".sitebody .grid_9 .mainContent .hawksearch .grid_4").first.css(".itemMiniCart .itemPrice").text #variety price
 
     seed
 

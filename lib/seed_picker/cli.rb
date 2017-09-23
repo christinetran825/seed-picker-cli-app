@@ -1,8 +1,8 @@
 class SeedPicker::CLI
 
   def call
-    puts "Welcome to Baker Creek Heirloom Seeds RareSeeds. \n Here is a collection of our Vegetable seeds:"
-    list_seeds
+    # SeedPicker::Scraper.new.print_seeds
+    puts "Welcome to Baker Creek Heirloom Seeds RareSeeds."
     choose_letter
     choose_parent_seed
     choose_variety
@@ -10,71 +10,139 @@ class SeedPicker::CLI
     goodbye
   end
 
-  def exit
-
-  end
-
-  def list_seeds
-    # user sees a list of vegetable seeds
-    ## scrape the seeds into groups starting with the seeds' name's first letter
-    puts "A: Amaranth, Artichoke & Cardoon, Asparagus"
-    puts "B: Beans, Beetroot, Bok Choy, Broccoli, Brussels Sprouts"
-    puts "C: Cabbage, Carrots, Cauliflower, Celery & Celeriac, Chicory, Chinese Cabbage, Collards, Corn, Cowpeas, Cucumbers"
-    SeedPicker::Scraper.new.print_seeds
-  end
-
   def choose_letter
-    # user chooses the parent seed by its grouped letter
+    puts ""
+    puts "Please choose a seed by its letter. Please enter a letter from A-Z." # user is prompted with a demand
+    puts ""
+    puts "----- Vegetable Seeds -----"   # user sees a list of vegetable seeds
+    puts "A: Amaranth, Artichoke & Cardoon, Asparagus"
+    SeedPicker::Scraper.new.print_seeds ## scrape the seeds into groups starting with the seeds' name's first letter
+    puts ""
 
-    # user is prompted with a choice
-    puts "Which group would you like to view? Please enter a letter from A-Z, enter back to go back to the list of seeds, or enter exit to exit."
     # user inputs the letter of the parent seed, that letter gives us a list of all the seeds within that letter starting with an index of 1.
-    input = gets.chomp.to_s.upcase
+    input = gets.strip.to_s.upcase
 
-    # build the list
-      # user has option to go back = returns to list_seeds
-    # user has option to exit = exits to goodbye
-    # user sees a list of all parent seeds within the input letter starting with an index of 1.
+    case input
+    when ("A"..."Z")
+      choose_parent_seed
+    when "exit"
+      goodbye
+    else
+      input = gets.strip.to_s.upcase
+    end
+
+      # if input != ("A"..."Z") # user enters a letter matching the parent seed name.
+      #   puts "Please enter a letter."
+      #   # input = gets.strip.to_s.upcase
+      # elsif input == "exit" # user has option to exit = exits to goodbye
+      #   goodbye
+      # else
+      #   choose_parent_seed # user sees a description of the parent seeds
+      # end
 
   end
 
   def choose_parent_seed
-    # user chooses the parent seed within the number/integer input
+    puts ""
+    puts "Please choose a seed by its number. Type back to go back to the group of seeds. Or type exit to exit." # user is prompted with a choice
+    puts ""
+    puts "----- Seeds in Group A -----" # user sees a list of all parent seeds with an index of 1.
+    puts "1. Amaranth"
+    puts "2. Artichoke & Cardoon"
+    puts "3. Asparagus"
+    puts ""
 
-    # user is prompted with a choice
-    puts "Which vegetable seed would you like to view? Please enter a number, enter back to go back to the group of seeds, or enter exit to exit."
     # user inputs the number corresponding to the parent seed they want to view
-    input = gets.chomp.to_i
 
-    # build the list
-    # user has option to go back = returns to choose_letter
-    # user has option to exit = exits to goodbye
-    # user sees a description of the parent seeds
-    # user sees a list of the varieties grouped by the starting with an index of 1.
+    input = gets.strip.to_i
+
+    case input
+    when (1..10)
+      choose_variety
+    when "exit"
+      goodbye
+    when "back"
+      choose_parent_seed
+    else
+      input = gets.strip.to_s.upcase
+    end
+
+      # if input != (1..10) # user enters a number matching the parent seed name.
+      #   puts "Please enter a number."
+      #   # input = gets.strip.to_i
+      # elsif input == "back"   # user has option to go back = returns to choose_letter
+      #   choose_letter
+      # elsif input == "exit" # user has option to exit = exits to goodbye
+      #   goodbye
+      # else
+      #   choose_variety # user sees a description of the parent seeds
+      # end
+
   end
 
   def choose_variety
-    # user chooses the variety seed within the number/integer input
-    # user is prompted with a choice
-    puts "Which variety of {choose_parent_seed_input} would you like to view? Please enter a number, enter back to go back to the group of seeds, or enter exit to exit."
-    input = gets.chomp.to_i
+    puts ""
+    puts "Please choose a variety by its number. Type back to go back to the main list of seeds. Or type exit to exit." # user is prompted with a choice
+    puts ""
+    puts "--- A - 1: Amaranth ---" # user sees a list of all parent seeds with an index of 1.
+    puts "1. Aurelia's Verde"
+    puts "2. Dreadlocks Amaranth"
+    puts "3. Elena's Rojo Amaranth"
+    puts ""
 
     # user inputs the number corresponding to the variety they want to view
-    # user has option to go back = returns to choose_parent_seed
-    # user has option to exit = exits to goodbye
-    # user sees the variety's name, description, and price
+
+    input = gets.strip.to_i
+
+    case input
+    when (1..10)
+      choose_another_seed
+    when "exit"
+      goodbye
+    when "back"
+      choose_variety
+    else
+      input = gets.strip.to_s.upcase
+    end
+
+      # if input != (1..10) # user enters a number matching the parent seed name.
+      #   puts "Please enter a number."
+      #   # input = gets.strip.to_i
+      # elsif input == "back"   # user has option to go back = returns to choose_letter
+      #   choose_parent_seed
+      # elsif input == "exit" # user has option to exit = exits to goodbye
+      #   goodbye
+      # else
+      #   choose_another_seed # user sees the variety's name, description, and price
+      # end
+
   end
 
   def choose_another_seed
     # user chooses to view another seed or leave the site
-    # user is prompted a question
-    puts "Do you want to choose another seed? Enter Y or N."
-    input = gets.chomp.to_s.upcase
-      if input != "N"
-        list_seeds
-      else
-        goodbye
-      end
+    puts ""
+    puts "Do you want to choose another seed? Enter Y or N. Type back to go back to the variety of seeds. " # user is prompted a question
+    puts ""
+
+    input = gets.strip.to_s.upcase
+
+    case input
+    when "Y"
+      choose_letter
+    when "N"
+      goodbye
+    when "back"
+      choose_variety
+    else
+      input = gets.strip.to_s.upcase
+    end
+
+      # if input != "N"
+      #   choose_letter
+      # else
+      #   goodbye
+      # end
+
   end
 
   def goodbye

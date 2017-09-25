@@ -19,23 +19,18 @@ binding.pry
     end
   end
 
-  def group_parent_seeds #lists all the seeds grouped in letters in a hash
-    self.make_seeds.group_by { |first_letter| first_letter[0] }
-  end
-
-  def list_parent_seeds #user inputs a letter and method returns an array of parent seeds
-    self.group_parent_seeds
-    input = gets.strip.to_s.upcase
-    the_parent_seeds = self.group_parent_seeds[input] #hash from group_parent_seeds returns array of parent seeds from the input (which is the key)
-    the_parent_seeds.collect.with_index(1) do |parent_seeds, index|
-      "#{index}. #{parent_seeds}" #parent_seeds are listed by its index
+  def group_parent_seeds #lists all the seeds grouped by first letters in a hash
+    group_by_letter = self.make_seeds.group_by { |first_letter| first_letter[0] }
+    group_by_letter.collect do |key, value|
+      "#{key}: #{value}"
     end
   end
 
-  # def choose_parent_seed
-  # end
+  def choosen_parent_seed
+    
+  end
 
-  SeedPicker::Scraper.new.list_parent_seeds
+  SeedPicker::Scraper.new.choosen_parent_seed
 end
 
 # SeedPicker::Scraper.new.print_seeds => lists all the vegetable seeds in grouped letters as a hash. parent seeds are grouped in an array

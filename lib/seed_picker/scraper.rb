@@ -26,14 +26,16 @@ binding.pry
   def list_parent_seeds #user inputs a letter and method returns an array of parent seeds
     self.group_parent_seeds
     input = gets.strip.to_s.upcase
-    self.group_parent_seeds[input]
+    the_parent_seeds = self.group_parent_seeds[input] #hash from group_parent_seeds returns array of parent seeds from the input (which is the key)
+    the_parent_seeds.collect.with_index(1) do |parent_seeds, index|
+      "#{index}. #{parent_seeds}" #parent_seeds are listed by its index
+    end
   end
 
-  def choose_parent_seed
-    self.list_parent_seeds
-  end
+  # def choose_parent_seed
+  # end
 
-  SeedPicker::Scraper.new.choose_parent_seed
+  SeedPicker::Scraper.new.list_parent_seeds
 end
 
 # SeedPicker::Scraper.new.print_seeds => lists all the vegetable seeds in grouped letters as a hash. parent seeds are grouped in an array

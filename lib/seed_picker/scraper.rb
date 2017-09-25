@@ -10,7 +10,7 @@ binding.pry
 
   def make_seeds
     # binding.pry
-    self.get_seeds.collect.with_index do |the_seeds, idx|
+    self.get_seeds.collect.with_index do |the_seeds|
       seed_link = the_seeds['href']
       seed_name = the_seeds.inner_text
       seed_name
@@ -19,28 +19,21 @@ binding.pry
     end
   end
 
-  def print_seeds #lists all the seed grouped in letters in a hash
-    letter_group = self.make_seeds.group_by { |first_letter, parent_seeds| first_letter[0] }
-    letter_group.each do |key, value|
-      group_seeds = {}
-      group_seeds[key] = "#{value.join(" , ")}"
-      group_seeds
-    end
+  def group_parent_seeds #lists all the seeds grouped in letters in a hash
+    self.make_seeds.group_by { |first_letter| first_letter[0] }
+  end
+
+  def list_parent_seeds #user inputs a letter and method returns an array of parent seeds
+    self.group_parent_seeds
+    input = gets.strip.to_s.upcase
+    self.group_parent_seeds[input]
   end
 
   def choose_parent_seed
-    self.print_seeds
-    input = gets.strip.to_s.upcase
-    self.print_seeds[input]
+    self.list_parent_seeds
   end
 
-  def self.scrape_seeds
-    seeds = []
-    seeds << self.scrape_parent_seeds
-    # seeds << self.scrape_variety_seeds
-    seeds
-  end
-
+  SeedPicker::Scraper.new.choose_parent_seed
 end
 
 # SeedPicker::Scraper.new.print_seeds => lists all the vegetable seeds in grouped letters as a hash. parent seeds are grouped in an array

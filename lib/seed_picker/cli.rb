@@ -12,15 +12,11 @@ class SeedPicker::CLI
     puts ""
     puts "  ------------- Vegetable Seeds -------------"   # user sees a list of vegetable seeds
     # puts "  A: Amaranth, Artichoke & Cardoon, Asparagus"
-    grouped_seeds = SeedPicker::Scraper.new.print_seeds
-    puts grouped_seeds
-   ## scrape the seeds into groups starting with the seeds' name's first letter
+    puts SeedPicker::Scraper.new.print_seeds ## scrape the seeds into groups starting with the seeds' name's first letter
     puts ""
 
     # user inputs the letter of the parent seed, that letter gives us a list of all the seeds within that letter starting with an index of 1.
     input = gets.strip.to_s.upcase
-
-    grouped_seeds[input]
 
     case input
     when ("A"..."Z")
@@ -38,9 +34,9 @@ class SeedPicker::CLI
     puts "^ - ^ Please choose a seed by its number. Type back to go back to the list of seeds. Type exit to exit." # user is prompted with a choice
     puts ""
     puts "     ----- Group A -----" # user sees a list of all parent seeds with an index of 1.
-    puts "     1. Amaranth"
-    puts "     2. Artichoke & Cardoon"
-    puts "     3. Asparagus"
+    # puts "     1. Amaranth"
+    # puts "     2. Artichoke & Cardoon"
+    # puts "     3. Asparagus"
     puts ""
 
     # user inputs the number corresponding to the parent seed they want to view

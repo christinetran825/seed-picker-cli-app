@@ -1,7 +1,5 @@
 class SeedPicker::Seeds
 
-  # binding.pry
-
   attr_accessor :parent_seed_name, :parent_seed_description, :variety_name, :variety_name_description, :price, :parent_seed_url, :variety_seed_url
 
   @@all = []
@@ -16,23 +14,7 @@ class SeedPicker::Seeds
     @variety_seed_url = variety_seed_url
   end
 
-  def self.group_by_letter #lists all the seed grouped in letters in a hash
-    grouped_seeds = SeedPicker::Scraper.new.print_seeds
-    input = gets.strip.to_s.upcase
-    grouped_seeds[input]
-
-  end
-
-  def self.group_by_parent_seed
-
-  end
-
-  def self.scrape_seeds
-    seeds = []
-    seeds << self.scrape_parent_seeds
-    # seeds << self.scrape_variety_seeds
-    seeds
-  end
+  
 
   # def self.scrape_variety_seeds
   #   set = Nokogiri::HTML(open(url))

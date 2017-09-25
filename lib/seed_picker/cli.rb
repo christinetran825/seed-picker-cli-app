@@ -6,7 +6,7 @@ class SeedPicker::CLI
     choose_letter
   end
 
-  def choose_letter
+  def choose_a_letter
     puts ""
     puts "^ - ^ Please choose a group of seeds by its letter from A-Z. Type exit to exit." # user is prompted with a demand
     puts ""
@@ -20,7 +20,7 @@ class SeedPicker::CLI
 
     case input
     when ("A"..."Z")
-      choose_parent_seed
+      choose_a_parent_seed
     when "EXIT"
       goodbye
     else
@@ -29,7 +29,7 @@ class SeedPicker::CLI
 
   end
 
-  def choose_parent_seed
+  def choose_a_parent_seed
     puts ""
     puts "^ - ^ Please choose a seed by its number. Type back to go back to the list of seeds. Type exit to exit." # user is prompted with a choice
     puts ""
@@ -49,7 +49,7 @@ class SeedPicker::CLI
     when "EXIT"
       goodbye
     when "BACK"
-      choose_letter
+      choose_a_letter
     else
       input = gets.strip.to_s.upcase
     end
@@ -80,7 +80,7 @@ class SeedPicker::CLI
     when "EXIT"
       goodbye
     when "BACK"
-      choose_parent_seed
+      choose_a_parent_seed
     else
       input = gets.strip.to_s.upcase
     end
@@ -100,7 +100,7 @@ class SeedPicker::CLI
 
     case input
     when "MAIN-SEED"
-      choose_letter
+      choose_a_letter
     when "BACK"
       choose_list_of_variety
     else "DONE"

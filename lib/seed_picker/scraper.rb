@@ -1,6 +1,6 @@
 class SeedPicker::Scraper
 
-  # binding.pry
+  binding.pry
 
   # Main Vegetable Seed page
   # doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/"))
@@ -39,7 +39,7 @@ class SeedPicker::Scraper
 
   def print_seeds
     parent_seeds = self.make_seeds.group_by { |first_letter, idx| first_letter[0] }
-    parent_seeds.collect do |key, value|
+    parent_seeds.each do |key, value|
       group_seeds = {}
       group_seeds[key] = "#{value.join(" , ")}"
       group_seeds

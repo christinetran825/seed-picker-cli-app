@@ -14,7 +14,11 @@ class SeedPicker::Seeds
     @variety_seed_url = variety_seed_url
   end
 
-  
+  def self.group_by_letter
+    grouped_seeds = SeedPicker::Scraper.new.print_seeds
+    input = gets.strip.to_s.upcase
+    grouped_seeds[input]
+  end
 
   # def self.scrape_variety_seeds
   #   set = Nokogiri::HTML(open(url))

@@ -1,9 +1,8 @@
 class SeedPicker::CLI
 
   def call
-    SeedPicker::Scraper.new.print_seeds
     puts "* * * Welcome to Baker Creek Heirloom Seeds RareSeeds * * * "
-    choose_letter
+    choose_a_letter
   end
 
   def choose_a_letter
@@ -12,7 +11,7 @@ class SeedPicker::CLI
     puts ""
     puts "  ------------- Vegetable Seeds -------------"   # user sees a list of vegetable seeds
     # puts "  A: Amaranth, Artichoke & Cardoon, Asparagus"
-    puts SeedPicker::Scraper.new.print_seeds ## scrape the seeds into groups starting with the seeds' name's first letter
+    puts SeedPicker::Scraper.new.print_seeds ## scrape the seeds into groups starting with the seeds' name's first lette
     puts ""
 
     # user inputs the letter of the parent seed, that letter gives us a list of all the seeds within that letter starting with an index of 1.

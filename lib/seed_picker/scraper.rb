@@ -1,5 +1,5 @@
 class SeedPicker::Scraper
-  binding.pry
+binding.pry
   def get_page
     Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/"))
   end
@@ -19,13 +19,26 @@ class SeedPicker::Scraper
     end
   end
 
-  def print_seeds
+  def print_seeds #lists all the seed grouped in letters in a hash
     letter_group = self.make_seeds.group_by { |first_letter, parent_seeds| first_letter[0] }
     letter_group.each do |key, value|
       group_seeds = {}
       group_seeds[key] = "#{value.join(" , ")}"
       group_seeds
     end
+  end
+
+  def choose_parent_seed
+    self.print_seeds
+    input = gets.strip.to_s.upcase
+    self.print_seeds[input]
+  end
+
+  def self.scrape_seeds
+    seeds = []
+    seeds << self.scrape_parent_seeds
+    # seeds << self.scrape_variety_seeds
+    seeds
   end
 
 end

@@ -1,7 +1,7 @@
 class SeedPicker::CLI
 
   def call
-    # SeedPicker::Scraper.new.print_seeds
+    SeedPicker::Scraper.new.print_seeds
     puts "* * * Welcome to Baker Creek Heirloom Seeds RareSeeds * * * "
     choose_letter
   end
@@ -11,12 +11,16 @@ class SeedPicker::CLI
     puts "^ - ^ Please choose a group of seeds by its letter from A-Z. Type exit to exit." # user is prompted with a demand
     puts ""
     puts "  ------------- Vegetable Seeds -------------"   # user sees a list of vegetable seeds
-    puts "  A: Amaranth, Artichoke & Cardoon, Asparagus"
-    # SeedPicker::Scraper.new.print_seeds ## scrape the seeds into groups starting with the seeds' name's first letter
+    # puts "  A: Amaranth, Artichoke & Cardoon, Asparagus"
+    grouped_seeds = SeedPicker::Scraper.new.print_seeds
+    puts grouped_seeds
+   ## scrape the seeds into groups starting with the seeds' name's first letter
     puts ""
 
     # user inputs the letter of the parent seed, that letter gives us a list of all the seeds within that letter starting with an index of 1.
     input = gets.strip.to_s.upcase
+
+    grouped_seeds[input]
 
     case input
     when ("A"..."Z")

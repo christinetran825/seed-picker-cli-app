@@ -11,7 +11,7 @@ class SeedPicker::CLI
     puts ""
     puts "  ------------- Vegetable Seeds -------------"   # user sees a list of vegetable seeds
     # puts "  A: Amaranth, Artichoke & Cardoon, Asparagus"
-    puts SeedPicker::Scraper.new.print_seeds ## scrape the seeds into groups starting with the seeds' name's first lette
+    puts SeedPicker::Scraper.new.print_seeds ## scrape the seeds into groups starting with the seeds' name's first letter
     puts ""
 
     # user inputs the letter of the parent seed, that letter gives us a list of all the seeds within that letter starting with an index of 1.
@@ -36,6 +36,7 @@ class SeedPicker::CLI
     # puts "     1. Amaranth"
     # puts "     2. Artichoke & Cardoon"
     # puts "     3. Asparagus"
+    puts SeedPicker::Scraper.new.choose_parent_seed
     puts ""
 
     # user inputs the number corresponding to the parent seed they want to view

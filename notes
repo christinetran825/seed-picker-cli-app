@@ -3,6 +3,7 @@ Scraping
   # Main Vegetable Seed page
   # doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/"))
   # doc.css(".sitebody .pageHeading h1.hdng#pageHeading").text #vegetable seed
+  # doc.css(".sitebody .grid_4 h3.itemTitle a").attr('id').value #url id
   # doc.css(".sitebody .grid_4 h3.itemTitle").first.css("a").attr('href').value #Link of Parent seed "http://www.rareseeds.com/store/vegetables/amaranth/"
   # doc.css(".sitebody .grid_4 h3.itemTitle").first.css("a").inner_text ##Name of Parent Seed "Amaranth"
   # doc.css(".sitebody .grid_4 h3.itemTitle").first.css("a").inner_text[0] ##first letter of parent seed name = "A"

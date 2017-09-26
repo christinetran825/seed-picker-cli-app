@@ -2,16 +2,16 @@ class SeedPicker::Scraper
 
 # binding.pry
 
-  attr_accessor :letter, :parent_seed_name, :parent_seed_url, :url_id, :parent_seed_description, :variety_name, :price
+  attr_accessor :parent_letter, :parent_seed_name, :parent_seed_url, :parent_seed_url_id, :veggie_description, :variety_name, :price
 
   def self.scrape_parent_seeds #scraping the parent seed for the url, url_id, parent_seed_name, and letter
     doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/"))
     doc.css(".sitebody .grid_4 h3.itemTitle a").collect do |the_seeds|
       seed = SeedPicker::Seeds.new ##!!!!! CALLING a new instance OBJECT !!!!!!!!
       seed.parent_seed_url = the_seeds['href']
-      seed.url_id = the_seeds['id']
+      seed.parent_seed_url_id= the_seeds['id']
       seed.parent_seed_name = the_seeds.inner_text
-      seed.letter = the_seeds.inner_text[0]
+      seed.parent_letter = the_seeds.inner_text[0]
       seed
     end
   end
@@ -29,7 +29,3 @@ class SeedPicker::Scraper
   # end
 
 end
-
-
-# SeedPicker::Scraper.new.print_seeds => lists all the vegetable seeds in grouped letters as a hash. parent seeds are grouped in an array
-# SeedPicker::Scraper.new.print_seeds["A"] = ["Amaranth", "Artichoke & Cardoon", "Asparagus"]

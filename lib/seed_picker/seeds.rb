@@ -1,23 +1,18 @@
 class SeedPicker::Seeds
 
-  attr_accessor :parent_seed_name, :parent_seed_description, :variety_name, :variety_name_description, :price, :parent_seed_url, :variety_seed_url
+  # binding.pry
+
+  attr_accessor :letter, :parent_seed_name, :parent_seed_url
+  # :parent_seed_description, :variety_name, :variety_name_description, :price, :variety_seed_url
 
   @@all = []
 
-  def initialize(parent_seed_name=nil, parent_seed_description=nil, variety_name=nil, variety_name_description=nil, price=nil, parent_seed_url=nil, variety_seed_url=nil)
-    @parent_seed_name = parent_seed_name
-    @parent_seed_description = parent_seed_description
-    @variety_name = variety_name
-    @variety_name_description = variety_name_description
-    @price = price
-    @parent_seed_url = parent_seed_url
-    @variety_seed_url = variety_seed_url
+  def initialize
+    @@all << self
   end
 
-  def self.group_by_letter
-    grouped_seeds = SeedPicker::Scraper.new.print_seeds
-    input = gets.strip.to_s.upcase
-    grouped_seeds[input]
+  def self.all
+    @@all
   end
 
   # def self.scrape_variety_seeds

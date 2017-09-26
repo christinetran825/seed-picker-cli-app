@@ -2,7 +2,7 @@ class SeedPicker::Scraper
 
 binding.pry
 
-  def make_seeds
+  def self.scrape_parent_seeds
     doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/"))
     doc.css(".sitebody .grid_4 h3.itemTitle a").collect do |the_seeds|
       hash = {}
@@ -14,27 +14,16 @@ binding.pry
     end
   end
 
-SeedPicker::Scraper.new.make_seeds
-
   def self.scrape_variety_seeds
-
-    set = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/"))
-
-    set.css(".sitebody .grid_4 h3.itemTitle a").collect do |the_seeds|
+    set = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/artichoke-cardoon/"))
+    set.css(".sitebody .grid_9 .mainContent").collect do |varieties|
     variety = {}
-      variety_seed_url = the_seeds['id']
-      variety[:url_id]
+      variety[:parent_seed_description] = varieties.css("div#CT_Main_0_pnlHeading .sectionDesc p").first.inner_text.gsub(/\r\n\t/, "") #description
+      # set.css(".sitebody .grid_9 .mainContent .hawksearch").first.css('title').text #parent seed name
+      variety[:variety_name] = varieties.css(".hawksearch .grid_4 h3.itemTitle a").first.inner_text #variety name
+      variety[:price]= varieties.css(".hawksearch .grid_4 .itemMiniCart .itemPrice").first.inner_text #variety price
     variety
     end
-  end
-
-    seed.parent_seed_description = set.css(".sitebody .grid_9 .mainContent").first.css("div#CT_Main_0_pnlHeading .sectionDesc p").first.text #description
-    # set.css(".sitebody .grid_9 .mainContent .hawksearch").first.css('title').text #parent seed name
-    seed.variety_name = set.css(".sitebody .grid_9 .mainContent .hawksearch .grid_4").first.css("h3.itemTitle a").text #variety name
-    seed.price = set.css(".sitebody .grid_9 .mainContent .hawksearch .grid_4").first.css(".itemMiniCart .itemPrice").text #variety price
-
-
-
   end
 
 

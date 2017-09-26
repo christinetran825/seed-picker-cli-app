@@ -1,6 +1,6 @@
 class SeedPicker::Scraper
 
-# binding.pry
+binding.pry
 
   attr_accessor :parent_letter, :parent_seed_name, :parent_seed_url, :parent_seed_url_id, :veggie_description, :variety_name, :price
 
@@ -13,6 +13,18 @@ class SeedPicker::Scraper
       seed.parent_seed_name = the_seeds.inner_text
       seed.parent_letter = the_seeds.inner_text[0]
       seed
+    end
+  end
+
+  def self.scrape_variety_seeds
+    set = Nokogiri::HTML(open())
+    set.css(".sitebody .grid_9 .mainContent").collect do |the_types|
+      varieties = SeedPicker::Seeds.new
+      varieties.veggie_description = the_types.css("div#CT_Main_0_pnlHeading .sectionDesc p").first.inner_text.gsub(/\r\n\t/, "") #description
+      # set.css(".sitebody .grid_9 .mainContent .hawksearch").first.css('title').text #parent seed name
+      varieties.variety_name = the_types.css(".hawksearch .grid_4 h3.itemTitle a").first.inner_text #variety name
+      varieties.price = the_types.css(".hawksearch .grid_4 .itemMiniCart .itemPrice").first.inner_text #variety price
+      varieties
     end
   end
 

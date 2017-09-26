@@ -62,8 +62,6 @@ class SeedPicker::CLI
     puts "     -------- A - 1: Amaranth --------"
     puts "     Description of seed"
     puts ""
-    puts "^ - ^ Please choose a variety by its number. Type back to go back to the group of seeds. Type exit to exit." # user is prompted with a choice
-    puts ""
     puts "     -------- A - 1: Amaranth - Varieties --------" # user sees a list of all parent seeds with an index of 1.
     puts "     1. Aurelia's Verde"
     puts "     2. Dreadlocks Amaranth"

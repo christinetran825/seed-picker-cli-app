@@ -2,7 +2,7 @@ class SeedPicker::Seeds
 
   # binding.pry
 
-  attr_accessor :letter, :parent_seed_name, :parent_seed_url, :parent_seed_description, :variety_name, :price
+  attr_accessor :letter, :parent_seed_name, :parent_seed_url, :url_id, :parent_seed_description, :variety_name, :price
 
   @@all = []
 
@@ -13,15 +13,17 @@ class SeedPicker::Seeds
     @parent_seed_description = parent_seed_description
     @variety_name = variety_name
     @price = price
-    # @@all << self
+    @@all << self
   end
 
   def self.all
     @@all
   end
-  #
-  # def self.parent_seed
-  #   @parent_seed_name
-  # end
+
+  def self.parent_seed
+    self.all.collect do |seed_name|
+      puts seed_name.parent_seed_name
+    end
+  end
 
 end

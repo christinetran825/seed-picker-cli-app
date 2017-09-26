@@ -6,12 +6,14 @@ class SeedPicker::CLI
   end
 
   def choose_a_letter
+
     puts ""
     puts "^ - ^ Please choose a group of seeds by its letter from A-Z. Type exit to exit." # user is prompted with a demand
     puts ""
     puts "  ------------- Vegetable Seeds -------------"   # user sees a list of vegetable seeds
-    # puts "  A: Amaranth, Artichoke & Cardoon, Asparagus"
-    # puts SeedPicker::Scraper.new ## scrape the seeds into groups starting with the seeds' name's first letter
+    SeedPicker::Scraper.scrape_parent_seeds #CLI calls on the scraper class to tell Nokogiri to scrape the website
+    SeedPicker::Seeds.parent_seed
+    # puts SeedPicker::Scraper.new.print_seeds ## scrape the seeds into groups starting with the seeds' name's first letter
     puts ""
 
     # user inputs the letter of the parent seed, that letter gives us a list of all the seeds within that letter starting with an index of 1.
@@ -32,11 +34,10 @@ class SeedPicker::CLI
     puts ""
     puts "^ - ^ Please choose a seed by its number. Type back to go back to the list of seeds. Type exit to exit." # user is prompted with a choice
     puts ""
-    puts "     ----- Group A -----" # user sees a list of all parent seeds with an index of 1.
+    # puts "     ----- Group A -----" # user sees a list of all parent seeds with an index of 1.
     # puts "     1. Amaranth"
     # puts "     2. Artichoke & Cardoon"
     # puts "     3. Asparagus"
-    puts SeedPicker::Scraper.new.choose_parent_seed
     puts ""
 
     # user inputs the number corresponding to the parent seed they want to view

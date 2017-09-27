@@ -1,6 +1,6 @@
 class SeedPicker::Seeds
 
-  attr_accessor :parent_letter, :parent_seed_name, :parent_seed_url, :parent_seed_url_id, :veggie_description, :variety_name, :price
+  attr_accessor :parent_letter, :parent_seed_name, :parent_seed_url, :veggie_description, :variety_name, :price
 
   @@all = []
 
@@ -8,7 +8,6 @@ class SeedPicker::Seeds
     @parent_letter = parent_letter
     @parent_seed_name = parent_seed_name
     @parent_seed_url = parent_seed_url
-    @parent_seed_url_id = parent_seed_url_id
     @veggie_description = veggie_description
     @variety_name = variety_name
     @price = price
@@ -20,6 +19,7 @@ class SeedPicker::Seeds
   end
 
   def self.veggie_seed #listing all vegetable seeds grouped by first letter
+    binding.pry
     self.all.collect do |veggie|
       puts "#{veggie.parent_letter} : #{veggie.parent_seed_name}"
     end
@@ -31,12 +31,25 @@ class SeedPicker::Seeds
     end
   end
 
-  def self.parent_description
-    self.all.collect do |veggie|
-      veggie.parent_seed_url
-    end
+
+## Scraping the variety details
+  #
+  def self.scrape_variety_seeds
+    variety = self.all.collect do |veggie| veggie.parent_seed_url end
+    Nokogiri::HTML(open(self.parent_seed_url))
+
   end
 
+  def veggie_description
+    @veggie_description ||= .css(".sitebody .grid_9 .mainContent div#CT_Main_0_pnlHeading .sectionDesc p").first.inner_text.gsub(/\r\n\t/, "") #description
+  end
 
+  def variety_name
+    @variety_name ||= .css(".sitebody .grid_9 .mainContent .hawksearch .grid_4 h3.itemTitle a").first.inner_text #variety name
+  end
+
+  def price
+    @price ||= .css(".sitebody .grid_9 .mainContent .hawksearch .grid_4 .itemMiniCart .itemPrice").first.inner_text  #variety price
+  end
 
 end

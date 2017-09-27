@@ -67,12 +67,13 @@ class SeedPicker::CLI
     puts "     -------- A - 1: Amaranth --------"
     puts "     Description of seed"
     puts ""
+    SeedPicker::Seeds.get_description
     puts "     -------- A - 1: Amaranth - Varieties --------" # user sees a list of all parent seeds with an index of 1.
     puts "     1. Aurelia's Verde"
     puts "     2. Dreadlocks Amaranth"
     puts "     3. Elena's Rojo Amaranth"
     puts ""
-
+    SeedPicker::Seeds.variety_seed
     # user inputs the number corresponding to the variety they want to view
 
     input = gets.strip.to_i || input = gets.strip.to_s.upcase
@@ -95,6 +96,7 @@ class SeedPicker::CLI
     puts "     Description: "
     puts "     Price: "
     puts "     ---------------------------------------------------"
+    SeedPicker::Seeds.variety_seed_info
     puts ""
     puts "~.~ Type back if you want to see another variety of the same seed. Type main-seed if you want to choose another seed. Type done if you are done."
     # user inputs the number corresponding to the variety they want to view

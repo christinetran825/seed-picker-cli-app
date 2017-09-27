@@ -17,6 +17,11 @@ class SeedPicker::CLI
     # user inputs the letter of the parent seed, that letter gives us a list of all the seeds within that letter starting with an index of 1.
     input = gets.strip.to_s.upcase
 
+    ###
+    # main_seeds = SeedPicker::Seeds.find
+
+    ###
+
     case input
     when ("A"..."Z")
       choose_a_parent_seed

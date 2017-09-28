@@ -1,6 +1,6 @@
 class SeedPicker::Seeds
 
-# binding.pry
+
 
   attr_accessor :parent_letter, :parent_seed_name, :parent_seed_url, :veggie_description, :variety_url, :variety_description, :variety_name, :price
 
@@ -22,37 +22,32 @@ class SeedPicker::Seeds
     @@all
   end
 
-  def self.veggie_seed #listing all vegetable seeds grouped by first letter
+  def self.show_all_seeds_by_letter #listing all vegetable seeds grouped by first letter
     group = self.all.collect do |veggie|
       array = []
       array = "#{veggie.parent_seed_name}"
       array
     end
-    the_group = group.group_by { |s| s[0] }
-    the_group.each do |key, value|
+    the_group = group.group_by { |s| s[0] } #becomes a hash grouped by first letter
+    the_group.each do |key, value| #iterates the hash
       puts "#{key}: #{value}"
     end
   end
 
-  #
-  # def self.veggie_seed #listing all vegetable seeds grouped by first letter
-  #   group = self.all.collect do |veggie|
-  #     array = []
-  #     array = "#{veggie.parent_seed_name}"
-  #     array
-  #   end
-  #   puts group.group_by { |s| s[0] }
-  # end
+  def self.show_parent_seed_by_letter #listing all parent_seeds by index upon user input
 
+  end
 
-  # def self.parent_seed #listing all parent_seeds by index upon user input
-  #   self.veggie_seed.collect do |veggie|
-  #     veggie
-  #   end
-  #   # self.all.collect.with_index(1) do |veggie, index|
-  #   #   puts "#{index}. #{veggie.parent_seed_name}"
-  #   # end
-  # end
+  def self.parent_seed
+  # binding.pry
+    input = gets.strip.to_s.upcase
+    # self.veggie_seed.collect.with_index(1) do |seed, index|
+    #   puts "#{index}. #{seed}."
+    # end
+    # self.all.collect.with_index(1) do |veggie, index|
+    #   puts "#{index}. #{veggie.parent_seed_name}"
+    # end
+  end
 
   def self.get_description
     self.all.collect do |the_info|

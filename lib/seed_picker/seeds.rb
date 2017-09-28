@@ -28,13 +28,30 @@ class SeedPicker::Seeds
       array = "#{veggie.parent_seed_name}"
       array
     end
-    puts group.group_by { |s| s[0] }
+    the_group = group.group_by { |s| s[0] }
+    the_group.each do |key, value|
+      puts "#{key}: #{value}"
+    end
   end
 
-  # def self.parent_seed #listing all parent_seeds by index upon user input
-  #   self.all.collect.with_index(1) do |veggie, index|
-  #     puts "#{index}. #{veggie.parent_seed_name}"
+  #
+  # def self.veggie_seed #listing all vegetable seeds grouped by first letter
+  #   group = self.all.collect do |veggie|
+  #     array = []
+  #     array = "#{veggie.parent_seed_name}"
+  #     array
   #   end
+  #   puts group.group_by { |s| s[0] }
+  # end
+
+
+  # def self.parent_seed #listing all parent_seeds by index upon user input
+  #   self.veggie_seed.collect do |veggie|
+  #     veggie
+  #   end
+  #   # self.all.collect.with_index(1) do |veggie, index|
+  #   #   puts "#{index}. #{veggie.parent_seed_name}"
+  #   # end
   # end
 
   def self.get_description

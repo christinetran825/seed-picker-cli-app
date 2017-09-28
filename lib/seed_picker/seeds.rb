@@ -1,5 +1,7 @@
 class SeedPicker::Seeds
 
+# binding.pry
+
   attr_accessor :parent_letter, :parent_seed_name, :parent_seed_url, :veggie_description, :variety_url, :variety_description, :variety_name, :price
 
   @@all = []
@@ -20,10 +22,25 @@ class SeedPicker::Seeds
     @@all
   end
 
+  # def self.veggie_seed #listing all vegetable seeds grouped by first letter
+  #   self.all.collect do |veggie|
+  #     puts "#{veggie.parent_letter} : #{veggie.parent_seed_name}"
+  #   end
+  # end
+
   def self.veggie_seed #listing all vegetable seeds grouped by first letter
-    self.all.collect do |veggie|
-      puts "#{veggie.parent_letter} : #{veggie.parent_seed_name}"
+    group = self.all.collect do |veggie|
+      veggie.parent_seed_name
     end
+    letter_list = group.group_by do |seed_name|
+      seed_name[0]
+    end
+    main_list = letter_list.collect do |key, value|
+      group_seeds = {}
+      group_seeds[key] = value
+      group_seeds
+    end
+    puts main_list
   end
 
   def self.parent_seed #listing all parent_seeds by index upon user input

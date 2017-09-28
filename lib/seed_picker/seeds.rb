@@ -1,7 +1,5 @@
 class SeedPicker::Seeds
 
-
-
   attr_accessor :parent_letter, :parent_seed_name, :parent_seed_url, :veggie_description, :variety_url, :variety_description, :variety_name, :price
 
   @@all = []
@@ -34,24 +32,20 @@ class SeedPicker::Seeds
     end
   end
 
-  def self.show_parent_seed_by_letter #listing all parent_seeds by index upon user input
-
-  end
-
   def self.parent_seed
-  # binding.pry
     input = gets.strip.to_s.upcase
-    # self.veggie_seed.collect.with_index(1) do |seed, index|
-    #   puts "#{index}. #{seed}."
-    # end
-    # self.all.collect.with_index(1) do |veggie, index|
-    #   puts "#{index}. #{veggie.parent_seed_name}"
-    # end
+    group = self.show_all_seeds_by_letter
+    list = group[input]
+    list.collect.with_index(1) do |the_info, index|
+      "#{index}. #{the_info}"
+    end
   end
 
   def self.get_description
-    self.all.collect do |the_info|
-      puts "#{the_info.veggie_description}"
+    parents = self.parent_seed
+    parents.collect.with_index(1) do |the_info, index|
+      "#{index}. #{the_info}"
+      # puts "#{the_info.veggie_description}"
     end
   end
 

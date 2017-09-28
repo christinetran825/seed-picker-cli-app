@@ -15,21 +15,25 @@ class SeedPicker::CLI
     puts ""
 
     # user inputs the letter of the parent seed, that letter gives us a list of all the seeds within that letter starting with an index of 1.
-    input = gets.strip.to_s.upcase
+    input = gets.strip.to_i || input = gets.strip.to_s.upcase
 
-    ###
-    # main_seeds = SeedPicker::Seeds.find
-
-    ###
-
-    case input
-    when ("A"..."Z")
-      choose_a_parent_seed
-    when "EXIT"
-      goodbye
-    else
+    until input == ("A"..."Z")
+      puts "Please enter a letter."
       input = gets.strip.to_s.upcase
+      break if input == "EXIT"
     end
+
+    # case input
+    # when ("A"..."Z")
+    #   choose_a_parent_seed
+    # when "EXIT"
+    #   goodbye
+    # when (1...10)
+    #   puts "Please enter a letter."
+    #   input = gets.strip.to_i || input = gets.strip.to_s.upcase
+    # else
+    #   input = gets.strip.to_i || input = gets.strip.to_s.upcase
+    # end
 
   end
 
@@ -68,6 +72,7 @@ class SeedPicker::CLI
     puts "     Description of seed"
     puts ""
     SeedPicker::Seeds.get_description
+    puts "^ - ^ Please choose a variety by its number. Type back to go back to the list of seeds. Type exit to exit."
     puts "     -------- A - 1: Amaranth - Varieties --------" # user sees a list of all parent seeds with an index of 1.
     puts "     1. Aurelia's Verde"
     puts "     2. Dreadlocks Amaranth"

@@ -11,29 +11,36 @@ class SeedPicker::CLI
     puts "^ - ^ Please choose a group of seeds by its letter from A-Z. Type exit to exit." # user is prompted with a demand
     puts ""
     puts "  ------------- Vegetable Seeds -------------"   # user sees a list of vegetable seeds
-    SeedPicker::Seeds.veggie_seed ## Seeds class veggie_seed method
+    SeedPicker::Seeds.show_all_seeds_by_letter ## Seeds class veggie_seed method
     puts ""
 
     # user inputs the letter of the parent seed, that letter gives us a list of all the seeds within that letter starting with an index of 1.
-    input = gets.strip.to_i || input = gets.strip.to_s.upcase
+    input = gets.strip.to_s.upcase || input = gets.strip.to_i
 
-    until input == ("A"..."Z")
+    # until input == ("A"..."Z")
+    #   puts "Please enter a letter."
+    #   input = gets.strip.to_s.upcase
+    #   break if input == "EXIT"
+    # end
+
+    puts ""
+    puts "     ----- You chose Group: #{input} -----" # user sees a list of all parent seeds with an index of 1.
+    # puts "     1. Amaranth"
+    # puts "     2. Artichoke & Cardoon"
+    # puts "     3. Asparagus"
+
+
+    case input
+    when ("A"..."Z")
+      choose_a_parent_seed
+    when "EXIT"
+      goodbye
+    when (1...10) #fix this
       puts "Please enter a letter."
       input = gets.strip.to_s.upcase
-      break if input == "EXIT"
+    else
+      input = gets.strip.to_s.upcase
     end
-
-    # case input
-    # when ("A"..."Z")
-    #   choose_a_parent_seed
-    # when "EXIT"
-    #   goodbye
-    # when (1...10)
-    #   puts "Please enter a letter."
-    #   input = gets.strip.to_i || input = gets.strip.to_s.upcase
-    # else
-    #   input = gets.strip.to_i || input = gets.strip.to_s.upcase
-    # end
 
   end
 
@@ -41,10 +48,6 @@ class SeedPicker::CLI
     puts ""
     puts "^ - ^ Please choose a seed by its number. Type back to go back to the list of seeds. Type exit to exit." # user is prompted with a choice
     puts ""
-    puts "     ----- Group  -----" # user sees a list of all parent seeds with an index of 1.
-    # puts "     1. Amaranth"
-    # puts "     2. Artichoke & Cardoon"
-    # puts "     3. Asparagus"
     SeedPicker::Seeds.parent_seed
     puts ""
 

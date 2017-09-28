@@ -94,6 +94,7 @@ class SeedPicker::CLI
   def choose_the_variety
     puts "     -------- A - 1: Amaranth - Aurelia's Verde --------" # user sees a list of all parent seeds with an index of 1.
     puts "     Description: "
+    SeedPicker::Seeds.variety_seed_description
     puts "     Price: "
     puts "     ---------------------------------------------------"
     SeedPicker::Seeds.variety_seed_info

@@ -22,32 +22,20 @@ class SeedPicker::Seeds
     @@all
   end
 
-  # def self.veggie_seed #listing all vegetable seeds grouped by first letter
-  #   self.all.collect do |veggie|
-  #     puts "#{veggie.parent_letter} : #{veggie.parent_seed_name}"
-  #   end
-  # end
-
   def self.veggie_seed #listing all vegetable seeds grouped by first letter
     group = self.all.collect do |veggie|
-      veggie.parent_seed_name
+      array = []
+      array = "#{veggie.parent_seed_name}"
+      array
     end
-    letter_list = group.group_by do |seed_name|
-      seed_name[0]
-    end
-    main_list = letter_list.collect do |key, value|
-      group_seeds = {}
-      group_seeds[key] = value
-      group_seeds
-    end
-    puts main_list
+    puts group.group_by { |s| s[0] }
   end
 
-  def self.parent_seed #listing all parent_seeds by index upon user input
-    self.all.collect.with_index(1) do |veggie, index|
-      puts "#{index}. #{veggie.parent_seed_name}"
-    end
-  end
+  # def self.parent_seed #listing all parent_seeds by index upon user input
+  #   self.all.collect.with_index(1) do |veggie, index|
+  #     puts "#{index}. #{veggie.parent_seed_name}"
+  #   end
+  # end
 
   def self.get_description
     self.all.collect do |the_info|

@@ -32,7 +32,9 @@ class SeedPicker::CLI
       puts ""
       puts " ----- You chose Group: #{input} ----- " # user sees a list of all parent seeds with an index of 1.
         list_parents = SeedPicker::Seeds.group_parents_by_letter[input]
-        list_parents.collect.with_index(1) do |the_info, index| puts "#{index}. #{the_info}" end
+        list_parents.collect.with_index(1) do |the_info, index|
+          puts "#{index}. #{the_info}"
+        end
       choose_a_parent_seed
     when "EXIT"
       goodbye
@@ -54,14 +56,15 @@ class SeedPicker::CLI
     when (1..10)
       puts " ----- Group 'letter' - #{input}: 'name of seed' ----- "
       puts "     Description of seed"
-      puts "#{seed.parent_description}"
-      # SeedPicker::Seeds.get_description
+      # puts "#{seed.parent_description}"
+      parent_seed = SeedPicker::Seeds.get_description
+      parent_seed[input]
       puts ""
       puts " ----- 'name of seed' - Varieties --------" # user sees a list of all parent seeds with an index of 1.
       # puts "     1. Aurelia's Verde"
       # puts "     2. Dreadlocks Amaranth"
       # puts "     3. Elena's Rojo Amaranth"
-      puts "#{seed.variety_name}"
+      # puts "#{seed.variety_name}"
       puts ""
       choose_list_of_variety
     when "EXIT"

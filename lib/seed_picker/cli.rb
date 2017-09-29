@@ -2,9 +2,16 @@ class SeedPicker::CLI
 
   def call
     SeedPicker::Scraper.scrape_parent_seeds #CLI calls on the scraper class to tell Nokogiri to scrape the website
+    # SeedPicker::Scraper.scrape_variety_seeds
+    # SeedPicker::Scraper.scrape_variety_details
     puts "* * * Welcome to Baker Creek Heirloom Seeds RareSeeds * * * "
     puts ""
     list_of_seeds
+    choose_a_letter
+  end
+
+  def all_seeds
+    SeedPicker::Seeds.all
   end
 
   def list_of_seeds
@@ -12,7 +19,6 @@ class SeedPicker::CLI
     puts ""
     puts "  ------------- Vegetable Seeds -------------"   # user sees a list of vegetable seeds
     SeedPicker::Seeds.show_all_seeds_by_letter
-    choose_a_letter
   end
 
   def choose_a_letter
@@ -20,16 +26,13 @@ class SeedPicker::CLI
     puts "^ - ^ Please choose a group of seeds by its letter from A-Z for more details." # user is prompted with a demand
     puts ""
     input = gets.strip.to_s.upcase || input = gets.strip.to_i
-    main = SeedPicker::Seeds.show_all_seeds_by_letter ## Seeds class veggie_seed method
-    puts ""
 
     case input
     when ("A"..."Z")
       puts ""
       puts " ----- You chose Group: #{input} ----- " # user sees a list of all parent seeds with an index of 1.
-        main[input].collect.with_index(1) do |seed, index|
-          puts "#{index}. #{seed}"
-        end
+        list_parents = SeedPicker::Seeds.group_parents_by_letter[input]
+        list_parents.collect.with_index(1) do |the_info, index| puts "#{index}. #{the_info}" end
       choose_a_parent_seed
     when "EXIT"
       goodbye
@@ -51,12 +54,14 @@ class SeedPicker::CLI
     when (1..10)
       puts " ----- Group 'letter' - #{input}: 'name of seed' ----- "
       puts "     Description of seed"
+      puts "#{seed.parent_description}"
       # SeedPicker::Seeds.get_description
       puts ""
       puts " ----- 'name of seed' - Varieties --------" # user sees a list of all parent seeds with an index of 1.
       # puts "     1. Aurelia's Verde"
       # puts "     2. Dreadlocks Amaranth"
       # puts "     3. Elena's Rojo Amaranth"
+      puts "#{seed.variety_name}"
       puts ""
       choose_list_of_variety
     when "EXIT"
@@ -78,8 +83,10 @@ class SeedPicker::CLI
     when (1..10)
       puts "     -------- Group 'letter' - #{input}: 'name of seed' - 'variety_name' --------" # user sees a list of all parent seeds with an index of 1.
       puts "     Variety Description: "
-
+      puts "#{seed.variety_description}"
       puts "     Price: "
+      puts "#{seed.price}"
+      puts ""
       go_back_or_finish
     end
 

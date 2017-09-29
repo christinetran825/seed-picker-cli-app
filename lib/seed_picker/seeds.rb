@@ -23,9 +23,7 @@ class SeedPicker::Seeds
   end
 
   def self.group_parents_by_letter #grouping parents by their letters
-    the_seeds = self.all.collect do |seeds|
-      seeds.parent_seed_name
-    end
+    the_seeds = self.all.collect { |seeds| seeds.parent_seed_name }
     lists = the_seeds.group_by { |letter| letter[0] } #becomes a hash grouped by first letter
   end
 
@@ -35,18 +33,34 @@ class SeedPicker::Seeds
     end
   end
 
+
+
+  def testing
+    parent_seeds = self.all.collect { |seeds| seeds.parent_seed_name }
+  end
+
+  # parent_letter => parent_seeds: parent_seed_name
+    #{A: ["Amaranth", "Artichoke & Cardoon", "Asparagus"]}
+  # parent_seed => parent_description: , varieties: variety_name
+    #{Amaranth: {parent_description: blah, varieties: 1.blah 2.blah 3.blah}
+  # variety_name => variety_description:, price:
+    # {"1.blah" => {variety_description: blah, price: $$$ }
+
+  def self.get_description
+    the_seeds = self.all.collect do |seeds|
+      # "#{seeds.parent_seed_name} => #{seeds.parent_description}"
+      puts "#{seeds.parent_seed_name} => #{seeds.parent_seed_url}"
+    end
+    # the_seeds.collect.with_index(1) do |key, index|
+    #   puts "#{index}. #{key}"
+    # end
+  end
+
+
+
 # binding.pry
-#
-#   s = SeedPicker::Seeds.new
 
 
-  # def self.get_description
-  #   parents = self.parent_seed
-  #   parents.collect.with_index(1) do |the_info, index|
-  #     "#{index}. #{the_info}"
-  #     # puts "#{the_info.parent_description}"
-  #   end
-  # end
 
   # def self.get_parent_description
   #   @veggie_description

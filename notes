@@ -33,7 +33,11 @@ Scraping
     # set.css(".sitebody .grid_9 .mainContent").first.css("div#CT_Main_0_pnlHeading .sectionDesc p").first.text.strip #description
     # set.css(".sitebody .grid_9 .mainContent .hawksearch").first.css('title').text #parent seed name
     # set.css(".sitebody .grid_9 .mainContent .hawksearch .grid_4").first.css("h3.itemTitle a").text #variety name
+    # set.css(".sitebody .grid_9 .mainContent .hawksearch .grid_4").first.css("h3.itemTitle a").attr('href') #variety url
     # set.css(".sitebody .grid_9 .mainContent .hawksearch .grid_4").first.css(".itemMiniCart .itemPrice").text #variety price
 
+  # Variety Seeds Page
+
+  HREF was "http://www.rareseeds.com/aurelia-s-verde-amaranth/" taken from main variety seed section of Parent seeds page
   # details = Nokogiri::HTML(open("http://www.rareseeds.com/aurelia-s-verde-amaranth/"))
-  # details.css(".sitebody .grid_9").first.css(".mainContent").first.css(".longDescription").text.gsub(/\r\n\t/, "") #variety descriptions
+  # details.css(".sitebody .grid_9").first.css(".mainContent").first.css(".longDescription").text.strip.gsub(/\r\n\t/, "") #variety descriptions

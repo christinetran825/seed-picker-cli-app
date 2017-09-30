@@ -12,6 +12,7 @@ class SeedPicker::Seeds
     @variety_seed_url = variety_seed_url
     @variety_seed_description = variety_seed_description
     @price = price
+    # @@all << self
   end
 
   def self.all
@@ -33,49 +34,25 @@ class SeedPicker::Seeds
     end
   end
 
-  # parent_letter => parent_seeds: parent_seed_name
-    #{A: ["Amaranth", "Artichoke & Cardoon", "Asparagus"]}
-  # parent_seed => parent_description: , varieties: variety_name
-    #{Amaranth: {parent_description: blah, varieties: 1.blah 2.blah 3.blah}
-  # variety_name => variety_description:, price:
-    # {"1.blah" => {variety_description: blah, price: $$$ }
-
-  def self.get_description
-    the_seeds = self.all.collect do |seeds|
-      # "#{seeds.parent_seed_name} => #{seeds.parent_description}"
-      puts "#{seeds.parent_seed_name} => #{seeds.parent_seed_url}"
-    end
-    # the_seeds.collect.with_index(1) do |key, index|
-    #   puts "#{index}. #{key}"
-    # end
-  end
-
-
-
-# binding.pry
-
-
-
-  # def self.get_parent_description
-  #   @veggie_description
-  # end
-  #
-  # def self.variety_seed
-  #   self.all.collect.with_index(1) do |the_info, index|
-  #     puts "#{index}. #{the_info.variety_name}"
+  # #a parent has a name, url, description, varieties
+  # def self.the_parents
+  #   self.all.collect do |seeds|
+  #     seeds.parent_seed_name
+  #     seeds.parent_seed_description
+  #     seeds.parent_seed_url
+  #     seeds.variety_seed_name
   #   end
   # end
   #
-  # def self.variety_seed_info
-  #   self.all.collect.with_index(1) do |the_info, index|
-  #     puts "#{index}. #{the_info.price}"
+  # #a variety has a name, url, description, price
+  # def self.the_varieties
+  #   self.all.collect do |seeds|
+  #     seeds.variety_seed_name
+  #     seeds.variety_seed_description
+  #     seeds.variety_seed_url
+  #     seeds.price
   #   end
   # end
-  #
-  # def self.variety_seed_description
-  #   self.all.collect.with_index(1) do |the_info, index|
-  #     puts "#{index}. #{the_info.variety_description}"
-  #   end
-  # end
+
 
 end

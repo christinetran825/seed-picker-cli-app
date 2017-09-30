@@ -2,8 +2,11 @@ class SeedPicker::CLI
 
   def call
     SeedPicker::Scraper.scrape_parent_seeds #CLI calls on the scraper class to tell Nokogiri to scrape the website
-    # SeedPicker::Scraper.scrape_variety_seeds
-    # SeedPicker::Scraper.scrape_variety_details
+    # all_seeds = SeedPicker::Seeds.all
+    # all_seeds.each do |seeds|
+    #   SeedPicker::Scraper.scrape_variety_seeds(seeds)
+    #   SeedPicker::Scraper.scrape_variety_details(seeds)
+    # end
     puts "* * * Welcome to Baker Creek Heirloom Seeds RareSeeds * * * "
     puts ""
     list_of_seeds
@@ -35,6 +38,7 @@ class SeedPicker::CLI
         list_parents.collect.with_index(1) do |the_info, index|
           puts "  #{index}. #{the_info}"
         end
+        #seed.parent_seed_name.each_with_index(1) {|list, index| puts "#{index}. #{list}" }
       choose_a_parent_seed
     when "EXIT"
       goodbye
@@ -54,18 +58,14 @@ class SeedPicker::CLI
 
     case input
     when (1..10)
-      puts " ----- Group 'letter' - #{input}: 'name of seed' ----- "
-      puts "     Description of seed"
-      # puts "#{seed.parent_description}"
-      parent_seed = SeedPicker::Seeds.get_description
-      parent_seed[input]
-      puts ""
-      puts " ----- 'name of seed' - Varieties --------" # user sees a list of all parent seeds with an index of 1.
-      # puts "     1. Aurelia's Verde"
-      # puts "     2. Dreadlocks Amaranth"
-      # puts "     3. Elena's Rojo Amaranth"
-      # puts "#{seed.variety_name}"
-      puts ""
+      puts "testing"
+      # puts ""
+      # puts " ----- Group 'letter' - #{input}: #{seed.parent_seed_name} ----- "
+      # puts "     #{seed.parent_seed_description}"
+      # puts ""
+      # puts " -------- Varieties -------- " # user sees a list of all parent seeds with an index of 1.
+      # seed.variety_seed_name.each_with_index(1) {|list, index| puts "#{index}. #{list}" }
+      # puts ""
       choose_list_of_variety
     when "EXIT"
       goodbye
@@ -84,12 +84,13 @@ class SeedPicker::CLI
 
     case input
     when (1..10)
-      puts "     -------- Group 'letter' - #{input}: 'name of seed' - 'variety_name' --------" # user sees a list of all parent seeds with an index of 1.
-      puts "     Variety Description: "
-      # puts "#{seed.variety_description}"
-      puts "     Price: "
-      # puts "#{seed.price}"
-      puts ""
+      puts "testing"
+      # puts "     -------- Group 'letter' - #{input}: #{seed.parent_seed_name} - #{seed.variety_seed_name} --------" # user sees a list of all parent seeds with an index of 1.
+      # puts "     #{seed.variety_seed_description} "
+      # puts ""
+      # puts "     Price: #{seed.price} "
+      # puts ""
+      # puts ""
       go_back_or_finish
     end
 

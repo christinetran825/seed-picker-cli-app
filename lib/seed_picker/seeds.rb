@@ -1,16 +1,16 @@
 class SeedPicker::Seeds
 
-  attr_accessor :parent_seed_name, :parent_seed_url, :parent_description, :variety_name, :variety_url, :variety_description, :price
+  attr_accessor :parent_seed_name, :parent_seed_url, :parent_seed_description, :variety_seed_name, :variety_seed_url, :variety_seed_description, :price
 
   @@all = []
 
   def initialize #new instances have the below methods/properties
     @parent_seed_name = parent_seed_name
     @parent_seed_url = parent_seed_url
-    @parent_description = parent_description
-    @variety_name = variety_name
-    @variety_url = variety_url
-    @variety_description = variety_description
+    @parent_seed_description = parent_seed_description
+    @variety_seed_name = variety_seed_name
+    @variety_seed_url = variety_seed_url
+    @variety_seed_description = variety_seed_description
     @price = price
   end
 
@@ -31,12 +31,6 @@ class SeedPicker::Seeds
     self.group_parents_by_letter.each do |key, value| #iterates the hash
       puts "#{key}: #{value}"
     end
-  end
-
-
-
-  def testing
-    parent_seeds = self.all.collect { |seeds| seeds.parent_seed_name }
   end
 
   # parent_letter => parent_seeds: parent_seed_name

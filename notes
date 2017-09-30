@@ -23,7 +23,7 @@ Scraping
   # Parent Seeds page
 
   HREF was "/store/vegetables/amaranth/" taken from left column menu which is seed.parent_seed_name
-  doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_name))
+  doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url)
   doc.css(".sitebody .grid_9 .mainContent").first.css("div#CT_Main_0_pnlHeading .sectionDesc p").first.text.gsub(/\r\n\t/, "") #description
   doc.css(".sitebody .grid_9 .mainContent .hawksearch").first.css('title').text #parent seed name
   doc.css(".sitebody .grid_9 .mainContent .hawksearch .grid_4").first.css("h3.itemTitle a").text #variety name
@@ -39,5 +39,5 @@ Scraping
   # Variety Seeds Page
 
   HREF was "http://www.rareseeds.com/aurelia-s-verde-amaranth/" taken from main variety seed section of Parent seeds page
-  # details = Nokogiri::HTML(open("http://www.rareseeds.com/aurelia-s-verde-amaranth/"))
-  # details.css(".sitebody .grid_9").first.css(".mainContent").first.css(".longDescription").text.strip.gsub(/\r\n\t/, "") #variety descriptions
+  doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.variety_seed_url))
+  doc.css(".sitebody .grid_9").first.css(".mainContent").first.css(".longDescription").text.strip.gsub(/\r\n\t/, "") #variety descriptions

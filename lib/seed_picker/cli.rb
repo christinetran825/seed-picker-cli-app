@@ -33,7 +33,7 @@ class SeedPicker::CLI
       puts " ----- You chose Group: #{input} ----- " # user sees a list of all parent seeds with an index of 1.
         list_parents = SeedPicker::Seeds.group_parents_by_letter[input]
         list_parents.collect.with_index(1) do |the_info, index|
-          puts "#{index}. #{the_info}"
+          puts "  #{index}. #{the_info}"
         end
       choose_a_parent_seed
     when "EXIT"
@@ -86,9 +86,9 @@ class SeedPicker::CLI
     when (1..10)
       puts "     -------- Group 'letter' - #{input}: 'name of seed' - 'variety_name' --------" # user sees a list of all parent seeds with an index of 1.
       puts "     Variety Description: "
-      puts "#{seed.variety_description}"
+      # puts "#{seed.variety_description}"
       puts "     Price: "
-      puts "#{seed.price}"
+      # puts "#{seed.price}"
       puts ""
       go_back_or_finish
     end
@@ -111,7 +111,13 @@ class SeedPicker::CLI
   def goodbye
     puts ""
     puts "^ - ^ Thank you for viewing our vegetable seed collection. We hope to see you again soon. Have a great day!"
-    #draw tomato or carrot or rabbit :]
+    puts ""
+    puts "         ( see you next time! )"
+    puts "          , "
+    puts "  (\ /)  , "
+    puts "  ( . .)  "
+    puts "  c(\")(\") "
+    puts ""
   end
 
 end

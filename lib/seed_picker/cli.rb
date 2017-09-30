@@ -110,9 +110,9 @@ class SeedPicker::CLI
 
   def goodbye
     puts ""
-    puts "^ - ^ Thank you for viewing our vegetable seed collection. We hope to see you again soon. Have a great day!"
+    puts "^ - ^ Goodbye!!!"
     puts ""
-    puts "         ( see you next time! )"
+    puts "         ( Thank you for viewing our vegetable seed collection. Seed you again, soon. Have a great day! )"
     puts "          , "
     puts "  (\ /)  , "
     puts "  ( . .)  "

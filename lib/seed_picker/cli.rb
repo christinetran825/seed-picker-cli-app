@@ -2,7 +2,8 @@ class SeedPicker::CLI
 
   def call
     SeedPicker::Scraper.scrape_parent_seeds #CLI calls on the scraper class to tell Nokogiri to scrape the website
-    # all_seeds = SeedPicker::Seeds.all
+    # binding.pry
+    # all_seeds = SeedPicker::Seeds.all.clone
     # all_seeds.each do |seeds|
     #   SeedPicker::Scraper.scrape_variety_seeds(seeds)
     #   SeedPicker::Scraper.scrape_variety_details(seeds)
@@ -17,12 +18,20 @@ class SeedPicker::CLI
     SeedPicker::Seeds.all
   end
 
+  ############### getting the links ###############
+
+
+  ############### Lists of Vegetable Seeds ###############
+
   def list_of_seeds
     puts "Here's our collection of vegetable seeds."
     puts ""
     puts "  ------------- Vegetable Seeds -------------"   # user sees a list of vegetable seeds
     SeedPicker::Seeds.listing_all_seeds
   end
+
+
+  ############### MENU ###############
 
   def choose_a_letter
     puts ""
@@ -34,10 +43,12 @@ class SeedPicker::CLI
     when ("A"..."Z")
       puts ""
       puts " ----- You chose Group: #{input} ----- " # user sees a list of all parent seeds with an index of 1.
-      group = SeedPicker::Seeds.get_letter(input) #input is being pased to the SeedPicker::Seeds.get_letter method where it's being passed into a hash as a key
-      group.collect.with_index(1) do |the_info, index| # the results of the SeedPicker::Seeds.testing(input) method is saved as group variable. The group variable is iterated with index of 1.
-        puts "  #{index}. #{the_info}"
-      end
+      puts ""
+      puts SeedPicker::Seeds.show_parents(input)
+      # list_parents = SeedPicker::Seeds.get_letter(input) #input is being pased to the SeedPicker::Seeds.get_letter method where it's being passed into a hash as a key
+      # list_parents.collect.with_index(1) do |the_info, index| # the results of the SeedPicker::Seeds.testing(input) method is saved as group variable. The group variable is iterated with index of 1.
+      #   puts "  #{index}. #{the_info}"
+      # end
       choose_a_parent_seed
     when "EXIT"
       goodbye
@@ -54,17 +65,14 @@ class SeedPicker::CLI
     puts ""
     puts "^ - ^ Please choose a seed by its number." # user is prompted with a choice
     input = gets.strip.to_i || input = gets.strip.to_s.upcase   # user inputs the number corresponding to the parent seed they want to view
-
+    index = 1
     case input
-    # when (1...10)
-    when ("A"..."Z")
+    when (1...10)
       puts "testing"
-      SeedPicker::Seeds.testing(input)
-      # SeedPicker::Seeds.get_parent_desc
-      # SeedPicker::Seeds.get_variety
-      # puts ""
-      # puts " ----- Group 'letter' - #{input}: #{seed.parent_seed_name.upcase} ----- "
-      # puts "     #{seed.parent_seed_description}"
+      puts ""
+      puts " ----- #{input}: parent name - DESCRIPTION ----- "
+      # puts SeedPicker::Seeds.testing(input)
+      # puts SeedPicker::Seeds.others
       # puts ""
       # puts " -------- Varieties -------- " # user sees a list of all parent seeds with an index of 1.
       # seed.variety_seed_name.each_with_index(1) {|list, index| puts "#{index}. #{list}" }

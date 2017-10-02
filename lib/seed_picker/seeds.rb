@@ -35,7 +35,9 @@ class SeedPicker::Seeds
   ############### Building the Vegetable List - Methods ###############
 
   def self.get_parents #getting all parent seeds
-    self.all.collect { |seeds| seeds.parent_seed_name }
+    group = self.all.collect { |seeds| seeds.parent_seed_name }
+    abc_list = group.sort_by {|x| x[0]}
+    abc_list
   end
 
   def self.group_by_letter #grouping all parent seeds by their first letters
@@ -43,7 +45,7 @@ class SeedPicker::Seeds
   end
 
   def self.listing_all_seeds #listing all vegetable seeds grouped from group_by_letter method hash
-    self.group_by_letter.each do |key, value| #iterates the hash
+    list = self.group_by_letter.each do |key, value| #iterates the hash
       puts "#{key}: #{value}"
     end
   end

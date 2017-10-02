@@ -35,24 +35,20 @@ class SeedPicker::CLI
 
   def choose_a_letter
     puts ""
-    puts "^ - ^ Please choose a group of seeds by its letter from A-Z for more details." # user is prompted with a demand
+    puts "^ - ^ Please choose a group of seeds by its letter from A-Z." # user is prompted with a demand
     puts ""
     input = gets.strip.to_s.upcase || input = gets.strip.to_i
 
     case input
-    when ("A"..."Z")
+    when ("A".."Z")
       puts ""
       puts " ----- You chose Group: #{input} ----- " # user sees a list of all parent seeds with an index of 1.
       puts ""
       puts SeedPicker::Seeds.show_parents(input)
-      # list_parents = SeedPicker::Seeds.get_letter(input) #input is being pased to the SeedPicker::Seeds.get_letter method where it's being passed into a hash as a key
-      # list_parents.collect.with_index(1) do |the_info, index| # the results of the SeedPicker::Seeds.testing(input) method is saved as group variable. The group variable is iterated with index of 1.
-      #   puts "  #{index}. #{the_info}"
-      # end
       choose_a_parent_seed
     when "EXIT"
       goodbye
-    when (1...10) #fix this
+    when (1..10) #fix this
       puts "Please enter a letter."
       input = gets.strip.to_s.upcase
     else
@@ -64,18 +60,22 @@ class SeedPicker::CLI
   def choose_a_parent_seed
     puts ""
     puts "^ - ^ Please choose a seed by its number." # user is prompted with a choice
-    input = gets.strip.to_i || input = gets.strip.to_s.upcase   # user inputs the number corresponding to the parent seed they want to view
-    index = 1
+    # input = gets.strip.to_i || input = gets.strip.to_s.upcase   # user inputs the number corresponding to the parent seed they want to view
+    input = gets.strip.to_s.upcase
+    num = gets.strip.to_i
+
     case input
-    when (1...10)
+    when ("A".."Z") #(1..10)
+      parent_name = SeedPicker::Seeds.others(input, num)
       puts "testing"
       puts ""
-      puts " ----- #{input}: parent name - DESCRIPTION ----- "
+      puts " ----- Group: #{input} - #{parent_name.upcase} - Description ----- "
       # puts SeedPicker::Seeds.testing(input)
-      # puts SeedPicker::Seeds.others
+      # puts SeedPicker::Seeds.others(input)
       # puts ""
-      # puts " -------- Varieties -------- " # user sees a list of all parent seeds with an index of 1.
-      # seed.variety_seed_name.each_with_index(1) {|list, index| puts "#{index}. #{list}" }
+      puts " -------- Varieties -------- " # user sees a list of all parent seeds with an index of 1.
+      # puts SeedPicker::Seeds.others(input)
+      puts ""
       # puts ""
       choose_list_of_variety
     when "EXIT"
@@ -128,7 +128,7 @@ class SeedPicker::CLI
     puts ""
     puts "         ( Thank you for viewing our vegetable seed collection. Seed you again, soon. Have a great day! )"
     puts "          , "
-    puts "  (\ /)  , "
+    puts "  (\\ /)  , "
     puts "  ( . .)  "
     puts "  c(\")(\") "
     puts ""

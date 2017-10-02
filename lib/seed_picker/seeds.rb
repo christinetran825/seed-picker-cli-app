@@ -12,47 +12,40 @@ class SeedPicker::Seeds
     @variety_seed_url = variety_seed_url
     @variety_seed_description = variety_seed_description
     @price = price
-    # @@all << self
+    @@all << self
   end
 
   def self.all
     @@all
   end
 
-  def save
-    @@all << self #all instances get added into @@all array
+  # def save
+  #   @@all << self #all instances get added into @@all array
+  # end
+
+  def self.get_parents
+    self.all.collect { |seeds| seeds.parent_seed_name }
   end
 
-  def self.group_parents_by_letter #grouping parents by their letters
-    the_seeds = self.all.collect { |seeds| seeds.parent_seed_name }
-    lists = the_seeds.group_by { |letter| letter[0] } #becomes a hash grouped by first letter
+  def self.group_by_letter #grouping parents by their letters
+    self.get_parents.group_by { |letter| letter[0] } #becomes a hash grouped by first letter
   end
 
-  def self.show_all_seeds_by_letter #listing all vegetable seeds grouped by first letter
-    self.group_parents_by_letter.each do |key, value| #iterates the hash
+  def self.get_letter(input)#grouping parents by their letters
+    self.group_by_letter[input]
+  end
+
+  def self.listing_all_seeds #listing all vegetable seeds grouped by first letter
+    self.group_by_letter.each do |key, value| #iterates the hash
       puts "#{key}: #{value}"
     end
   end
 
-  # #a parent has a name, url, description, varieties
-  # def self.the_parents
-  #   self.all.collect do |seeds|
-  #     seeds.parent_seed_name
-  #     seeds.parent_seed_description
-  #     seeds.parent_seed_url
-  #     seeds.variety_seed_name
-  #   end
-  # end
-  #
-  # #a variety has a name, url, description, price
-  # def self.the_varieties
-  #   self.all.collect do |seeds|
-  #     seeds.variety_seed_name
-  #     seeds.variety_seed_description
-  #     seeds.variety_seed_url
-  #     seeds.price
-  #   end
-  # end
-
-
+  def self.testing(input)
+    group = self.get_parents
+    group.select do |name|
+      name.start_with?(input)
+    end
+  end
+  
 end

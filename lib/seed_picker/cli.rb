@@ -75,7 +75,7 @@ class SeedPicker::CLI
     case num
     when (1..10)
       # seed = SeedPicker::Seeds.find(num.to_i) #finding num(user's input) for the seed chosen from choose_a_letter method and NOT from the entire alphabet.
-      seed = SeedPicker::Seeds.find(letter, num.to_i) #finding num(user's input) for the seed chosen from choose_a_letter method and NOT from the entire alphabet.
+      seed = SeedPicker::Seeds.find_details(letter, num.to_i) #finding num(user's input) for the seed chosen from choose_a_letter method and NOT from the entire alphabet.
       SeedPicker::Scraper.scrape_variety_seeds(seed) #calls the Scraper class method .scrape_variety_seeds & passes seed
       print_parent_details(seed)
       # parent_name = SeedPicker::Seeds.get_descriptions(letter, num)

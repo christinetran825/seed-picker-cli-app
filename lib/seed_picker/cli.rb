@@ -8,27 +8,28 @@ class SeedPicker::CLI
     #   SeedPicker::Scraper.scrape_variety_seeds(seeds)
     #   SeedPicker::Scraper.scrape_variety_details(seeds)
     # end
+    puts ""
     puts "* * * Welcome to Baker Creek Heirloom Seeds RareSeeds * * * "
     puts ""
-    list_of_seeds
-    choose_a_letter
+    start
   end
 
   def all_seeds
     SeedPicker::Seeds.all
   end
 
-  ############### getting the links ###############
-
-
-  ############### Lists of Vegetable Seeds ###############
-
-  def list_of_seeds
+  def start
     puts "Here's our collection of vegetable seeds."
     puts ""
     puts "  ------------- Vegetable Seeds -------------"   # user sees a list of vegetable seeds
     SeedPicker::Seeds.listing_all_seeds
+    choose_a_letter
   end
+
+
+
+  ############### getting the links ###############
+
 
 
   ############### MENU ###############
@@ -51,7 +52,7 @@ class SeedPicker::CLI
     else
       choose_a_letter
     end
-
+    
   end
 
   def choose_a_parent_seed
@@ -118,13 +119,13 @@ class SeedPicker::CLI
 
     case input
     when "LIST"
-      self.call
+      self.start
     when "DONE"
       goodbye
     else
       go_back_or_finish
     end
-    
+
   end
 
   def goodbye

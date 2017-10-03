@@ -2,19 +2,13 @@ class SeedPicker::CLI
 
   def call
     SeedPicker::Scraper.scrape_parent_seeds #CLI calls on the scraper class to tell Nokogiri to scrape the website
-    # binding.pry
-    # all_seeds = SeedPicker::Seeds.all.clone
-    # all_seeds.each do |seeds|
-    #   SeedPicker::Scraper.scrape_variety_seeds(seeds)
-    #   SeedPicker::Scraper.scrape_variety_details(seeds)
-    # end
     puts ""
     puts "* * * Welcome to Baker Creek Heirloom Seeds RareSeeds * * * "
     puts ""
     start
   end
 
-  ############ helper methods? #######
+  ############ Helper Methods ############
 
   def print_parent_seeds(letter)
     puts ""
@@ -48,6 +42,8 @@ class SeedPicker::CLI
   # puts ""
   #end
 
+############ Start of Program ############
+
   def start
     puts "Here's our collection of vegetable seeds."
     puts ""
@@ -58,33 +54,26 @@ class SeedPicker::CLI
 
   def choose_a_letter
     puts ""
-    puts "^ - ^ Please choose a group of seeds by its letter from A-Z." # user is prompted with a demand
+    puts "^ - ^ Please choose a group of seeds by its letter from A-Z."
     puts ""
     letter = gets.strip.to_s.upcase
-
     case letter
     when ("A".."Z")
-      # puts ""
-      # puts " ----- You chose Group: #{input} ----- " # user sees a list of all parent seeds with an index of 1.
-      # puts ""
-      # puts SeedPicker::Seeds.show_parents(input)
-      print_parent_seeds(letter)
-      choose_a_parent_seed(letter)
+      print_parent_seeds(letter) #passes the letter(user's input) to this helper method to print out results
+      choose_a_parent_seed(letter) #passes the letter(user's input) to the next method/step of the program
     when "DONE"
       goodbye
     else
       choose_a_letter
     end
-
   end
 
-  def choose_a_parent_seed(letter)
+  def choose_a_parent_seed(letter) #previous letter(user's input) is passed in
     puts ""
-    puts "^ - ^ Please choose a seed by its number." # user is prompted with a choice
+    puts "^ - ^ Please choose a seed by its number."
     num = gets.strip.to_i
-
     case num
-    when (1..10) #("A".."Z")
+    when (1..10)
       # parent_name = SeedPicker::Seeds.get_descriptions(letter, num)
       # puts "testing"
       # puts ""
@@ -100,7 +89,7 @@ class SeedPicker::CLI
       # puts ""
       # puts "  seed-description"
       # puts ""
-      seed = SeedPicker::Seeds.find(num.to_i)
+      seed = SeedPicker::Seeds.find(num.to_i) #finding num(user's input) for the seed chosen from choose_a_letter method and NOT from the entire alphabet.
 
       SeedPicker::Scraper.scrape_variety_seeds(seed)
 

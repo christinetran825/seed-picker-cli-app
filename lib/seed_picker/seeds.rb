@@ -16,6 +16,7 @@ class SeedPicker::Seeds
   end
 
   def self.all
+    # binding.pry
     @@all
   end
 
@@ -26,13 +27,13 @@ class SeedPicker::Seeds
   ############### Helper Methods ###############
 
   def self.get_parents #getting all parent seeds
-    self.all.collect { |seeds| seeds.parent_seed_name }
+    all_parents = self.all.collect { |seeds| seeds.parent_seed_name }
+    all_parents.sort { |a, b| a <=> b }
   end
 
-  def self.group_by_letter #grouping all parent seeds by their first letters
+  def self.group_by_letter #grouping all parent seeds by their first letters  ###listing all veggie seeds
     group = self.get_parents
-    abc_list = group.sort_by {|x| x[0]}
-    abc_list.group_by { |letter| letter[0] } #returns a hash grouped by first letter
+    group.group_by { |s| s[0,1] } #returns a hash grouped by first letter
   end
 
   def self.get_varieties #getting all parent seeds
@@ -51,8 +52,8 @@ class SeedPicker::Seeds
 
   def self.show_parents(letter)
     list_parents = self.group_by_letter[letter] #input is being pased to the SeedPicker::Seeds.get_letter method where it's being passed into a hash as a key
-    list_parents.collect.with_index(1) do |the_info, index| # the results of the SeedPicker::Seeds.testing(input) method is saved as group variable. The group variable is iterated with index of 1.
-      puts "  #{index}. #{the_info}"
+    list_parents.collect.with_index(1) do |the_parent, index| # the results of the SeedPicker::Seeds.testing(input) method is saved as group variable. The group variable is iterated with index of 1.
+      puts "  #{index}. #{the_parent}"
     end
   end
 
@@ -63,5 +64,21 @@ class SeedPicker::Seeds
     group[letter][num - 1]
   end
 
+  # def self.lists_all_seeds(num) #gets parent seed chosen from index from show_parents(letter) method
+  #   self.all[num - 1]
+  # end
+
+  def self.testing
+    # binding.pry
+    # group = self.get_parents
+    # group.collect.with_index(1) do |seed, index|
+    #   "#{index}. #{seed}"
+    # end
+    group = self.get_parents
+    group.group_by { |s| s[0,1]}
+    all_lists = group.collect.with_index(1) do |seed, index|
+      "#{index}. #{seed}"
+    end
+  end
 
 end

@@ -14,22 +14,22 @@ class SeedPicker::CLI
     puts ""
     puts " ----- You chose Group: #{letter} ----- " # user sees a list of all parent seeds with an index of 1.
     puts ""
-    puts SeedPicker::Seeds.show_parents(letter)
+    puts SeedPicker::Seeds.show_parents(letter).compact
   end
 
   def print_parent_details(seed)
     puts ""
-    puts " ----- Group: letter - #{seed.parent_seed_name} ----- "
+    puts " ----- Group: #{seed.parent_seed_name[0]} - #{seed.parent_seed_name} ----- "
     puts ""
-    puts " -------- Varieties -------- " # user sees a list of all parent seeds with an index of 1.
+    puts " Varieties: " # user sees a list of all parent seeds with an index of 1.
     puts ""
-    # 1. seed.variety_seed_name[0]    2. seed.variety_seed_name[1]     3. seed.variety_seed_name[2]    4. seed.variety_seed_name[3]
-    # 5. seed.variety_seed_name[4]     6. seed.variety_seed_name[5]     7. seed.variety_seed_name[6]    8. seed.variety_seed_name[7]
-    # 9. seed.variety_seed_name[8]     10. seed.variety_seed_name[9]
+    puts " 1. #{seed.variety_seed_name}    2. #{seed.variety_seed_name}     3. #{seed.variety_seed_name}    4. #{seed.variety_seed_name}"
+    puts " 5. #{seed.variety_seed_name}     6. #{seed.variety_seed_name}     7. #{seed.variety_seed_name}    8. #{seed.variety_seed_name}"
+    puts " 9. #{seed.variety_seed_name}     10. #{seed.variety_seed_name}"
     puts ""
-    puts " -------- Description -------- "
+    puts " Description: "
     puts ""
-    # puts seed.description
+    puts "#{seed.parent_seed_description}"
     puts ""
   end
 
@@ -74,27 +74,11 @@ class SeedPicker::CLI
     num = gets.strip.to_i
     case num
     when (1..10)
-      # parent_name = SeedPicker::Seeds.get_descriptions(letter, num)
-      # puts "testing"
-      # puts ""
-      # puts " ----- Group: #{letter} - #{parent_name.upcase} ----- "
-      # puts ""
-      # puts "  Varieties: " # user sees a list of all parent seeds with an index of 1.
-      # # puts SeedPicker::Seeds.others(input)
-      # puts "  1. seed    2. seed    3. seed   4. seed"
-      # puts "  5. seed    6. seed    7. seed   8. seed"
-      # puts "  9. seed    10. seed"
-      # puts ""
-      # puts "  Description: "
-      # puts ""
-      # puts "  seed-description"
-      # puts ""
-      seed = SeedPicker::Seeds.find(num.to_i) #finding num(user's input) for the seed chosen from choose_a_letter method and NOT from the entire alphabet.
-
-      SeedPicker::Scraper.scrape_variety_seeds(seed)
-
+      # seed = SeedPicker::Seeds.find(num.to_i) #finding num(user's input) for the seed chosen from choose_a_letter method and NOT from the entire alphabet.
+      seed = SeedPicker::Seeds.find(letter, num.to_i) #finding num(user's input) for the seed chosen from choose_a_letter method and NOT from the entire alphabet.
+      SeedPicker::Scraper.scrape_variety_seeds(seed) #calls the Scraper class method .scrape_variety_seeds & passes seed
       print_parent_details(seed)
-
+      # parent_name = SeedPicker::Seeds.get_descriptions(letter, num)
       choose_list_of_variety
     when "DONE"
       goodbye

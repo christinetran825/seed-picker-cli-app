@@ -23,9 +23,10 @@ class SeedPicker::Seeds
     @@all << self #all instances get added into @@all array
   end
 
-  # def self.find(seed_info)
-  #   self.all[seed_info]
-  # end
+  def self.find(seed_info) #get select from from seed not the entire alphabet
+    
+    self.all[seed_info]
+  end
 
   ############### Building the Vegetable List - Methods ###############
 
@@ -76,7 +77,7 @@ class SeedPicker::Seeds
 
   #shows the description, shows the list of varieties
 
-  def self.get_descriptions(input, num)
+  def self.get_descriptions(letter, num)
     group = self.group_by_letter
     group[input][num - 1]
   end

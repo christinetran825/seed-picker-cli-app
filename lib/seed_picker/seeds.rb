@@ -23,19 +23,6 @@ class SeedPicker::Seeds
     @@all << self #all instances get added into @@all array
   end
 
-  def self.find(seed_info) #get select from from seed not the entire alphabet
-    
-    self.all[seed_info]
-  end
-
-  ############### Building the Vegetable List - Methods ###############
-
-  def self.get_urls
-    self.all.collect do |links|
-      "#{links.parent_seed_url}"
-    end
-  end
-
   ############### Helper Methods ###############
 
   def self.get_parents #getting all parent seeds
@@ -52,7 +39,7 @@ class SeedPicker::Seeds
     self.all.collect { |seeds| seeds.variety_seed_name }
   end
 
-  ############### Vegetable List ###############
+  ############### Lists ALL Vegetable Seeds ###############
 
   def self.listing_all_seeds #listing all vegetable seeds grouped from group_by_letter method hash
     self.group_by_letter.each do |key, value| #iterates the hash
@@ -60,11 +47,7 @@ class SeedPicker::Seeds
     end
   end
 
-  ############### Choosing the Letter to get list of parent seeds ###############
-  #
-  # def self.get_letter(input) #getting parent seeds from its first letter from the hash return of group_by_letter method hash
-  #   self.group_by_letter[input]
-  # end
+  ############### Print Parent Seeds ###############
 
   def self.show_parents(letter)
     list_parents = self.group_by_letter[letter] #input is being pased to the SeedPicker::Seeds.get_letter method where it's being passed into a hash as a key
@@ -73,19 +56,12 @@ class SeedPicker::Seeds
     end
   end
 
-  ############### Choosing the Index of parent seeds - Methods ###############
+  ############### Print Parent Seeds Details ###############
 
-  #shows the description, shows the list of varieties
-
-  def self.get_descriptions(letter, num)
+  def self.find_details(letter, num) #gets parent seed chosen from index from show_parents(letter) method
     group = self.group_by_letter
-    group[input][num - 1]
+    group[letter][num - 1]
   end
 
-  # def self.get_descriptions
-  #   group = self.all.collect do |seeds| #### index here is at zero
-  #     "#{seeds.parent_seed_description}"
-  #   end
-  # end
 
 end

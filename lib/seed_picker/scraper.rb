@@ -13,7 +13,9 @@ class SeedPicker::Scraper
   end
 
   def self.scrape_variety_seeds(seed) #passing an instance of SeedPicker::Seeds.new which is how we get the seed.parent_seed_url from the previous method
-    doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url))
+    # doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url))
+    # doc = Nokogiri::HTML(open("http://www.rareseeds.com#{seed}")) # "http://www.rareseeds.com/store/vegetables/garden-berries/" #http://www.rareseeds.comGarden Berries (URI::InvalidURIError)
+    doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/#{seed}")) #http://www.rareseeds.com/store/vegetables/Garden Berries (URI::InvalidURIError)
     doc.css(".sitebody .mainContent").collect do |the_details|
       seed.parent_seed_description = the_details.css("div#CT_Main_0_pnlHeading").first.css(".sectionDesc p").first.text.strip #parent_description
       the_details.css("h3.itemTitle a").collect do |more_details|

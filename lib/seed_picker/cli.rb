@@ -20,31 +20,30 @@ class SeedPicker::CLI
 
   ############ helper methods? #######
 
-    def print_parent_seeds(letter)
-      puts ""
-      puts " ----- You chose Group: #{letter} ----- " # user sees a list of all parent seeds with an index of 1.
-      puts ""
-      puts SeedPicker::Seeds.show_parents(letter)
-    end
-  # seed = SeedPicker::Seeds.find(input.to_i)
-  #
-  # def print_parent_details(seed)
-    # puts ""
-    # puts " ----- Group: letter - #{parent_name.upcase} ----- "
-    # puts ""
-    # puts " -------- Varieties -------- " # user sees a list of all parent seeds with an index of 1.
-    # puts ""
-    # # 1. seed.variety_seed_name[0]    2. seed.variety_seed_name[1]     3. seed.variety_seed_name[2]    4. seed.variety_seed_name[3]
-    # # 5. seed.variety_seed_name[4]     6. seed.variety_seed_name[5]     7. seed.variety_seed_name[6]    8. seed.variety_seed_name[7]
-    # # 9. seed.variety_seed_name[8]     10. seed.variety_seed_name[9]
-    # puts ""
-    # puts " -------- Description -------- "
-    # puts ""
-    # # puts seed.description
-    # puts ""
-  # end
+  def print_parent_seeds(letter)
+    puts ""
+    puts " ----- You chose Group: #{letter} ----- " # user sees a list of all parent seeds with an index of 1.
+    puts ""
+    puts SeedPicker::Seeds.show_parents(letter)
+  end
 
-  # def print_variety_details(seed)
+# def print_parent_details(seed)
+  # puts ""
+  # puts " ----- Group: letter - #{parent_name.upcase} ----- "
+  # puts ""
+  # puts " -------- Varieties -------- " # user sees a list of all parent seeds with an index of 1.
+  # puts ""
+  # # 1. seed.variety_seed_name[0]    2. seed.variety_seed_name[1]     3. seed.variety_seed_name[2]    4. seed.variety_seed_name[3]
+  # # 5. seed.variety_seed_name[4]     6. seed.variety_seed_name[5]     7. seed.variety_seed_name[6]    8. seed.variety_seed_name[7]
+  # # 9. seed.variety_seed_name[8]     10. seed.variety_seed_name[9]
+  # puts ""
+  # puts " -------- Description -------- "
+  # puts ""
+  # # puts seed.description
+  # puts ""
+# end
+
+# def print_variety_details(seed)
   # puts "-------- Group #{letter}: #{seed.parent_seed_name} - #{seed.variety_seed_name} --------" # user sees a list of all parent seeds with an index of 1.
   # puts ""
   # puts "Price: #{seed.price} "
@@ -106,6 +105,10 @@ class SeedPicker::CLI
       puts ""
       # puts seed.description
       puts ""
+
+      # seed = SeedPicker::Seeds.find(input.to_i)
+      # print_parent_details(seed)
+
       choose_list_of_variety
     when "DONE"
       goodbye
@@ -125,13 +128,11 @@ class SeedPicker::CLI
     case input
     when (1..10)
       puts "testing"
-      # puts "     -------- Group 'letter' - #{input}: #{seed.parent_seed_name} - #{seed.variety_seed_name} --------" # user sees a list of all parent seeds with an index of 1.
-      # puts "     #{seed.variety_seed_description} "
+      # puts "-------- Group #{letter}: #{seed.parent_seed_name} - #{seed.variety_seed_name} --------" # user sees a list of all parent seeds with an index of 1.
       # puts ""
-      # puts "     Price: #{seed.price} "
-      # SeedPicker::Seeds.get_variety_desc
-      # SeedPicker::Seeds.get_prices
+      # puts "Price: #{seed.price} "
       # puts ""
+      # puts "#{seed.variety_seed_description} "
       # puts ""
       go_back_or_finish
     when "DONE"

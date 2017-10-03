@@ -30,7 +30,6 @@ class SeedPicker::Seeds
   ############### Building the Vegetable List - Methods ###############
 
   def self.get_urls
-    binding.pry
     self.all.collect do |links|
       "#{links.parent_seed_url}"
     end

@@ -23,6 +23,10 @@ class SeedPicker::Seeds
     @@all << self #all instances get added into @@all array
   end
 
+  # def self.find(seed_info)
+  #   self.all[seed_info]
+  # end
+
   ############### Building the Vegetable List - Methods ###############
 
   def self.get_urls
@@ -62,8 +66,8 @@ class SeedPicker::Seeds
   #   self.group_by_letter[input]
   # end
 
-  def self.show_parents(input)
-    list_parents = self.group_by_letter[input] #input is being pased to the SeedPicker::Seeds.get_letter method where it's being passed into a hash as a key
+  def self.show_parents(letter)
+    list_parents = self.group_by_letter[letter] #input is being pased to the SeedPicker::Seeds.get_letter method where it's being passed into a hash as a key
     list_parents.collect.with_index(1) do |the_info, index| # the results of the SeedPicker::Seeds.testing(input) method is saved as group variable. The group variable is iterated with index of 1.
       puts "  #{index}. #{the_info}"
     end
@@ -91,14 +95,9 @@ class SeedPicker::Seeds
   #   hash
   # end
   # binding.pry
-  def self.others(input, num)
+  def self.get_descriptions(input, num)
     group = self.group_by_letter
     group[input][num - 1]
-    # group = self.get_parents
-    # varieities = self.get_varieties
-    # pairing = group.zip(varieities)
-    # hashed = pairing.to_h
-    # puts hashed[input]
   end
 
 end

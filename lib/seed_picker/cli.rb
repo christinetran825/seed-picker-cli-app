@@ -95,15 +95,15 @@ class SeedPicker::CLI
       puts ""
       puts " ----- Group: #{input} - #{parent_name.upcase} ----- "
       puts ""
-      puts " -------- Varieties -------- " # user sees a list of all parent seeds with an index of 1.
+      puts "  Varieties: " # user sees a list of all parent seeds with an index of 1.
       # puts SeedPicker::Seeds.others(input)
-      # 1. seed    2. seed    3. seed   4. seed
-      # 5. seed    6. seed    7. seed   8. seed
-      # 9. seed    10. seed
+      puts "  1. seed    2. seed    3. seed   4. seed"
+      puts "  5. seed    6. seed    7. seed   8. seed"
+      puts "  9. seed    10. seed"
       puts ""
-      puts " -------- Description -------- "
+      puts "  Description: "
       puts ""
-      # puts seed.description
+      puts "  seed-description"
       puts ""
 
       # seed = SeedPicker::Seeds.find(input.to_i)

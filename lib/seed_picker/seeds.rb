@@ -76,27 +76,15 @@ class SeedPicker::Seeds
 
   #shows the description, shows the list of varieties
 
+  def self.get_descriptions(input, num)
+    group = self.group_by_letter
+    group[input][num - 1]
+  end
+
   # def self.get_descriptions
   #   group = self.all.collect do |seeds| #### index here is at zero
   #     "#{seeds.parent_seed_description}"
   #   end
   # end
-
-    # parents_array[key][values_index]
-    # group = self.listing_all_seeds
-    # group["A"][index]
-
-  # def self.what
-  #   parents_array = self.listing_all_seeds
-  #   group = parents_array.values
-  #   hash = {}
-  #   group.each { |k, v| hash[k] = v }
-  #   hash
-  # end
-  # binding.pry
-  def self.get_descriptions(input, num)
-    group = self.group_by_letter
-    group[input][num - 1]
-  end
 
 end

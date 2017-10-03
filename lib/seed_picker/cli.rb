@@ -37,7 +37,7 @@ class SeedPicker::CLI
     puts ""
     puts "^ - ^ Please choose a group of seeds by its letter from A-Z." # user is prompted with a demand
     puts ""
-    input = gets.strip.to_s.upcase || input = gets.strip.to_i
+    input = gets.strip.to_s.upcase
 
     case input
     when ("A".."Z")
@@ -56,7 +56,7 @@ class SeedPicker::CLI
 
   def choose_a_parent_seed
     puts ""
-    puts "^ - ^ Please choose a seed by its number. Enter back to choose another seed." # user is prompted with a choice
+    puts "^ - ^ Please choose a seed by its number." # user is prompted with a choice
     input = gets.strip.to_s.upcase
     num = gets.strip.to_i
 
@@ -76,8 +76,8 @@ class SeedPicker::CLI
       choose_list_of_variety
     when "DONE"
       goodbye
-    when "BACK"
-      choose_a_letter
+    # when "BACK"
+    #   choose_a_letter
     else
       choose_a_parent_seed
     end
@@ -101,6 +101,12 @@ class SeedPicker::CLI
       # puts ""
       # puts ""
       go_back_or_finish
+    when "DONE"
+      goodbye
+    # when "BACK"
+    #   choose_a_parent_seed
+    else
+      choose_list_of_variety
     end
 
   end

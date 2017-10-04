@@ -4,65 +4,56 @@ HOW THE CLI SHOULD LOOK LIKE
 
 Here's our collection of vegetable seeds.
 
-  ------------- Vegetable Seeds -------------
-A: ["Amaranth", "Artichoke & Cardoon", "Asparagus"]
-B: ["Beans", "Beetroot", "Bok Choy", "Broccoli", "Brussels Sprouts", "Bulk Vegetables"]
-C: ["Cabbage", "Carrots", "Cauliflower", "Celery & Celeriac", "Chicory", "Chinese Cabbage", "Collards", "Corn", "Cowpeas", "Cucumbers"]
-E: ["Eggplant", "Endive & Escarole"]
-F: ["Fennel", "Fall Favorites"]
-G: ["Garden Berries", "Garlic", "Gourds", "Grains and Cover Crops", "Greens", "Greens, Oriental", "Ground Cherries"]
-K: ["Kale", "Kohlrabi"]
-L: ["Leeks", "Lettuce", "Live Plants"]
-M: ["Melon"]
-O: ["Okra", "Onions"]
-P: ["Parsnips", "Peanuts", "Peas", "Peppers"]
-R: ["Radicchio", "Radishes", "Rhubarb", "Roselle", "Rutabagas"]
-S: ["Salad Blends", "Salsify", "Sorghum", "Spinach", "Squash", "Strawberries", "Swiss Chard", "Slow Food's Ark of Taste"]
-T: ["Tomatillo", "Tomatoes", "Turnips", "The Explorer Series", "Thai Varieties"]
-W: ["Watermelon", "William Woys Weaver"]
-N: ["New Items"]
-
-
-^ - ^ Please choose a group of seeds by its letter from A-Z for more details.
-
-    #user input => A
-
- ----- You chose Group: A -----
-  1. Amaranth
-  2. Artichoke & Cardoon
-  3. Asparagus
-
+------------- Vegetable Seeds -------------
+1. Amaranth
+2. Artichoke & Cardoon
+3. Asparagus
+4. Beans
+5. Beetroot
+6. Bok Choy
+7. Broccoli
+8. Brussels Sprouts
+9. Cabbage
+10. Carrots
+11. Cauliflower
+12. Celery & Celeriac
+# more seeds...
 
 ^ - ^ Please choose a seed by its number.
 
     #user input => 1
 
- ----- Group A - 1: Amaranth -----
- (Amaranthus sp.) Direct seed or set young, growing amaranth transplants after danger of frost, in rich soil and full sun. Space 2-3 feet apart. Drought tolerant, but more productive with adequate moisture. Harvest young leaves for greens all summer long. Amaranth seeds mature over a long period, so must be collected several times for best production; or, cut and hang upside-down indoors, collecting seeds on a tarp as they fall. (Some threshing may be necessary.) This crop is easy to grow, quite colorful and makes delicious greens and grain. A good ornamental plant for landscaping.
+----- Group: A - Amaranth -----
 
- ----- Amaranth - Varieties --------
-  1. Aurelia's Verde
-  2. Dreadlocks Amaranth
-  3. Elena's Rojo Amaranth
+ Varieties:
+ 1. Aurelia's Verde Amaranth
+ 2. Dreadlocks Amaranth
+ 3. Elena's Rojo Amaranth
+ 4. Elephant Head Amaranth
+ # more varieties...
 
+ Description:
+ (Amaranthus sp.) Direct... #continues description of parent seed.
 
 ^ - ^ Please choose a variety by its number.
 
     #user input => 1
 
- -------- Group A - 1: Amaranth: - Aurelia's Verde --------
- Native amaranth from Guatemala that flowers light green; primarily used for grain which is rich in vitamin B, vitamin A, vitamin E and iron; this variety has been revived in the Mayan communities of Baja Verapaz after almost being lost during the civil war; named after Aurelia, the woman whose family revived and saved seeds of this amaranth.of this particular amaranth.
+-------- Group A: Amaranth - Aurelia's Verde Amaranth --------
 
  Price: $2.50
+
+ Description:
+
+ Native amaranth from Guatemala... #more description of variety seed.
 
 ^ - ^ Type list if you want to choose another seed. Type done if you are done.
 
     #user input => done
 
-
 ^ - ^ Goodbye!!!"
 
-          ( Thank you for viewing our vegetable seed collection. Seed you again, soon. Have a great day! )
+          ( Thank you for viewing our vegetable seed collection. Seed you again, soon!!! )
             ,
     (\ /)  ,
     ( . .)

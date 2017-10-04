@@ -57,12 +57,10 @@ class SeedPicker::CLI
       puts ""
       puts "-------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{variety.variety_seed_name} --------" # user sees a list of all parent seeds with an index of 1.
       puts ""
-      #
-      # SeedPicker::Scraper.scrape_variety_details(variety)
-      # SeedPicker::Varieties.get_varieties_details(seed)
       puts "Price: #{variety.price} "
       puts ""
       puts "Description: "
+      SeedPicker::Scraper.scrape_variety_details(variety)
       puts "#{variety.variety_seed_description} "
       puts ""
       go_back_or_finish

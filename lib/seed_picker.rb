@@ -4,6 +4,7 @@ require 'pry'
 
 require_relative "./seed_picker/version"
 require_relative "./seed_picker/seeds"
+require_relative "./seed_picker/varieties"
 require_relative "./seed_picker/scraper"
 require_relative "./seed_picker/cli"
 

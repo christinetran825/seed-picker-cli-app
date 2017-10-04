@@ -10,15 +10,8 @@ class SeedPicker::CLI
 
   ############ Helper Methods ############
 
-  def print_parent_seeds(letter)
-    puts ""
-    puts " ----- You chose Group: #{letter} ----- " # user sees a list of all parent seeds with an index of 1.
-    puts ""
-    puts SeedPicker::Seeds.show_parents(letter).compact
-  end
-
   def list_varieties(seed)
-    puts SeedPicker::Seeds.get_varieties(seed).compact
+    puts SeedPicker::Varieties.get_varieties(seed).compact
   end
 
   def print_parent_details(seed)
@@ -26,7 +19,7 @@ class SeedPicker::CLI
     puts " ----- Group: #{seed.parent_seed_name[0]} - #{seed.parent_seed_name} ----- "
     puts ""
     puts " Varieties: " # user sees a list of all parent seeds with an index of 1.
-    list_varieties(seed)
+    # list_varieties(seed)
     puts ""
     puts " 1. #{seed.variety_seed_name}    2. #{seed.variety_seed_name}     3. #{seed.variety_seed_name}    4. #{seed.variety_seed_name}"
     puts " 5. #{seed.variety_seed_name}     6. #{seed.variety_seed_name}     7. #{seed.variety_seed_name}    8. #{seed.variety_seed_name}"
@@ -54,27 +47,10 @@ class SeedPicker::CLI
     puts ""
     puts "  ------------- Vegetable Seeds -------------"   # user sees a list of vegetable seeds
     SeedPicker::Seeds.listing_all_seeds
-    choose_a_letter
+    choose_a_parent_seed
   end
 
-  def choose_a_letter
-    puts ""
-    puts "^ - ^ Please choose a group of seeds by its letter from A-Z."
-    puts ""
-    letter = gets.strip.to_s.upcase
-    case letter
-    when ("A".."Z")
-      # print_parent_seeds(letter) #passes the letter(user's input) to this helper method to print out results
-      SeedPicker::Seeds.testing
-      choose_a_parent_seed(letter) #passes the letter(user's input) to the next method/step of the program
-    when "DONE"
-      goodbye
-    else
-      choose_a_letter
-    end
-  end
-
-  def choose_a_parent_seed(letter) #previous letter(user's input) is passed in
+  def choose_a_parent_seed #previous letter(user's input) is passed in
     puts ""
     puts "^ - ^ Please choose a seed by its number."
     num = gets.strip.to_i
@@ -91,7 +67,7 @@ class SeedPicker::CLI
     # when "BACK"
     #   choose_a_letter
     else
-      choose_a_parent_seed(letter)
+      start
     end
 
   end
@@ -117,7 +93,7 @@ class SeedPicker::CLI
     # when "BACK"
     #   choose_a_parent_seed
     else
-      choose_list_of_variety
+      choose_a_parent_seed
     end
 
   end

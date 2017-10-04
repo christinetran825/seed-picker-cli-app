@@ -21,7 +21,7 @@ class SeedPicker::CLI
   def choose_a_parent_seed
     puts ""
     puts "^ - ^ Please choose a seed by its number."
-    num = gets.strip.to_i
+    num = gets.strip.to_i || um = gets.strip.to_s
     case num
     when (1..63)
       seed = SeedPicker::Seeds.find(num.to_i) #finding num(user's input) for the seed chosen from choose_a_letter method and NOT from the entire alpha
@@ -30,6 +30,7 @@ class SeedPicker::CLI
       puts "----- Group: #{seed.parent_seed_name[0]} - #{seed.parent_seed_name} ----- "
       puts ""
       puts "Varieties: " # user sees a list of all parent seeds with an index of 1.
+      puts ""
       SeedPicker::Varieties.get_varieties(seed).compact
       puts ""
       puts "Description: "
@@ -39,10 +40,8 @@ class SeedPicker::CLI
       choose_list_of_variety(seed) #seed gets passed to next method
     when "DONE"
       goodbye
-    # when "BACK"
-    #   choose_a_letter
     else
-      start
+      choose_a_parent_seed
     end
 
   end
@@ -60,16 +59,15 @@ class SeedPicker::CLI
       puts "Price: #{variety.price} "
       puts ""
       puts "Description: "
+      puts ""
       SeedPicker::Scraper.scrape_variety_details(variety)
       puts "#{variety.variety_seed_description} "
       puts ""
       go_back_or_finish
     when "DONE"
       goodbye
-    # when "BACK"
-    #   choose_a_parent_seed
     else
-      choose_a_parent_seed
+      choose_list_of_variety(seed)
     end
 
   end
@@ -81,7 +79,7 @@ class SeedPicker::CLI
 
     case input
     when "LIST"
-      self.start
+      start
     when "DONE"
       goodbye
     else

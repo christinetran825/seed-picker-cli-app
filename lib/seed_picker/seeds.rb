@@ -1,6 +1,6 @@
 class SeedPicker::Seeds
 
-  attr_accessor :parent_seed_name, :parent_seed_url, :parent_seed_description, :variety_seed_name, :variety_seed_url, :variety_seed_description, :price
+  attr_accessor :parent_seed_name, :parent_seed_url, :parent_seed_description
 
   @@all = []
 
@@ -8,20 +8,12 @@ class SeedPicker::Seeds
     @parent_seed_name = parent_seed_name
     @parent_seed_url = parent_seed_url
     @parent_seed_description = parent_seed_description
-    @variety_seed_name = variety_seed_name
-    @variety_seed_url = variety_seed_url
-    @variety_seed_description = variety_seed_description
-    @price = price
     @@all << self #all instances get added into @@all array
   end
 
   def self.all
     @@all #shows all instances as an array
   end
-
-  # def save
-  #   @@all << self #all instances get added into @@all array
-  # end
 
   ############### Helper Methods ###############
 
@@ -48,12 +40,14 @@ class SeedPicker::Seeds
 
   def self.listing_all_seeds
     group = self.get_parents
-    list_parents = group.collect.with_index(1) do |seed, index| puts "#{index}. #{seed}" end
+    group.collect.with_index(1) do |seed, index|
+      puts "#{index}. #{seed}"
+    end
   end
 
-  ############### Print Parent Seeds Details ###############
+  ############### Find Parent Seeds ###############
 
-  def self.find(num) #gets parent seed chosen from index from show_parents(letter) method
+  def self.find(num) #gets parent seed
     self.all[num-1] #objects are listed starting at 0
   end
 

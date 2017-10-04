@@ -16,20 +16,18 @@ class SeedPicker::Varieties
     @@all #shows all instances as an array
   end
 
-############### Print List of Variety Seeds ###############
+############### List ALL VARIETY Seeds ###############
 
   def self.get_varieties(seed) #getting all varieties seeds
-    the_varieties = self.all.collect.with_index(1) { |seeds, index| puts "#{index}. #{seeds.variety_seed_name}" }
-    the_varieties
+    self.all.collect.with_index(1) do |seeds, index|
+      puts "#{index}. #{seeds.variety_seed_name}"
+    end
   end
 
-############### Print Variety Seeds Details ###############
+############### Find Variety Seeds ###############
+
   def self.find(num) #gets variety seed
     self.all[num-1] #objects are listed starting at 0
-  end
-
-  def self.get_varieties_details(seed) #getting all varieties seeds
-    puts "whoa"
   end
 
 end

@@ -15,17 +15,14 @@ class SeedPicker::Scraper
   def self.scrape_variety_seeds(seed) #passing an instance of SeedPicker::Seeds.new which is how we get the seed.parent_seed_url from the previous method
     doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url))
     # binding.pry
-    seed.parent_seed_description_a = doc.css(".sitebody .mainContent p").children.first.text.gsub(/\r\n\t/,"") #melons, peppers, squash, gourds, tomatoes
-    seed.parent_seed_description_b = doc.css(".sitebody .mainContent .sectionDesc").text.strip.gsub(/\r\n\r\n/,"\n") #garlic, ground cherries
+    seed.parent_seed_description_a = doc.css(".sitebody .mainContent p").children.text.gsub(/\r\n\t/,"") #gourds, melons, peppers, squash, gourds, tomatoes
+    seed.parent_seed_description_b = doc.css(".sitebody .mainContent .sectionDesc").text.strip.gsub(/\r\n\r\n/,"\n \n") #garlic, ground cherries
     seed.parent_seed_description_c = doc.css(".sitebody .mainContent .sectionDesc p").first.text.strip #all other seeds, salad blends
-    # doc.css(".sitebody .mainContent p").collect do |the_details|
-      # seed.parent_seed_description = the_details.css(".sectionDesc p").text.gsub(/\r\n\t/,"") #parent_description
-    # end
     doc.css(".sitebody .mainContent .itemWrapper").collect do |the_details|
-      seed = SeedPicker::Varieties.new ##!!!!! CALLING a new instance OBJECT !!!!!!!!
-      seed.variety_seed_name = the_details.css("h3.itemTitle a").text #variety name
-      seed.variety_seed_url = the_details.css("h3.itemTitle a").attribute("href").value #variety url
-      seed.price = the_details.css(".itemMiniCart .itemPrice").text #variety price
+      variety = SeedPicker::Varieties.new ##!!!!! CALLING a new instance OBJECT !!!!!!!!
+      variety.variety_seed_name = the_details.css("h3.itemTitle a").text #variety name
+      variety.variety_seed_url = the_details.css("h3.itemTitle a").attribute("href").value #variety url
+      variety.price = the_details.css(".itemMiniCart .itemPrice").text #variety price
     end
   end
 

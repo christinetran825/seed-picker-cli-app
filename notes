@@ -24,10 +24,10 @@ Scraping
 
   HREF was "/store/vegetables/amaranth/" taken from left column menu which is seed.parent_seed_name
   doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url)
-  doc.css(".sitebody .grid_9 .mainContent").first.css("div#CT_Main_0_pnlHeading .sectionDesc p").first.text.gsub(/\r\n\t/, "") #description
-  doc.css(".sitebody .grid_9 .mainContent .hawksearch").first.css('title').text #parent seed name
-  doc.css(".sitebody .grid_9 .mainContent .hawksearch .grid_4").first.css("h3.itemTitle a").text #variety name
-  doc.css(".sitebody .grid_9 .mainContent .hawksearch .grid_4").first.css(".itemMiniCart .itemPrice").text #variety price
+    doc.css(".sitebody .mainContent .sectionDesc p").first.text.gsub(/\r\n\t/,"")
+    doc.css(".sitebody .mainContent .grid_4 h3.itemTitle a").first.text
+    doc.css(".sitebody .mainContent .grid_4 h3.itemTitle a").attribute("href").value
+    doc.css(".sitebody .mainContent .itemMiniCart .itemPrice").first.text
 
     # set = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/amaranth/"))
     # set.css(".sitebody .grid_9 .mainContent").first.css("div#CT_Main_0_pnlHeading .sectionDesc p").first.text.strip #description

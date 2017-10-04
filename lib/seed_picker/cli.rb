@@ -17,11 +17,16 @@ class SeedPicker::CLI
     puts SeedPicker::Seeds.show_parents(letter).compact
   end
 
+  def list_varieties(seed)
+    puts SeedPicker::Seeds.get_varieties(seed).compact
+  end
+
   def print_parent_details(seed)
     puts ""
     puts " ----- Group: #{seed.parent_seed_name[0]} - #{seed.parent_seed_name} ----- "
     puts ""
     puts " Varieties: " # user sees a list of all parent seeds with an index of 1.
+    list_varieties(seed)
     puts ""
     puts " 1. #{seed.variety_seed_name}    2. #{seed.variety_seed_name}     3. #{seed.variety_seed_name}    4. #{seed.variety_seed_name}"
     puts " 5. #{seed.variety_seed_name}     6. #{seed.variety_seed_name}     7. #{seed.variety_seed_name}    8. #{seed.variety_seed_name}"
@@ -33,14 +38,14 @@ class SeedPicker::CLI
     puts ""
   end
 
-# def print_variety_details(seed)
-  # puts "-------- Group #{letter}: #{seed.parent_seed_name} - #{seed.variety_seed_name} --------" # user sees a list of all parent seeds with an index of 1.
-  # puts ""
-  # puts "Price: #{seed.price} "
-  # puts ""
-  # puts "#{seed.variety_seed_description} "
-  # puts ""
-  #end
+  def print_variety_details(seed)
+    puts "-------- Group #{letter}: #{seed.parent_seed_name} - #{seed.variety_seed_name} --------" # user sees a list of all parent seeds with an index of 1.
+    puts ""
+    puts "Price: #{seed.price} "
+    puts ""
+    puts "#{seed.variety_seed_description} "
+    puts ""
+  end
 
 ############ Start of Program ############
 
@@ -86,7 +91,7 @@ class SeedPicker::CLI
     # when "BACK"
     #   choose_a_letter
     else
-      choose_a_parent_seed
+      choose_a_parent_seed(letter)
     end
 
   end
@@ -94,11 +99,12 @@ class SeedPicker::CLI
   def choose_list_of_variety
     puts ""
     puts "^ - ^ Please choose a variety by its number."
-    input = gets.strip.to_i || input = gets.strip.to_s.upcase
+    input = gets.strip.to_i
 
     case input
     when (1..63)
       puts "testing"
+      # print_variety_details(num)
       # puts "-------- Group #{letter}: #{seed.parent_seed_name} - #{seed.variety_seed_name} --------" # user sees a list of all parent seeds with an index of 1.
       # puts ""
       # puts "Price: #{seed.price} "

@@ -36,7 +36,8 @@ class SeedPicker::CLI
       puts "Description: "
       puts ""
       # puts "#{seed.parent_seed_description}"
-      helper(seed)
+      SeedPicker::Seeds.find_desc(seed)
+      # helper(seed)
       puts ""
       choose_list_of_variety(seed) #seed gets passed to next method
     when "DONE"
@@ -47,17 +48,17 @@ class SeedPicker::CLI
 
   end
 
-  def helper(seed)
-    if seed == 23 || 28 #garlic, ground cherries
-      puts "#{seed.parent_seed_description_b}"
-    elsif seed == 24 || 34 || 40 || 50 || 54 #gourds, melons, peppers, squash, tomatoes; no descriptions
-      #there's no description from website
-      puts "#{seed.parent_seed_description_a}"
-      puts "Select a variety to view descriptions."
-    else
-      puts "#{seed.parent_seed_description_c}" #all seeds and 46 salad blends
-    end
-  end
+  # def helper(seed)
+  #   if seed == 23 || 28 #garlic, ground cherries
+  #     puts "#{seed.parent_seed_description_b}"
+  #   elsif seed == 24 || 34 || 40 || 50 || 54 #gourds, melons, peppers, squash, tomatoes; no descriptions
+  #     #there's no description from website
+  #     puts "#{seed.parent_seed_description_a}"
+  #     puts "Select a variety to view descriptions."
+  #   else
+  #     puts "#{seed.parent_seed_description_c}" #all seeds and 46 salad blends
+  #   end
+  # end
 
   def choose_list_of_variety(seed)
     puts ""

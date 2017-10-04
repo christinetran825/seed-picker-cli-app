@@ -8,7 +8,7 @@ class SeedPicker::Scraper
       seed = SeedPicker::Seeds.new ##!!!!! CALLING a new instance OBJECT !!!!!!!!
       seed.parent_seed_url = the_seeds.attribute("href").value
       seed.parent_seed_name = the_seeds.text
-      seed.save
+      seed
     end
   end
 

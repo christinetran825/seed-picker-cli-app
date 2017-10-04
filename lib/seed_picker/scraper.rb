@@ -15,10 +15,9 @@ class SeedPicker::Scraper
   def self.scrape_variety_seeds(seed) #passing an instance of SeedPicker::Seeds.new which is how we get the seed.parent_seed_url from the previous method
     doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url))
     # binding.pry
-    seed.parent_seed_description_a = doc.css(".sitebody .mainContent p").children.first.text.gsub(/\r\n\t/,"") #tomatoes
-    seed.parent_seed_description_b = doc.css(".sitebody .mainContent .sectionDesc").text.strip.gsub(/\r\n\r\n/,"\n") #garlic
-    seed.parent_seed_description_c = doc.css(".sitebody .mainContent .sectionDesc p").first.text.strip #all other seeds?
-
+    seed.parent_seed_description_a = doc.css(".sitebody .mainContent p").children.first.text.gsub(/\r\n\t/,"") #melons, peppers, squash, gourds, tomatoes
+    seed.parent_seed_description_b = doc.css(".sitebody .mainContent .sectionDesc").text.strip.gsub(/\r\n\r\n/,"\n") #garlic, ground cherries
+    seed.parent_seed_description_c = doc.css(".sitebody .mainContent .sectionDesc p").first.text.strip #all other seeds, salad blends
     # doc.css(".sitebody .mainContent p").collect do |the_details|
       # seed.parent_seed_description = the_details.css(".sectionDesc p").text.gsub(/\r\n\t/,"") #parent_description
     # end

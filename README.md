@@ -4,23 +4,11 @@ This is a CLI gem for the Baker Creek Heirloom Seeds RareSeeds vegetable seed we
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'seed_picker'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install seed_picker
+Clone the repository and run bundle install.
 
 ## Usage
 
-After installing the gem, you can run the program by entering ./bin/seed_picker
+After installing the gem, run seed-picker to begin.
 
 ## Development
 

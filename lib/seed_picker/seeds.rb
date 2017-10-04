@@ -12,46 +12,41 @@ class SeedPicker::Seeds
     @variety_seed_url = variety_seed_url
     @variety_seed_description = variety_seed_description
     @price = price
-    # @@all << self
+    @@all << self #all instances get added into @@all array
   end
 
   def self.all
-    # binding.pry
-    @@all
+    @@all #shows all instances as an array
   end
 
-  def save
-    @@all << self #all instances get added into @@all array
-  end
+  # def save
+  #   @@all << self #all instances get added into @@all array
+  # end
 
   ############### Helper Methods ###############
 
   def self.get_parents #getting all parent seeds
     # all_parents = self.all.collect { |seeds| seeds.parent_seed_name }
     # all_parents.sort { |a, b| a <=> b }
-    # binding.pry
     all_parents = self.all.collect { |seeds| seeds.parent_seed_name }
     all_seeds = all_parents.sort { |a, b| a <=> b }
     all_seeds.delete("Bulk Vegetables")
     all_seeds.delete("Fall Favorites")
     all_seeds.delete("Melon") #try to add this manually?
+    all_seeds.delete("New Items") #try to add this manually?
     all_seeds.delete("Slow Food's Ark of Taste") #try to add this manually?
     all_seeds.delete("Thai Varieties") #try to add this manually?
     all_seeds.delete("The Explorer Series") #try to add this manually?
     all_seeds.delete("Tomatoes") #try to add this manually?
     all_seeds.delete("Watermelon") #try to add this manually?
     all_seeds.delete("William Woys Weaver") #try to add this manually?
-    all_seeds.delete("Turnips") #try to add this manually?
+    # all_seeds.delete("Turnips") #try to add this manually?
     all_seeds
   end
 
   def self.group_by_letter #grouping all parent seeds by their first letters  ###listing all veggie seeds
     group = self.get_parents
     group.group_by { |s| s[0,1] } #returns a hash grouped by first letter
-  end
-
-  def self.get_varieties #getting all parent seeds
-    self.all.collect { |seeds| seeds.variety_seed_name }
   end
 
   ############### Lists ALL Vegetable Seeds ###############
@@ -80,16 +75,20 @@ class SeedPicker::Seeds
 
   def self.find(num) #gets parent seed chosen from index from show_parents(letter) method
     # binding.pry
-    # self.all[num-1] #objects are listed starting at 0
     self.all[num-1] #objects are listed starting at 0
-    # self.all #all objects are listed in an array with its instances
-
     #how to group each object by it's seed name's first letter?
   end
 
   def self.testing
     group = self.get_parents
     list_parents = group.collect.with_index(1) do |seed, index| puts "#{index}. #{seed}" end
+  end
+
+############### Print Variety Seeds Details ###############
+
+  def self.get_varieties(seed) #getting all varieties seeds
+    the_varieties = self.all.collect.with_index(1) { |seeds, index| puts "#{index}. #{seeds.variety_seed_name}" }
+    the_varieties
   end
 
 end

@@ -4,11 +4,11 @@ This is a CLI gem for the Baker Creek Heirloom Seeds RareSeeds vegetable seed we
 
 ## Installation
 
-Clone the repository and run bundle install.
+Clone the repository and run `bundle install`.
 
 ## Usage
 
-After installing the gem, run seed-picker to begin.
+After installing the gem, run `seed-picker` to begin.
 
 ## Development
 

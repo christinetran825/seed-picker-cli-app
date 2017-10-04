@@ -1,13 +1,16 @@
 class SeedPicker::Seeds
 
-  attr_accessor :parent_seed_name, :parent_seed_url, :parent_seed_description
+  attr_accessor :parent_seed_name, :parent_seed_url, :parent_seed_description_a, :parent_seed_description_b, :parent_seed_description_c #:parent_seed_description
 
   @@all = []
 
   def initialize #new instances have the below methods/properties
     @parent_seed_name = parent_seed_name
     @parent_seed_url = parent_seed_url
-    @parent_seed_description = parent_seed_description
+    # @parent_seed_description = parent_seed_description
+    @parent_seed_description_a = parent_seed_description_a
+    @parent_seed_description_b = parent_seed_description_b
+    @parent_seed_description_c = parent_seed_description_c
     @@all << self #all instances get added into @@all array
   end
 
@@ -24,13 +27,10 @@ class SeedPicker::Seeds
     all_seeds = all_parents.sort { |a, b| a <=> b }
     all_seeds.delete("Bulk Vegetables")
     all_seeds.delete("Fall Favorites")
-    all_seeds.delete("Melon") #try to add this manually?
     all_seeds.delete("New Items") #try to add this manually?
     all_seeds.delete("Slow Food's Ark of Taste") #try to add this manually?
     all_seeds.delete("Thai Varieties") #try to add this manually?
     all_seeds.delete("The Explorer Series") #try to add this manually?
-    all_seeds.delete("Tomatoes") #try to add this manually?
-    all_seeds.delete("Watermelon") #try to add this manually?
     all_seeds.delete("William Woys Weaver") #try to add this manually?
     # all_seeds.delete("Turnips") #try to add this manually?
     all_seeds

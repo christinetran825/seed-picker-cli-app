@@ -64,21 +64,18 @@ class SeedPicker::Seeds
     group[letter][num - 1]
   end
 
-  # def self.lists_all_seeds(num) #gets parent seed chosen from index from show_parents(letter) method
-  #   self.all[num - 1]
-  # end
+  def self.find(num) #gets parent seed chosen from index from show_parents(letter) method
+    # binding.pry
+    # self.all[num-1] #objects are listed starting at 0
+    self.all[num] #objects are listed starting at 0
+    # self.all #all objects are listed in an array with its instances
+
+    #how to group each object by it's seed name's first letter?
+  end
 
   def self.testing
-    # binding.pry
-    # group = self.get_parents
-    # group.collect.with_index(1) do |seed, index|
-    #   "#{index}. #{seed}"
-    # end
     group = self.get_parents
-    group.group_by { |s| s[0,1]}
-    all_lists = group.collect.with_index(1) do |seed, index|
-      "#{index}. #{seed}"
-    end
+    list_parents = group.collect.with_index(1) do |seed, index| puts "#{index}. #{seed}" end
   end
 
 end

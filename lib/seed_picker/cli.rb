@@ -59,7 +59,8 @@ class SeedPicker::CLI
     letter = gets.strip.to_s.upcase
     case letter
     when ("A".."Z")
-      print_parent_seeds(letter) #passes the letter(user's input) to this helper method to print out results
+      # print_parent_seeds(letter) #passes the letter(user's input) to this helper method to print out results
+      SeedPicker::Seeds.testing
       choose_a_parent_seed(letter) #passes the letter(user's input) to the next method/step of the program
     when "DONE"
       goodbye
@@ -73,12 +74,12 @@ class SeedPicker::CLI
     puts "^ - ^ Please choose a seed by its number."
     num = gets.strip.to_i
     case num
-    when (1..10)
-      # seed = SeedPicker::Seeds.find(num.to_i) #finding num(user's input) for the seed chosen from choose_a_letter method and NOT from the entire alphabet.
-      seed = SeedPicker::Seeds.find_details(letter, num.to_i) #finding num(user's input) for the seed chosen from choose_a_letter method and NOT from the entire alphabet.
+    when (1..63)
+      seed = SeedPicker::Seeds.find(num.to_i) #finding num(user's input) for the seed chosen from choose_a_letter method and NOT from the entire alpha
+      # binding.pry
+      # seed = SeedPicker::Seeds.find_details(letter, num.to_i) #finding num(user's input) for the seed chosen from choose_a_letter method and NOT from the entire alphabet.
       SeedPicker::Scraper.scrape_variety_seeds(seed) #calls the Scraper class method .scrape_variety_seeds & passes seed
       print_parent_details(seed)
-      # parent_name = SeedPicker::Seeds.get_descriptions(letter, num)
       choose_list_of_variety
     when "DONE"
       goodbye
@@ -96,7 +97,7 @@ class SeedPicker::CLI
     input = gets.strip.to_i || input = gets.strip.to_s.upcase
 
     case input
-    when (1..10)
+    when (1..63)
       puts "testing"
       # puts "-------- Group #{letter}: #{seed.parent_seed_name} - #{seed.variety_seed_name} --------" # user sees a list of all parent seeds with an index of 1.
       # puts ""
@@ -143,6 +144,11 @@ class SeedPicker::CLI
     puts ""
   end
 
+  # the_parent = SeedPicker::Seeds.find_details(letter, num.to_i) #finding num(user's input) for the seed chosen from choose_a_letter method and NOT from the entire alphabet.
+  # seed = the_parent.downcase.split
+  # seed_b = seed.join("-")
+  # SeedPicker::Scraper.scrape_variety_seeds(seed_b) #calls the Scraper class method .scrape_variety_seeds & passes seed
+  # # print_parent_details(seed)
 
 
 end

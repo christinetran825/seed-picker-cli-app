@@ -15,27 +15,15 @@ class SeedPicker::Scraper
   def self.scrape_variety_seeds(seed) #passing an instance of SeedPicker::Seeds.new which is how we get the seed.parent_seed_url from the previous method
     # binding.pry
     doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url))
-    # doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/#{seed}/")) # "http://www.rareseeds.com/store/vegetables/garden-berries/" #http://www.rareseeds.comGarden Berries (URI::InvalidURIError)
-    # binding.pry
     doc.css(".sitebody .mainContent").collect do |the_details|
-      # seed.parent_seed_description = the_details.css("div#CT_Main_0_pnlHeading").first.css(".sectionDesc p").first.text.strip #parent_description
-      seed.parent_seed_description = the_details.css(".sectionDesc p").first.text #parent_description
-      seed.variety_seed_name = the_details.css(".grid_4 h3.itemTitle a").text #variety name
-      the_details.css("h3.itemTitle").collect do |more_details|
-        
-        seed.variety_seed_url = more_details.css("a").attribute("href").value #variety url
-      end
+      seed.parent_seed_description = the_details.css(".sectionDesc p").first.text.gsub(/\r\n\t/,"") #parent_description
+      seed.variety_seed_name = the_details.css("h3.itemTitle a").first.text #variety name
+      seed.variety_seed_url = the_details.css("h3.itemTitle a").attribute("href").value #variety url
       seed.price = the_details.css(".itemMiniCart .itemPrice").first.text #variety price
-      # the_details.css("h3.itemTitle").collect do |more_details|
-      #   seed.variety_seed_name = more_details.css("a").text #variety name
-      #   seed.variety_seed_url = more_details.css("a").attribute("href").value #variety url
-      # end
-      # seed.price = the_details.css(".itemMiniCart .itemPrice").first.text #variety price
     end
   end
 
   def self.scrape_variety_details(seed) #passing an instance of SeedPicker::Seeds.new which is how we get the seed.parent_seed_url from the previous method
-
     doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.variety_seed_url))
     seed.variety_seed_description = doc.css(".sitebody .mainContent .longDescription").text.strip.gsub(/\r\n/, "")
   end

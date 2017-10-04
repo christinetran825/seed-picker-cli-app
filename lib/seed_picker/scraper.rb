@@ -2,7 +2,7 @@ class SeedPicker::Scraper
 
 # binding.pry
 
-  def self.scrape_parent_seeds #scraping the parent seed for the url, url_id, parent_seed_name, and letter
+  def self.scrape_parent_seeds #scraping the parent seed for the url and parent_seed_name
     doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/"))
     doc.css(".sitebody ul.lnav li a").collect do |the_seeds|
       seed = SeedPicker::Seeds.new ##!!!!! CALLING a new instance OBJECT !!!!!!!!
@@ -13,7 +13,6 @@ class SeedPicker::Scraper
   end
 
   def self.scrape_variety_seeds(seed) #passing an instance of SeedPicker::Seeds.new which is how we get the seed.parent_seed_url from the previous method
-    # binding.pry
     doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url))
     doc.css(".sitebody .mainContent").collect do |the_details|
       seed.parent_seed_description = the_details.css(".sectionDesc p").first.text.gsub(/\r\n\t/,"") #parent_description
@@ -22,12 +21,12 @@ class SeedPicker::Scraper
       seed = SeedPicker::Varieties.new ##!!!!! CALLING a new instance OBJECT !!!!!!!!
       seed.variety_seed_name = the_details.css("h3.itemTitle a").text #variety name
       seed.variety_seed_url = the_details.css("h3.itemTitle a").attribute("href").value #variety url
-      seed.price = the_details.css(".itemMiniCart .itemPrice").first.text #variety price
+      seed.price = the_details.css(".itemMiniCart .itemPrice").text #variety price
     end
   end
 
   def self.scrape_variety_details(variety) #passing an instance of SeedPicker::Seeds.new which is how we get the seed.parent_seed_url from the previous method
-    doc = Nokogiri::HTML(open("http://www.rareseeds.com" + variety.variety_seed_url))
+    doc = Nokogiri::HTML(open(variety.variety_seed_url))
     variety.variety_seed_description = doc.css(".sitebody .mainContent .longDescription").text.strip.gsub(/\r\n/, "")
   end
 

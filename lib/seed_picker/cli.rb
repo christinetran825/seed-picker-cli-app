@@ -58,16 +58,17 @@ class SeedPicker::CLI
 
   def choose_grouped_variety(seed)
     puts "   ~ ~ ~ Please choose the grouped variety. ~ ~ ~"
-    puts ""
     num = gets.strip.to_i
     case num
     when (1..63)
       groups = SeedPicker::Grouped_Variety.find(num.to_i)
-      SeedPicker::Scraper.scrape_grouped_varieties(seed)
-      puts "test"
-      puts "  -------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{groups.grouped_variety_name} --------"
+      SeedPicker::Scraper.scrape_grouped_varieties(groups)
+      puts ""
+      puts "   -------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{groups.grouped_variety_name} --------"
       puts "   #{groups.grouped_variety_name} - Varieties: "
-      puts "   #{groups_variety_varieties_name}"
+      puts ""
+      SeedPicker::Grouped_Variety.get_grouped_variety(groups).compact
+      # puts "   #{groups.grouped_variety_varieties_name}"
     else
       puts "testing"
     end

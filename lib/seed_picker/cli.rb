@@ -24,9 +24,33 @@ class SeedPicker::CLI
     num = gets.strip.to_i || um = gets.strip.to_s
     case num
     when (1..63)
-      seed = SeedPicker::Seeds.find(num.to_i) #finding num(user's input) for the seed chosen from choose_a_letter method and NOT from the entire alpha
-      SeedPicker::Scraper.scrape_variety_seeds(seed) #calls the Scraper class method .scrape_variety_seeds & passes seed
-      SeedPicker::Scraper.scrape_parent_seeds_descriptions(seed)
+      seed = SeedPicker::Seeds.find(num.to_i) #finding num(user's choice of seed) from list of all seeds
+      SeedPicker::Scraper.scrape_variety_seeds(seed) #calls the Scraper.scrape_variety_seeds & passes the user's seed. That seed's details are scraped in that method
+      SeedPicker::Scraper.scrape_parent_seeds_descriptions(seed) #calls the Scraper.scrape_parent_seeds_description & passes the user's seed. That seed's details are scraped in that method
+      listing_all_varieties(seed)
+    when "DONE"
+      goodbye
+    else
+      choose_a_parent_seed
+    end
+  end
+
+  def listing_all_varieties(seed)
+    case seed.parent_seed_name
+    when "Gourds" || "Melon" || "Peppers" || "Squash" || "Tomatoes"
+      puts ""
+      puts "----- Group: #{seed.parent_seed_name[0]} - #{seed.parent_seed_name} ----- "
+      puts ""
+      puts "Varieties: " # user sees a list of all parent seeds with an index of 1.
+      puts ""
+      SeedPicker::Grouped_Variety.get_grouped_variety(seed).compact
+      puts ""
+      puts "Description: "
+      puts ""
+      puts "#{seed.parent_seed_description}"
+      puts ""
+      choose_grouped_variety(seed)
+    else
       puts ""
       puts "----- Group: #{seed.parent_seed_name[0]} - #{seed.parent_seed_name} ----- "
       puts ""
@@ -38,21 +62,7 @@ class SeedPicker::CLI
       puts ""
       puts "#{seed.parent_seed_description}"
       puts ""
-      choose_specs(seed)
-      # choose_list_of_variety(seed) #seed gets passed to next method
-    when "DONE"
-      goodbye
-    else
-      choose_a_parent_seed
-    end
-  end
-
-  def choose_specs(seed)
-    case seed.parent_seed_name
-    when "Gourds" || "Melon" || "Peppers" || "Squash" || "Tomatoes"
-      choose_grouped_variety(seed)
-    else
-      choose_list_of_variety(seed)
+      choose_list_of_variety(seed) #seed gets passed to next method
     end
   end
 

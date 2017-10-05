@@ -38,14 +38,38 @@ class SeedPicker::CLI
       puts ""
       puts "#{seed.parent_seed_description}"
       puts ""
-      choose_list_of_variety(seed) #seed gets passed to next method
+      choose_specs(seed)
+      # choose_list_of_variety(seed) #seed gets passed to next method
     when "DONE"
       goodbye
     else
       choose_a_parent_seed
     end
-
   end
+
+  def choose_specs(seed)
+    if seed.parent_seed_name = "Gourds" || "Melon" || "Peppers" || "Squash" || "Tomatoes"
+      choose_grouped_variety(seed)
+    else
+      choose_list_of_variety(seed)
+    end
+  end
+
+  def choose_grouped_variety(seed)
+    puts " ~ ~ ~ Please choose the grouped variety. ~ ~ ~"
+    puts ""
+    # num = gets.strip.to_i
+    # when (1..63)
+    #   SeedPicker::Scraper.scrape_grouped_varieties(seed)
+    #   # puts "test"
+    #   # puts "-------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{seed.grouped_variety_name} --------"
+    #   # puts " #{seed.grouped_variety_name} - Varieties: "
+    #   # puts " #{grouped_variety_varieties_name}"
+    # else
+    #   choose_grouped_variety(seed)
+    # end
+  end
+
 
   def choose_list_of_variety(seed)
     puts ""
@@ -70,7 +94,6 @@ class SeedPicker::CLI
     else
       choose_list_of_variety(seed)
     end
-
   end
 
   def go_back_or_finish
@@ -86,7 +109,6 @@ class SeedPicker::CLI
     else
       go_back_or_finish
     end
-
   end
 
   def goodbye

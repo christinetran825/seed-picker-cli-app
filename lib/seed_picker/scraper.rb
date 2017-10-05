@@ -16,36 +16,24 @@ class SeedPicker::Scraper
     doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url))
     # binding.pry
     case seed.parent_seed_name
-    when "Garlic" || "Ground Cherries" || "Salad Blends" #garlic, ground cherries
-      seed.parent_seed_description = doc.css(".sitebody .mainContent div#CT_Main_0_pnlHeading").first.text.strip.gsub(/\r\n\r\n/,"\n \n")
-    when "Gourds" || "Melons" || "Peppers"  || "Squash" || "Tomatoes" #gourds, melons, peppers, squash, tomatoes; no descriptions
-      #there's no description from website
+    when "Garlic" || "Salad Blends" #garlic, ground cherries
+      seed.parent_seed_description = doc.css(".sitebody .mainContent div#CT_Main_0_pnlHeading").first.text.strip.gsub(/\r\n\r\n/,"\n \n")\
+    when "Ground Cherries"
+      seed.parent_seed_description = doc.css(".sitebody .mainContent .sectionDesc").text.strip
+    when "Gourds"
       seed.parent_seed_description = doc.css(".sitebody .mainContent p").children.first.text.gsub(/\r\n\t/,"")
+    when "Melon"  #no descriptions
+      seed.parent_seed_description = doc.css(".sitebody .mainContent p").first.text
+    when "Peppers"
+      seed.parent_seed_description = doc.css(".sitebody .mainContent").first.css("p").first.text
+    when "Squash"
+      seed.parent_seed_description = doc.css(".sitebody .mainContent p").children.first.text.strip
+    when "Tomatoes"
+      seed.parent_seed_description = doc.css(".sitebody .mainContent p").children.first.text.strip
     else
       seed.parent_seed_description = doc.css(".sitebody .mainContent .sectionDesc p").first.text.strip #all other seeds
     end
-    # seed.parent_seed_description_a = doc.css(".sitebody .mainContent p").children.first.text.gsub(/\r\n\t/,"") #gourds, melons, peppers, squash, gourds, tomatoes
-    # seed.parent_seed_description_b = doc.css(".sitebody .mainContent div#CT_Main_0_pnlHeading").first.text.strip.gsub(/\r\n\r\n/,"\n \n") #garlic
-    # # seed.parent_seed_description_b = doc.css(".sitebody .mainContent div#CT_Main_0_pnlHeading").first.text.strip #ground cherries
-    # # seed.parent_seed_description_b = doc.css(".sitebody .mainContent div#CT_Main_0_pnlHeading p").first.text.strip #salad blends
-    # seed.parent_seed_description_c = doc.css(".sitebody .mainContent .sectionDesc p").first.text.strip #all other seeds
   end
-
-  #
-  # case seed.parent_seed_name
-  # when "Garlic" || "Ground Cherries" || "Salad Blends" #garlic, ground cherries
-  #   puts "#{seed.parent_seed_description_b}"
-  # when "Gourds" || "Melons" || "Peppers"  || "Squash" || "Tomatoes" #gourds, melons, peppers, squash, tomatoes; no descriptions
-  #   #there's no description from website
-  #   puts "#{seed.parent_seed_description_a}"
-  #   puts ""
-  #   # if seed.parent_seed_description_c == nil
-  #   #   puts "Select a variety to view descriptions."
-  #   # end
-  # else
-  #   puts "#{seed.parent_seed_description_c}" #all seeds
-  # end
-
 
   def self.scrape_variety_seeds(seed) #passing an instance of SeedPicker::Seeds.new which is how we get the seed.parent_seed_url from the previous method
     doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url))

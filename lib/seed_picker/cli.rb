@@ -27,17 +27,17 @@ class SeedPicker::CLI
       seed = SeedPicker::Seeds.find(num.to_i) #finding num(user's choice of seed) from list of all seeds
       SeedPicker::Scraper.scrape_variety_seeds(seed) #calls the Scraper.scrape_variety_seeds & passes the user's seed. That seed's details are scraped in that method
       SeedPicker::Scraper.scrape_parent_seeds_descriptions(seed) #calls the Scraper.scrape_parent_seeds_description & passes the user's seed. That seed's details are scraped in that method
-      puts ""
-      puts "----- Group: #{seed.parent_seed_name[0]} - #{seed.parent_seed_name} ----- "
-      puts ""
-      puts "Varieties: " # user sees a list of all parent seeds with an index of 1.
-      puts ""
-      SeedPicker::Varieties.get_varieties(seed).compact
-      puts ""
-      puts "Description: "
-      puts ""
-      puts "#{seed.parent_seed_description}"
-      puts ""
+        puts ""
+        puts "----- Group: #{seed.parent_seed_name[0]} - #{seed.parent_seed_name} ----- "
+        puts ""
+        puts "Varieties: " # user sees a list of all parent seeds with an index of 1.
+        puts ""
+        SeedPicker::Varieties.get_varieties(seed).compact
+        puts ""
+        puts "Description: "
+        puts ""
+        puts "#{seed.parent_seed_description}"
+        puts ""
       choose_specs(seed)
       # choose_list_of_variety(seed) #seed gets passed to next method
     when "DONE"
@@ -63,12 +63,21 @@ class SeedPicker::CLI
     when (1..63)
       groups = SeedPicker::Grouped_Variety.find(num.to_i)
       SeedPicker::Scraper.scrape_grouped_varieties(groups)
-      puts ""
-      puts "   -------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{groups.grouped_variety_name} --------"
-      puts "   #{groups.grouped_variety_name} - Varieties: "
-      puts ""
-      SeedPicker::Grouped_Variety.get_grouped_variety(groups).compact
-      # puts "   #{groups.grouped_variety_varieties_name}"
+        puts ""
+        puts "   -------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{groups.grouped_variety_name} --------"
+        puts "   #{groups.grouped_variety_name} - Varieties: "
+        puts ""
+        SeedPicker::Grouped_Variety.get_grouped_variety(groups).compact
+        puts ""
+        puts "Main Description: "
+        puts "   #{groups.grouped_variety_description}"
+        puts ""
+        puts "Price:"
+        puts ""
+        puts "Variety Description"
+        SeedPicker::Scraper.scrape_grouped_varieties_details(groups)
+        puts "   #{groups.grouped_variety_varieties_description}"
+        puts ""
     else
       puts "testing"
     end
@@ -82,16 +91,16 @@ class SeedPicker::CLI
     case num
     when (1..63)
       variety = SeedPicker::Varieties.find(num.to_i)
-      puts ""
-      puts "-------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{variety.variety_seed_name} --------" # user sees a list of all parent seeds with an index of 1.
-      puts ""
-      puts "Price: #{variety.price} "
-      puts ""
-      puts "Description: "
-      puts ""
-      SeedPicker::Scraper.scrape_variety_details(variety)
-      puts "#{variety.variety_seed_description} "
-      puts ""
+        puts ""
+        puts "-------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{variety.variety_seed_name} --------" # user sees a list of all parent seeds with an index of 1.
+        puts ""
+        puts "Price: #{variety.price} "
+        puts ""
+        puts "Variety Description: "
+        puts ""
+        SeedPicker::Scraper.scrape_variety_details(variety)
+        puts "#{variety.variety_seed_description} "
+        puts ""
       go_back_or_finish
     when "DONE"
       goodbye

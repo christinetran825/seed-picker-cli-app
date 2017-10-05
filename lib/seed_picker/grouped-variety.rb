@@ -1,6 +1,6 @@
 class SeedPicker::Grouped_Variety
 
-  attr_accessor :grouped_variety_url, :grouped_variety_name, :grouped_variety_description, :grouped_variety_varieties_url, :grouped_variety_varieties_name
+  attr_accessor :grouped_variety_url, :grouped_variety_name, :grouped_variety_description, :grouped_variety_varieties_url, :grouped_variety_varieties_name, :grouped_variety_varieties_description, :grouped_price
 
   @@all = []
 
@@ -10,6 +10,8 @@ class SeedPicker::Grouped_Variety
     @grouped_variety_description = grouped_variety_description
     @grouped_variety_varieties_url = grouped_variety_varieties_url
     @grouped_variety_varieties_name = grouped_variety_varieties_name
+    @grouped_variety_varieties_description = grouped_variety_varieties_description
+    @grouped_price = grouped_price
     @@all << self #all instances get added into @@all array
   end
 
@@ -21,6 +23,7 @@ class SeedPicker::Grouped_Variety
 
   def self.get_grouped_variety(groups) #getting all grouped variety seeds
     self.all.collect.with_index(1) do |seeds, index|
+      # binding.pry
       puts "   #{index}. #{seeds.grouped_variety_varieties_name}"
     end
   end

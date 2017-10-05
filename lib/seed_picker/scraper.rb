@@ -38,15 +38,6 @@ class SeedPicker::Scraper
     end
   end
 
-  def self.scrape_grouped_varieties(groups)
-    doc = Nokogiri::HTML(open(groups.grouped_variety_url))
-      groups = SeedPicker::Grouped_Variety.new
-      doc.css(".sitebody .mainContent .itemWrapper").collect do |seeds|
-        groups.grouped_variety_varieties_url = seeds.css("h3.itemTitle a").attribute('href').value
-        groups.grouped_variety_varieties_name = seeds.css("h3.itemTitle a").text
-      end
-  end
-
   def self.scrape_variety_seeds(seed) #passing an instance of SeedPicker::Seeds.new which is how we get the seed.parent_seed_url from the previous method
     doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url))
     doc.css(".sitebody .mainContent .itemWrapper").collect do |the_details|
@@ -59,6 +50,25 @@ class SeedPicker::Scraper
 
   def self.scrape_variety_details(variety) #passing an instance of SeedPicker::Seeds.new which is how we get the seed.parent_seed_url from the previous method
     doc = Nokogiri::HTML(open(variety.variety_seed_url))
+    variety.variety_seed_description = doc.css(".sitebody .mainContent .longDescription").text.strip.gsub(/\r\n/, "")
+  end
+
+  ####### scraping Gourds, Melon, Peppers, Squash, Tomatoes #######
+
+  def self.scrape_grouped_varieties(groups)
+    # binding.pry
+    doc = Nokogiri::HTML(open(groups.grouped_variety_url))
+    bunched = SeedPicker::Grouped_Variety.new
+    bunched.grouped_variety_description = doc.css(".sitebody .mainContent .sectionDesc p").first.text.strip
+    doc.css(".sitebody .mainContent .grid_4 .itemWrapper").collect do |seeds|
+      bunched.grouped_variety_varieties_url = seeds.css("h3.itemTitle a").attribute('href').value
+      bunched.grouped_variety_varieties_name = seeds.css("h3.itemTitle a").text
+      bunched.grouped_price = seeds.css(".itemMiniCart .itemPrice").text
+    end
+  end
+
+  def self.scrape_grouped_varieties_details(groups)
+    doc = Nokogiri::HTML(open(grouped_variety_varieties_url))
     variety.variety_seed_description = doc.css(".sitebody .mainContent .longDescription").text.strip.gsub(/\r\n/, "")
   end
 

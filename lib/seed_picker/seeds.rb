@@ -53,28 +53,19 @@ class SeedPicker::Seeds
 
   ############### Get Parent Seeds Descriptions ###############
 
-  # def self.find_desc(seed)
-  #   case seed.parent_seed_name
-  #   when "Garlic" #garlic, ground cherries
-  #     puts "#{seed.parent_seed_description_b}"
-  #   when "Gourds" || "Melons" || "Peppers" || "Salad Blends" || "Squash" || "Tomatoes" #gourds, melons, peppers, squash, tomatoes; no descriptions
-  #     #there's no description from website
-  #     # puts "#{seed.parent_seed_description_a}"
-  #     puts "Select a variety to view descriptions."
-  #   else
-  #     puts "#{seed.parent_seed_description_c}" #all seeds
-  #   end
-  # end
-  #
   def self.find_desc(seed)
-      if seed == 23 || 28 #garlic, ground cherries
+    case seed.parent_seed_name
+    when "Garlic" || "Ground Cherries" || "Salad Blends" #garlic, ground cherries
       puts "#{seed.parent_seed_description_b}"
-    elsif seed == 24 || 34 || 40 || 46 || 50 || 54 #gourds, melons, peppers, squash, tomatoes; no descriptions
+    when "Gourds" || "Melons" || "Peppers"  || "Squash" || "Tomatoes" #gourds, melons, peppers, squash, tomatoes; no descriptions
       #there's no description from website
-      # puts "#{seed.parent_seed_description_a}"
-      puts "Select a variety to view descriptions." #when 28 is placed here, this text prints, why?
+      puts "#{seed.parent_seed_description_a}"
+      puts ""
+      # if seed.parent_seed_description_c == nil
+      #   puts "Select a variety to view descriptions."
+      # end
     else
-      puts "#{seed.parent_seed_description_c}" #all seeds and 46 salad blends
+      puts "#{seed.parent_seed_description_c}" #all seeds
     end
   end
 

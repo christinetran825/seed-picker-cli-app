@@ -1,6 +1,6 @@
 class SeedPicker::Seeds
 
-  attr_accessor :parent_seed_name, :parent_seed_url, :parent_seed_description #:parent_seed_description_a, :parent_seed_description_b, :parent_seed_description_c
+  attr_accessor :parent_seed_name, :parent_seed_url, :parent_seed_description
 
   @@all = []
 
@@ -8,9 +8,6 @@ class SeedPicker::Seeds
     @parent_seed_name = parent_seed_name
     @parent_seed_url = parent_seed_url
     @parent_seed_description = parent_seed_description
-    # @parent_seed_description_a = parent_seed_description_a
-    # @parent_seed_description_b = parent_seed_description_b
-    # @parent_seed_description_c = parent_seed_description_c
     @@all << self #all instances get added into @@all array
   end
 

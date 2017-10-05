@@ -37,7 +37,6 @@ class SeedPicker::CLI
       puts ""
       # puts "#{seed.parent_seed_description}"
       SeedPicker::Seeds.find_desc(seed)
-      # helper(seed)
       puts ""
       choose_list_of_variety(seed) #seed gets passed to next method
     when "DONE"

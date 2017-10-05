@@ -17,7 +17,17 @@ class SeedPicker::Grouped_Variety
     @@all #shows all instances as an array
   end
 
-  ############### Find Grouped_Variety Seeds ###############
+############### List ALL VARIETY Seeds ###############
+
+  def self.get_grouped_variety(seed) #getting all grouped variety seeds
+    self.all.collect.with_index(1) do |seeds, index|
+      puts "#{index}. #{seeds.grouped_variety_name}"
+    end
+  end
+
+
+
+############### Find Grouped_Variety Seeds ###############
 
   def self.find(num) #gets grouped_variety seed
     # binding.pry

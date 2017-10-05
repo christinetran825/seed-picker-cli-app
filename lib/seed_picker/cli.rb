@@ -48,7 +48,8 @@ class SeedPicker::CLI
   end
 
   def choose_specs(seed)
-    if seed.parent_seed_name = "Gourds" || "Melon" || "Peppers" || "Squash" || "Tomatoes"
+    case seed.parent_seed_name
+    when "Gourds" || "Melon" || "Peppers" || "Squash" || "Tomatoes"
       choose_grouped_variety(seed)
     else
       choose_list_of_variety(seed)
@@ -56,18 +57,20 @@ class SeedPicker::CLI
   end
 
   def choose_grouped_variety(seed)
-    puts " ~ ~ ~ Please choose the grouped variety. ~ ~ ~"
+    puts "   ~ ~ ~ Please choose the grouped variety. ~ ~ ~"
     puts ""
-    # num = gets.strip.to_i
-    # when (1..63)
-    #   SeedPicker::Scraper.scrape_grouped_varieties(seed)
-    #   # puts "test"
-    #   # puts "-------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{seed.grouped_variety_name} --------"
-    #   # puts " #{seed.grouped_variety_name} - Varieties: "
-    #   # puts " #{grouped_variety_varieties_name}"
-    # else
-    #   choose_grouped_variety(seed)
-    # end
+    num = gets.strip.to_i
+    case num
+    when (1..63)
+      groups = SeedPicker::Grouped_Variety.find(num.to_i)
+      SeedPicker::Scraper.scrape_grouped_varieties(seed)
+      puts "test"
+      puts "  -------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{groups.grouped_variety_name} --------"
+      puts "   #{groups.grouped_variety_name} - Varieties: "
+      puts "   #{groups_variety_varieties_name}"
+    else
+      puts "testing"
+    end
   end
 
 

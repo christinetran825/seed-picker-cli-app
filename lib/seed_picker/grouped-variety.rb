@@ -19,9 +19,9 @@ class SeedPicker::Grouped_Variety
 
 ############### List ALL VARIETY Seeds ###############
 
-  def self.get_grouped_variety(seed) #getting all grouped variety seeds
+  def self.get_grouped_variety(groups) #getting all grouped variety seeds
     self.all.collect.with_index(1) do |seeds, index|
-      puts "#{index}. #{seeds.grouped_variety_name}"
+      puts "   #{index}. #{seeds.grouped_variety_varieties_name}"
     end
   end
 

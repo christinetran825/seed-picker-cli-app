@@ -26,6 +26,7 @@ class SeedPicker::CLI
     when (1..63)
       seed = SeedPicker::Seeds.find(num.to_i) #finding num(user's input) for the seed chosen from choose_a_letter method and NOT from the entire alpha
       SeedPicker::Scraper.scrape_variety_seeds(seed) #calls the Scraper class method .scrape_variety_seeds & passes seed
+      SeedPicker::Scraper.scrape_parent_seeds_descriptions(seed)
       puts ""
       puts "----- Group: #{seed.parent_seed_name[0]} - #{seed.parent_seed_name} ----- "
       puts ""
@@ -35,8 +36,7 @@ class SeedPicker::CLI
       puts ""
       puts "Description: "
       puts ""
-      # puts "#{seed.parent_seed_description}"
-      SeedPicker::Seeds.find_desc(seed)
+      puts "#{seed.parent_seed_description}"
       puts ""
       choose_list_of_variety(seed) #seed gets passed to next method
     when "DONE"

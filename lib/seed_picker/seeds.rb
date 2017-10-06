@@ -1,19 +1,18 @@
 class SeedPicker::Seeds
 
-  attr_accessor :parent_seed_name, :parent_seed_url, :parent_seed_description, :grouped_variety_url, :grouped_variety_description, :grouped_variety_varieties_name, :grouped_price #:grouped_variety_name, :grouped_variety_varieties_url,
-
+  attr_accessor :parent_seed_name, :parent_seed_url, :parent_seed_description
   @@all = []
 
   def initialize #new instances have the below methods/properties
     @parent_seed_name = parent_seed_name
     @parent_seed_url = parent_seed_url
     @parent_seed_description = parent_seed_description
-    @grouped_variety_url = grouped_variety_url
-    # @grouped_variety_name = grouped_variety_name 
-    @grouped_variety_description = grouped_variety_description
-    # @grouped_variety_varieties_url = grouped_variety_varieties_url
-    @grouped_variety_varieties_name = grouped_variety_varieties_name
-    @grouped_price = grouped_price
+    # @grouped_variety_url = grouped_variety_url
+    # # @grouped_variety_name = grouped_variety_name 
+    # @grouped_variety_description = grouped_variety_description
+    # # @grouped_variety_varieties_url = grouped_variety_varieties_url
+    # @grouped_variety_varieties_name = grouped_variety_varieties_name
+    # @grouped_price = grouped_price
     @@all << self #all instances get added into @@all array
   end
 
@@ -51,13 +50,15 @@ class SeedPicker::Seeds
     self.all[num-1] #objects are listed starting at 0
   end
 
-  ############### List ALL VARIETY Seeds ###############
-
-   def self.get_grouped_variety(seed) #getting all grouped variety seeds
-     self.all.collect.with_index(1) do |seeds, index|
-       # binding.pry
-       puts "   #{index}. #{seeds.grouped_variety_varieties_name}"
-     end
-   end
+  # ############### List ALL VARIETY Seeds ###############
+  # 
+  #  def self.get_grouped_variety(seed) #getting all grouped variety seeds
+  #    self.all.collect.with_index(1) do |seeds, index|
+  #      # binding.pry
+  #      puts "   #{index}. #{seeds.grouped_variety_varieties_name}"
+  #    end
+  #  end
+  # 
+  #  
 
 end

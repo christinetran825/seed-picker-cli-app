@@ -22,13 +22,6 @@ class SeedPicker::Scraper
       seed.parent_seed_description = doc.css(".sitebody .mainContent .sectionDesc").text.strip
     when "Gourds"
       seed.parent_seed_description = doc.css(".sitebody .mainContent p").children.first.text.gsub(/\r\n\t/,"")
-      doc.css(".sitebody .mainContent .itemWrapper").collect do |details|
-        groups = SeedPicker::Grouped_Variety.new
-        groups.grouped_variety_url = details.css("h3.itemTitle a").attribute('href').value
-      end
-      # groups = SeedPicker::Grouped_Variety.new
-      # groups.grouped_variety_url = doc.css(".sitebody .mainContent .itemWrapper h3.itemTitle a").attribute('href').value
-      # groups.grouped_variety_name = doc.css(".sitebody .mainContent .itemWrapper h3.itemTitle a").first.text
     when "Melon"  #no descriptions
       seed.parent_seed_description = doc.css(".sitebody .mainContent p").first.text
     when "Peppers"  #no descriptions
@@ -55,26 +48,6 @@ class SeedPicker::Scraper
 
   def self.scrape_variety_details(variety) #passing an instance of SeedPicker::Seeds.new which is how we get the seed.parent_seed_url from the previous method
     doc = Nokogiri::HTML(open(variety.variety_seed_url))
-    variety.variety_seed_description = doc.css(".sitebody .mainContent .longDescription").text.strip.gsub(/\r\n/, "")
-  end
-
-  ####### scraping Gourds, Melon, Peppers, Squash, Tomatoes #######
-
-  def self.scrape_grouped_varieties(groups)
-    # binding.pry
-    doc = Nokogiri::HTML(open(groups.grouped_variety_url))
-    bunched = SeedPicker::Grouped_Variety.new
-    bunched.grouped_variety_description = doc.css(".sitebody .mainContent .sectionDesc p").first.text.strip
-    doc.css(".sitebody .mainContent .grid_4 .itemWrapper").collect do |seeds|
-      bunched.grouped_variety_varieties_url = seeds.css("h3.itemTitle a").attribute('href').value
-      bunched.grouped_variety_varieties_name = seeds.css("h3.itemTitle a").text
-      bunched.grouped_price = seeds.css(".itemMiniCart .itemPrice").text
-    end
-  end
-
-  def self.scrape_grouped_varieties_details(groups)
-    # binding.pry
-    doc = Nokogiri::HTML(open(groups.grouped_variety_varieties_url))
     variety.variety_seed_description = doc.css(".sitebody .mainContent .longDescription").text.strip.gsub(/\r\n/, "")
   end
 

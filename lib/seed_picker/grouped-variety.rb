@@ -24,7 +24,7 @@ class SeedPicker::Grouped_Variety
    def self.get_grouped_variety(groups) #getting all grouped variety seeds
      self.all.collect.with_index(1) do |seeds, index|
        # binding.pry
-       puts "   #{index}. #{seeds.grouped_variety_varieties_name}"
+      "   #{index}. #{seeds.grouped_variety_varieties_name}"
      end
    end
 

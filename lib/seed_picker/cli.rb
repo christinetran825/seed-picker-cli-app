@@ -39,10 +39,8 @@ class SeedPicker::CLI
         puts ""
         puts "#{seed.parent_seed_description}"
         puts ""
-      choose_specs(seed) #sorting Gourds, Melon, Peppers, Squash, Tomatoes out of the normal program loop 
+      choose_specs(seed) #sorting Gourds, Melon, Peppers, Squash, Tomatoes out of the normal program loop
       # choose_list_of_variety(seed) #seed gets passed to next method
-    when "DONE"
-      goodbye
     else
       choose_a_parent_seed
     end
@@ -101,7 +99,7 @@ class SeedPicker::CLI
     when (1..56)
       SeedPicker::Scraper.scrape_grouped_varieties_details(group)
         puts ""
-        puts "Price: #{group.grouped_price}" 
+        puts "Price: #{group.grouped_price}"
         puts ""
         puts "Variety Description:"
         puts "   #{group.grouped_variety_description}"
@@ -111,7 +109,7 @@ class SeedPicker::CLI
       choose_cateogry_varieties(seed, group)
     end
   end
-  
+
   ##### Normal consistent structure #####
   def choose_list_of_variety(seed)
     puts ""

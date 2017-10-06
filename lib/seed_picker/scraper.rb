@@ -48,11 +48,11 @@ class SeedPicker::Scraper
     variety.variety_seed_description = doc.css(".sitebody .mainContent .longDescription").text.strip.gsub(/\r\n/, "")
   end
 
-
   ####### Seeds with inconsistent HTML formats - Gourds, Melon, Peppers, Squash, Tomatoes #######
+
   def self.scrape_group_seeds
-    # doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url)) http://www.rareseeds.com/store/vegetables/gourds/
-    doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/gourds/"))
+    # doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url)) #http://www.rareseeds.com/store/vegetables/gourds/
+    # doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/gourds/"))
     # doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/#{seed.parent_seed_name.downcase}/"))
     doc.css(".sitebody ul.lnav li a").collect do |details|
       group = SeedPicker::Grouped_Variety.new
@@ -63,7 +63,7 @@ class SeedPicker::Scraper
 
   def self.scrape_grouped_varieties(group)
     # binding.pry
-    doc = Nokogiri::HTML(open("http://www.rareseeds.com" + group.grouped_variety_url))
+    doc = Nokogiri::HTML(open("http://www.rareseeds.com#{group.grouped_variety_url}"))
     # group = SeedPicker::Grouped_Variety.new
     group.grouped_variety_description = doc.css(".sitebody .mainContent .sectionDesc p").first.text.strip
     doc.css(".sitebody .mainContent .itemWrapper").collect do |seeds|

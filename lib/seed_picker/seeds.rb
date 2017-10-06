@@ -21,11 +21,11 @@ class SeedPicker::Seeds
     all_seeds = all_parents.sort { |a, b| a <=> b }
     all_seeds.delete("Bulk Vegetables")
     all_seeds.delete("Fall Favorites")
-    all_seeds.delete("New Items") #try to add this manually?
-    all_seeds.delete("Slow Food's Ark of Taste") #try to add this manually?
-    all_seeds.delete("Thai Varieties") #try to add this manually?
-    all_seeds.delete("The Explorer Series") #try to add this manually?
-    all_seeds.delete("William Woys Weaver") #try to add this manually?
+    all_seeds.delete("New Items")
+    all_seeds.delete("Slow Food's Ark of Taste")
+    all_seeds.delete("Thai Varieties")
+    all_seeds.delete("The Explorer Series")
+    all_seeds.delete("William Woys Weaver")
     all_seeds
   end
 

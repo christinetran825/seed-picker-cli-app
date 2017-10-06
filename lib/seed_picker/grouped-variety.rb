@@ -28,20 +28,11 @@ class SeedPicker::Grouped_Variety
     end
   end
 
-
-
 ############### Find Grouped_Variety Seeds ###############
 
   def self.find(num) #gets grouped_variety seed
     # binding.pry
     self.all[num-1] #objects are listed starting at 0
   end
-
-  # def self.list_grouped_variety
-  #   all_grouped_variety = self.all.collect { |seed| seed.variety_varieties_name }
-  #   all_grouped_variety.collect.with_index(1) do |seed, index|
-  #     puts "#{index}. #{seed}"
-  #   end
-  # end
 
 end

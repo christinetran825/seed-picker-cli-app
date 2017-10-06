@@ -62,12 +62,13 @@ class SeedPicker::CLI
     case num
     when (1..63)
       groups = SeedPicker::Grouped_Variety.find(num.to_i)
+      variety = SeedPicker::Varieties.find(num.to_i)
       SeedPicker::Scraper.scrape_grouped_varieties(groups)
         puts ""
-        puts "   -------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{groups.grouped_variety_name} --------"
-        puts "   #{groups.grouped_variety_name} - Varieties: "
+        puts "   -------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{variety.variety_seed_name} --------"
+        puts "   #{variety.variety_seed_name} - Varieties: "
         puts ""
-        SeedPicker::Grouped_Variety.get_grouped_variety(groups).compact
+        SeedPicker::Grouped_Variety.get_grouped_variety(groups)
         puts ""
         puts "Main Description: "
         puts "   #{groups.grouped_variety_description}"
@@ -75,8 +76,8 @@ class SeedPicker::CLI
         puts "Price:"
         puts ""
         puts "Variety Description"
-        SeedPicker::Scraper.scrape_grouped_varieties_details(groups)
-        puts "   #{groups.grouped_variety_varieties_description}"
+        # SeedPicker::Scraper.scrape_grouped_varieties_details(groups)
+        # puts "   #{groups.grouped_variety_varieties_description}"
         puts ""
     else
       puts "testing"

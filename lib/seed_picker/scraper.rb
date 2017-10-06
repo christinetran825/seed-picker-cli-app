@@ -22,9 +22,13 @@ class SeedPicker::Scraper
       seed.parent_seed_description = doc.css(".sitebody .mainContent .sectionDesc").text.strip
     when "Gourds"
       seed.parent_seed_description = doc.css(".sitebody .mainContent p").children.first.text.gsub(/\r\n\t/,"")
-      groups = SeedPicker::Grouped_Variety.new
-      groups.grouped_variety_url = doc.css(".sitebody .mainContent .itemWrapper h3.itemTitle a").attribute('href').value
-      groups.grouped_variety_name = doc.css(".sitebody .mainContent .itemWrapper h3.itemTitle a").first.text
+      doc.css(".sitebody .mainContent .itemWrapper").collect do |details|
+        groups = SeedPicker::Grouped_Variety.new
+        groups.grouped_variety_url = details.css("h3.itemTitle a").attribute('href').value
+      end
+      # groups = SeedPicker::Grouped_Variety.new
+      # groups.grouped_variety_url = doc.css(".sitebody .mainContent .itemWrapper h3.itemTitle a").attribute('href').value
+      # groups.grouped_variety_name = doc.css(".sitebody .mainContent .itemWrapper h3.itemTitle a").first.text
     when "Melon"  #no descriptions
       seed.parent_seed_description = doc.css(".sitebody .mainContent p").first.text
     when "Peppers"  #no descriptions
@@ -39,6 +43,7 @@ class SeedPicker::Scraper
   end
 
   def self.scrape_variety_seeds(seed) #passing an instance of SeedPicker::Seeds.new which is how we get the seed.parent_seed_url from the previous method
+    # binding.pry
     doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url))
     doc.css(".sitebody .mainContent .itemWrapper").collect do |the_details|
       variety = SeedPicker::Varieties.new ##!!!!! CALLING a new instance OBJECT !!!!!!!!
@@ -68,7 +73,8 @@ class SeedPicker::Scraper
   end
 
   def self.scrape_grouped_varieties_details(groups)
-    doc = Nokogiri::HTML(open(grouped_variety_varieties_url))
+    # binding.pry
+    doc = Nokogiri::HTML(open(groups.grouped_variety_varieties_url))
     variety.variety_seed_description = doc.css(".sitebody .mainContent .longDescription").text.strip.gsub(/\r\n/, "")
   end
 

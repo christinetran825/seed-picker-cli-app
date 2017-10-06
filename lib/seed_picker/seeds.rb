@@ -34,7 +34,7 @@ class SeedPicker::Seeds
   def self.listing_all_seeds
     group = self.get_parents
     group.collect.with_index(1) do |seed, index|
-      puts "#{index}. #{seed}"
+      "#{index}. #{seed}"
     end
   end
 
@@ -43,16 +43,5 @@ class SeedPicker::Seeds
   def self.find(num) #gets parent seed
     self.all[num-1] #objects are listed starting at 0
   end
-
-  # ############### List ALL VARIETY Seeds ###############
-  # 
-  #  def self.get_grouped_variety(seed) #getting all grouped variety seeds
-  #    self.all.collect.with_index(1) do |seeds, index|
-  #      # binding.pry
-  #      puts "   #{index}. #{seeds.grouped_variety_varieties_name}"
-  #    end
-  #  end
-  # 
-  #  
 
 end

@@ -51,22 +51,23 @@ class SeedPicker::CLI
   def choose_specs(seed)
     case seed.parent_seed_name
     when "Gourds" || "Melon" || "Peppers" || "Squash"
-      choose_grouped_variety(seed)
+      choose_category(seed)
     when "Tomatoes"
-      choose_grouped_variety(seed)
+      choose_category(seed)
     else
       choose_list_of_variety(seed)
     end
   end
 
-  def choose_grouped_variety(seed)
-    puts "   ~ ~ ~ Please choose the grouped variety. ~ ~ ~"
+  def choose_category(seed)
+    puts "   ~ ~ ~ Please choose the category of varieties ~ ~ ~"
     num = gets.strip.to_i
     case num
     when (1..63)
-      # groups = SeedPicker::Grouped_Variety.find(num.to_i)
+      group = SeedPicker::Grouped_Variety.find(num.to_i)
+      # binding.pry
       variety = SeedPicker::Varieties.find(num.to_i)
-      # SeedPicker::Scraper.scrape_grouped_varieties(seed)
+      SeedPicker::Scraper.scrape_grouped_varieties(group)
         puts ""
         puts "   -------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{variety.variety_seed_name} --------"
         puts "   #{variety.variety_seed_name} - Varieties: "
@@ -74,18 +75,32 @@ class SeedPicker::CLI
         SeedPicker::Grouped_Variety.get_grouped_variety(seed).compact
         puts ""
         puts "Main Description: "
-        puts "   #{seed.grouped_variety_description}"
+        puts "   #{group.grouped_variety_description}"
         puts ""
-        puts "Price: #{seed.grouped_price}" 
-        puts ""
-        puts "Variety Description:"
-        # SeedPicker::Scraper.scrape_grouped_varieties_details(groups)
-        # puts "   #{groups.grouped_variety_varieties_description}"
-        puts ""
+        choose_cateogry_varieties(seed, group)
     else
       puts "testing"
     end
   end
+
+  def choose_cateogry_varieties(seed, group)
+    puts ""
+    puts "   ~ ~ ~ Please choose the category's varieties ~ ~ ~"
+    num = gets.strip.to_i
+    case num
+    when (1..63)
+      SeedPicker::Scraper.scrape_grouped_varieties_details(group)
+      puts ""
+      puts "Price: #{group.grouped_price}" 
+      puts ""
+      puts "Variety Description:"
+      puts "   #{group.grouped_variety_description}"
+      puts ""
+    else
+      puts "testing"
+    end
+  end
+  
 
   def choose_list_of_variety(seed)
     puts ""

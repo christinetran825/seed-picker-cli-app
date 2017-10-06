@@ -35,7 +35,6 @@ class SeedPicker::Scraper
   end
 
   def self.scrape_variety_seeds(seed) #passing an instance of SeedPicker::Seeds.new which is how we get the seed.parent_seed_url from the previous method
-    # binding.pry
     doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url))
     doc.css(".sitebody .mainContent .itemWrapper").collect do |the_details|
       variety = SeedPicker::Varieties.new ##!!!!! CALLING a new instance OBJECT !!!!!!!!
@@ -55,7 +54,6 @@ class SeedPicker::Scraper
   def self.scrape_group_seeds
     # doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url)) http://www.rareseeds.com/store/vegetables/gourds/
     doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/gourds/"))
-    # binding.pry
     doc.css(".sitebody ul.lnav li a").collect do |details|
       group = SeedPicker::Grouped_Variety.new
       group.grouped_variety_url = details.attribute("href").value
@@ -63,24 +61,23 @@ class SeedPicker::Scraper
     end
   end
 
-  # def self.scrape_grouped_varieties(seed)
-  #   # binding.pry
-  #   doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.grouped_variety_url))
-  #   seed = SeedPicker::Grouped_Variety.new
-  #   seed.grouped_variety_description = doc.css(".sitebody .mainContent .sectionDesc p").first.text.strip
-  #   doc.css(".sitebody .mainContent .itemWrapper").collect do |seeds|
-  #     seed.grouped_variety_varieties_url = seeds.css("h3.itemTitle a").attribute('href').value
-  #     seed.grouped_variety_varieties_name = seeds.css("h3.itemTitle a").text
-  #     seed.grouped_price = seeds.css(".itemMiniCart .itemPrice").first.text
-  #   end
-  # end
-  # 
+  def self.scrape_grouped_varieties(group)
+    # binding.pry
+    doc = Nokogiri::HTML(open("http://www.rareseeds.com" + group.grouped_variety_url))
+    # group = SeedPicker::Grouped_Variety.new
+    group.grouped_variety_description = doc.css(".sitebody .mainContent .sectionDesc p").first.text.strip
+    doc.css(".sitebody .mainContent .itemWrapper").collect do |seeds|
+      group.grouped_variety_varieties_url = seeds.css("h3.itemTitle a").attribute('href').value
+      group.grouped_variety_varieties_name = seeds.css("h3.itemTitle a").first.text
+      group.grouped_price = seeds.css(".itemMiniCart .itemPrice").first.text
+      group
+    end
+  end
 
-  # 
-  # def self.scrape_grouped_varieties_details(groups)
-  #   # binding.pry
-  #   doc = Nokogiri::HTML(open(groups.grouped_variety_varieties_url))
-  #   variety.variety_seed_description = doc.css(".sitebody .mainContent .longDescription").text.strip.gsub(/\r\n/, "")
-  # end
+  def self.scrape_grouped_varieties_details(group)
+    # binding.pry
+    doc = Nokogiri::HTML(open(group.grouped_variety_varieties_url))
+    group.grouped_variety_description = doc.css(".sitebody .mainContent .longDescription").text.strip.gsub(/\r\n/, "")
+  end
 
 end

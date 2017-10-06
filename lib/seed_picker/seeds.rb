@@ -7,12 +7,6 @@ class SeedPicker::Seeds
     @parent_seed_name = parent_seed_name
     @parent_seed_url = parent_seed_url
     @parent_seed_description = parent_seed_description
-    # @grouped_variety_url = grouped_variety_url
-    # # @grouped_variety_name = grouped_variety_name 
-    # @grouped_variety_description = grouped_variety_description
-    # # @grouped_variety_varieties_url = grouped_variety_varieties_url
-    # @grouped_variety_varieties_name = grouped_variety_varieties_name
-    # @grouped_price = grouped_price
     @@all << self #all instances get added into @@all array
   end
 

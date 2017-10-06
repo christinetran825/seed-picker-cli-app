@@ -20,7 +20,7 @@ class SeedPicker::Varieties
 
   def self.get_varieties(seed) #getting all varieties seeds
     self.all.collect.with_index(1) do |seeds, index|
-      puts "#{index}. #{seeds.variety_seed_name}"
+      "#{index}. #{seeds.variety_seed_name}"
     end
   end
 

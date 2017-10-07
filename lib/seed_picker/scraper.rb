@@ -50,10 +50,8 @@ class SeedPicker::Scraper
 
   ####### Seeds with inconsistent HTML formats - Gourds, Melon, Peppers, Squash, Tomatoes #######
 
-  def self.scrape_category
-    # doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url)) #http://www.rareseeds.com/store/vegetables/gourds/
-    doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/gourds/"))
-    # doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/#{seed.parent_seed_name.downcase}/"))
+  def self.scrape_category(seed)
+    doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url)) #http://www.rareseeds.com/store/vegetables/gourds/
     doc.css(".sitebody ul.lnav li a").collect do |details|
       group = SeedPicker::Grouped_Variety.new
       group.category_url = details.attribute("href").value
@@ -62,9 +60,8 @@ class SeedPicker::Scraper
   end
 
   def self.scrape_category_varieties(group)
-    # binding.pry
+    binding.pry
     doc = Nokogiri::HTML(open("http://www.rareseeds.com#{group.category_url}"))
-    # group = SeedPicker::Grouped_Variety.new
     group.category_description = doc.css(".sitebody .mainContent .sectionDesc p").first.text.strip
     doc.css(".sitebody .mainContent .itemWrapper").collect do |seeds|
       group.category_varieties_url = seeds.css("h3.itemTitle a").attribute('href').value

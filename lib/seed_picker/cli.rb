@@ -2,7 +2,6 @@ class SeedPicker::CLI
 
   def call
     SeedPicker::Scraper.scrape_parent_seeds #CLI calls on the scraper class to tell Nokogiri to scrape the website
-    SeedPicker::Scraper.scrape_category
     puts ""
     puts "* * * Welcome to Baker Creek Heirloom Seeds RareSeeds * * * "
     puts ""
@@ -28,6 +27,7 @@ class SeedPicker::CLI
       seed = SeedPicker::Seeds.find(num.to_i) #finding num(user's choice of seed) from list of all seeds
       SeedPicker::Scraper.scrape_variety_seeds(seed) #calls the Scraper.scrape_variety_seeds & passes the user's seed. That seed's details are scraped in that method
       SeedPicker::Scraper.scrape_parent_seeds_descriptions(seed) #calls the Scraper.scrape_parent_seeds_description & passes the user's seed. That seed's details are scraped in that method
+      SeedPicker::Scraper.scrape_category(seed)
         puts ""
         puts "----- Group: #{seed.parent_seed_name[0]} - #{seed.parent_seed_name} ----- "
         puts ""

@@ -50,33 +50,33 @@ class SeedPicker::Scraper
 
   ####### Seeds with inconsistent HTML formats - Gourds, Melon, Peppers, Squash, Tomatoes #######
 
-  def self.scrape_group_seeds
+  def self.scrape_category
     # doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url)) #http://www.rareseeds.com/store/vegetables/gourds/
-    # doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/gourds/"))
+    doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/gourds/"))
     # doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/#{seed.parent_seed_name.downcase}/"))
     doc.css(".sitebody ul.lnav li a").collect do |details|
       group = SeedPicker::Grouped_Variety.new
-      group.grouped_variety_url = details.attribute("href").value
+      group.category_url = details.attribute("href").value
       group
     end
   end
 
-  def self.scrape_grouped_varieties(group)
+  def self.scrape_category_varieties(group)
     # binding.pry
-    doc = Nokogiri::HTML(open("http://www.rareseeds.com#{group.grouped_variety_url}"))
+    doc = Nokogiri::HTML(open("http://www.rareseeds.com#{group.category_url}"))
     # group = SeedPicker::Grouped_Variety.new
-    group.grouped_variety_description = doc.css(".sitebody .mainContent .sectionDesc p").first.text.strip
+    group.category_description = doc.css(".sitebody .mainContent .sectionDesc p").first.text.strip
     doc.css(".sitebody .mainContent .itemWrapper").collect do |seeds|
-      group.grouped_variety_varieties_url = seeds.css("h3.itemTitle a").attribute('href').value
-      group.grouped_variety_varieties_name = seeds.css("h3.itemTitle a").text
-      group.grouped_price = seeds.css(".itemMiniCart .itemPrice").first.text
+      group.category_varieties_url = seeds.css("h3.itemTitle a").attribute('href').value
+      group.category_varieties_name = seeds.css("h3.itemTitle a").text
+      group.category_varieties_price = seeds.css(".itemMiniCart .itemPrice").first.text
       group
     end
   end
 
-  def self.scrape_grouped_varieties_details(group)
-    doc = Nokogiri::HTML(open(group.grouped_variety_varieties_url))
-    group.grouped_variety_description = doc.css(".sitebody .mainContent .longDescription").text.strip.gsub(/\r\n/, "")
+  def self.scrape_category_varieties_details(group)
+    doc = Nokogiri::HTML(open(group.category_varieties_url))
+    group.category_varieties_description = doc.css(".sitebody .mainContent .longDescription").text.strip.gsub(/\r\n/, "")
   end
 
 end

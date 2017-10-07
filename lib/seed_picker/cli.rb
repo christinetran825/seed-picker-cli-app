@@ -78,7 +78,8 @@ class SeedPicker::CLI
         puts "   -------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{variety.variety_seed_name} --------"
         puts "   #{variety.variety_seed_name} - Varieties: "
         puts ""
-        puts SeedPicker::Grouped_Variety.get_category_variety(seed).compact
+        puts SeedPicker::Grouped_Variety.get_category_variety(group).compact
+        binding.pry
         puts ""
         puts "Main Description: "
         puts "   #{group.category_description}"

@@ -26,20 +26,19 @@ class SeedPicker::CLI
     when (1..56)
       seed = SeedPicker::Seeds.find(num.to_i)
       SeedPicker::Scraper.scrape_variety_seeds(seed)
-      SeedPicker::Scraper.scrape_parent_seeds_descriptions(seed)
         puts ""
         puts "----- Group: #{seed.parent_seed_name[0]} - #{seed.parent_seed_name} ----- "
         puts ""
         puts "Varieties: "
         puts ""
-        puts SeedPicker::Varieties.get_varieties(seed).compact
+        SeedPicker::Varieties.get_varieties(seed).compact
         puts ""
         puts "Description: "
         puts ""
+        SeedPicker::Scraper.scrape_parent_seeds_descriptions(seed)
         puts "#{seed.parent_seed_description}"
         puts ""
       choose_specs(seed) #sorting Gourds, Melon, Peppers, Squash, Tomatoes out of the normal program loop
-      # choose_list_of_variety(seed) #seed gets passed to next method
     else
       choose_a_parent_seed
     end
@@ -94,12 +93,13 @@ class SeedPicker::CLI
     num = gets.strip.to_i
     case num
     when (1..56)
-      SeedPicker::Scraper.scrape_category_varieties_details(variety)
+      group = SeedPicker::Grouped_Variety.find(num.to_i)
+      SeedPicker::Scraper.scrape_category_varieties_details(group)
         puts ""
-        puts "Price: #{variety.category_varieties_price}"
+        puts "Price: #{group.category_varieties_price}"
         puts ""
         puts "Variety Description:"
-        puts "   #{variety.category_varieties_description}"
+        puts "   #{group.category_varieties_description}"
         puts ""
       go_back_or_finish
     else

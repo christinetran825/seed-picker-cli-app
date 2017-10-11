@@ -57,7 +57,6 @@ class SeedPicker::Scraper
 
   def self.scrape_category_varieties(variety)
     doc = Nokogiri::HTML(open(variety.variety_seed_url))
-    # binding.pry
     doc.css(".sitebody .mainContent .itemWrapper").collect do |seeds|
       group = SeedPicker::Grouped_Variety.new
       group.category_varieties_url = seeds.css("h3.itemTitle a").attribute('href').value

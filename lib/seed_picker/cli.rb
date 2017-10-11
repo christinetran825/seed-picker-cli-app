@@ -96,6 +96,8 @@ class SeedPicker::CLI
       group = SeedPicker::Grouped_Variety.find(num.to_i)
       SeedPicker::Scraper.scrape_category_varieties_details(group)
         puts ""
+        puts "-------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{variety.variety_seed_name} - #{group.category_varieties_name}:  --------"
+        puts ""
         puts "Price: #{group.category_varieties_price}"
         puts ""
         puts "Variety Description:"

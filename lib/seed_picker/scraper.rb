@@ -1,7 +1,7 @@
 class SeedPicker::Scraper
 
   def self.scrape_parent_seeds #scraping the parent seed for the url and parent_seed_name
-    doc = Nokogiri::HTML(open("http://www.rareseeds.com/store/vegetables/"))
+    doc = Nokogiri::HTML(open("https://www.rareseeds.com/store/vegetables/"))
     doc.css(".sitebody ul.lnav li a").collect do |the_seeds|
       seed = SeedPicker::Seeds.new ##!!!!! CALLING a new instance OBJECT !!!!!!!!
       seed.parent_seed_url = the_seeds.attribute("href").value
@@ -12,7 +12,7 @@ class SeedPicker::Scraper
 
   ####### separates the parent seeds with consistent structures from seeds with inconsistent HTML formats #######
   def self.scrape_parent_seeds_descriptions(seed) #passing an instance of SeedPicker::Seeds.new which is how we get the seed.parent_seed_url from the previous method
-    doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url))
+    doc = Nokogiri::HTML(open("https://www.rareseeds.com" + seed.parent_seed_url))
     case seed.parent_seed_name
     when "Garlic" || "Salad Blends" #garlic, ground cherries
       seed.parent_seed_description = doc.css(".sitebody .mainContent div#CT_Main_0_pnlHeading").first.text.strip.gsub(/\r\n\r\n/,"\n \n")\
@@ -34,7 +34,7 @@ class SeedPicker::Scraper
   end
 
   def self.scrape_variety_seeds(seed) #passing an instance of SeedPicker::Seeds.new which is how we get the seed.parent_seed_url from the previous method
-    doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url))
+    doc = Nokogiri::HTML(open("https://www.rareseeds.com" + seed.parent_seed_url))
     doc.css(".sitebody .mainContent .itemWrapper").collect do |the_details|
       variety = SeedPicker::Varieties.new ##!!!!! CALLING a new instance OBJECT !!!!!!!!
       variety.variety_seed_name = the_details.css("h3.itemTitle a").text #variety name
@@ -51,7 +51,7 @@ class SeedPicker::Scraper
   ####### Seeds with inconsistent HTML formats - Gourds, Melon, Peppers, Squash, Tomatoes #######
 
   def self.scrape_category(seed)
-    doc = Nokogiri::HTML(open("http://www.rareseeds.com" + seed.parent_seed_url)) #http://www.rareseeds.com/store/vegetables/gourds/
+    doc = Nokogiri::HTML(open("https://www.rareseeds.com" + seed.parent_seed_url)) #http://www.rareseeds.com/store/vegetables/gourds/
     doc.css(".sitebody ul.lnav li a").collect do |details|
       group = SeedPicker::Grouped_Variety.new
       group.category_url = details.attribute("href").value
@@ -60,8 +60,8 @@ class SeedPicker::Scraper
   end
 
   def self.scrape_category_varieties(group)
-    binding.pry
-    doc = Nokogiri::HTML(open("http://www.rareseeds.com#{group.category_url}"))
+    # binding.pry
+    doc = Nokogiri::HTML(open("https://www.rareseeds.com#{group.category_url}"))
     group.category_description = doc.css(".sitebody .mainContent .sectionDesc p").first.text.strip
     doc.css(".sitebody .mainContent .itemWrapper").collect do |seeds|
       group.category_varieties_url = seeds.css("h3.itemTitle a").attribute('href').value

@@ -1,6 +1,6 @@
 class SeedPicker::Varieties
 
-  attr_accessor :variety_seed_name, :variety_seed_url, :variety_seed_description, :price
+  attr_accessor :variety_seed_name, :variety_seed_url, :variety_seed_description, :price, :category_description
 
   @@all = []
 
@@ -8,6 +8,7 @@ class SeedPicker::Varieties
     @variety_seed_name = variety_seed_name
     @variety_seed_url = variety_seed_url
     @variety_seed_description = variety_seed_description
+    @category_description = category_description
     @price = price
     @@all << self #all instances get added into @@all array
   end
@@ -20,7 +21,7 @@ class SeedPicker::Varieties
 
   def self.get_varieties(seed) #getting all varieties seeds
     self.all.collect.with_index(1) do |seeds, index|
-      "#{index}. #{seeds.variety_seed_name}"
+      puts "#{index}. #{seeds.variety_seed_name}"
     end
   end
 

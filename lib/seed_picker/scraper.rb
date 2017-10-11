@@ -66,8 +66,8 @@ class SeedPicker::Scraper
     end
   end
 
-  def self.scrape_category_varieties_details(variety)
-    doc = Nokogiri::HTML(open(variety.category_varieties_url))
+  def self.scrape_category_varieties_details(group)
+    doc = Nokogiri::HTML(open(group.category_varieties_url))
     group.category_varieties_description = doc.css(".sitebody .mainContent .longDescription").text.strip.gsub(/\r\n/, "")
   end
 

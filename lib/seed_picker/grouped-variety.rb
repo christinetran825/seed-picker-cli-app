@@ -1,11 +1,10 @@
 class SeedPicker::Grouped_Variety
 
-  attr_accessor :category_url, :category_description, :category_varieties_url, :category_varieties_name, :category_varieties_description, :category_varieties_price
+  attr_accessor :category_varieties_url, :category_varieties_name, :category_varieties_description, :category_varieties_price
+  
   @@all = []
 
   def initialize #new instances have the below methods/properties
-    @category_url = category_url
-    @category_description = category_description
     @category_varieties_url = category_varieties_url
     @category_varieties_name = category_varieties_name
     @category_varieties_description = category_varieties_description
@@ -19,10 +18,10 @@ class SeedPicker::Grouped_Variety
 
  ############### List ALL VARIETY Seeds ###############
 
-  def self.get_category_variety(group) #getting all grouped variety seeds
+  def self.get_category_variety(variety) #getting all grouped variety seeds
     # binding.pry
     self.all.collect.with_index(1) do |seeds, index|
-      "   #{index}. #{seeds.category_varieties_name}"
+      puts "   #{index}. #{seeds.category_varieties_name}"
     end
   end
 

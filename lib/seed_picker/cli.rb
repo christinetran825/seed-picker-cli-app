@@ -1,7 +1,7 @@
 class SeedPicker::CLI
 
   def call
-    SeedPicker::Scraper.scrape_parent_seeds #CLI calls on the scraper class to tell Nokogiri to scrape the website
+    SeedPicker::Scraper.scrape_parent_seeds
     puts ""
     puts "* * * Welcome to Baker Creek Heirloom Seeds RareSeeds * * * "
     puts ""
@@ -13,7 +13,7 @@ class SeedPicker::CLI
   def start
     puts "Here's our collection of vegetable seeds."
     puts ""
-    puts "------------- Vegetable Seeds -------------"   # user sees a list of vegetable seeds
+    puts "------------- Vegetable Seeds -------------"
     puts SeedPicker::Seeds.listing_all_seeds
     choose_a_parent_seed
   end
@@ -24,14 +24,13 @@ class SeedPicker::CLI
     num = gets.strip.to_i
     case num
     when (1..56)
-      seed = SeedPicker::Seeds.find(num.to_i) #finding num(user's choice of seed) from list of all seeds
-      SeedPicker::Scraper.scrape_variety_seeds(seed) #calls the Scraper.scrape_variety_seeds & passes the user's seed. That seed's details are scraped in that method
-      SeedPicker::Scraper.scrape_parent_seeds_descriptions(seed) #calls the Scraper.scrape_parent_seeds_description & passes the user's seed. That seed's details are scraped in that method
-      SeedPicker::Scraper.scrape_category(seed)
+      seed = SeedPicker::Seeds.find(num.to_i)
+      SeedPicker::Scraper.scrape_variety_seeds(seed)
+      SeedPicker::Scraper.scrape_parent_seeds_descriptions(seed)
         puts ""
         puts "----- Group: #{seed.parent_seed_name[0]} - #{seed.parent_seed_name} ----- "
         puts ""
-        puts "Varieties: " # user sees a list of all parent seeds with an index of 1.
+        puts "Varieties: "
         puts ""
         puts SeedPicker::Varieties.get_varieties(seed).compact
         puts ""
@@ -70,43 +69,41 @@ class SeedPicker::CLI
     num = gets.strip.to_i
     case num
     when (1..56)
-      # binding.pry
       variety = SeedPicker::Varieties.find(num.to_i)
-      group = SeedPicker::Grouped_Variety.find(num.to_i)
-      SeedPicker::Scraper.scrape_category_varieties(group)
+      SeedPicker::Scraper.scrape_category_varieties(variety)
         puts ""
         puts "   -------- Group #{seed.parent_seed_name[0]}: #{seed.parent_seed_name} - #{variety.variety_seed_name} --------"
         puts "   #{variety.variety_seed_name} - Varieties: "
         puts ""
-        puts SeedPicker::Grouped_Variety.get_category_variety(group).compact
-        binding.pry
+        SeedPicker::Grouped_Variety.get_category_variety(variety).compact
         puts ""
-        puts "Main Description: "
-        puts "   #{group.category_description}"
+        puts "Category Description: "
+        SeedPicker::Scraper.scrape_category_varieties_description(variety)
+        puts "   #{variety.category_description}"
         puts ""
-      choose_category_varieties(seed, group)
+      choose_category_varieties(seed, variety)
     else
       choose_category(seed)
     end
   end
 
   ####### Seeds with inconsistent HTML formats - Gourds, Melon, Peppers, Squash, Tomatoes #######
-  def choose_category_varieties(seed, group)
+  def choose_category_varieties(seed, variety)
     puts ""
     puts "   ~ ~ ~ Please choose the category's varieties ~ ~ ~"
     num = gets.strip.to_i
     case num
     when (1..56)
-      SeedPicker::Scraper.scrape_category_varieties_details(group)
+      SeedPicker::Scraper.scrape_category_varieties_details(variety)
         puts ""
-        puts "Price: #{group.category_varieties_price}"
+        puts "Price: #{variety.category_varieties_price}"
         puts ""
         puts "Variety Description:"
-        puts "   #{group.category_varieties_description}"
+        puts "   #{variety.category_varieties_description}"
         puts ""
       go_back_or_finish
     else
-      choose_category_varieties(seed, group)
+      choose_category_varieties(seed, variety)
     end
   end
 

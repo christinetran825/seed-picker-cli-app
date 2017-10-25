@@ -1,12 +1,10 @@
 class SeedPicker::Seeds
 
-  attr_accessor :parent_seed_name, :parent_seed_url, :parent_seed_description
+  attr_accessor :parent_seed_name, :parent_seed_url, :parent_seed_description; :varieties
   @@all = []
 
   def initialize #new instances have the below methods/properties
-    @parent_seed_name = parent_seed_name
-    @parent_seed_url = parent_seed_url
-    @parent_seed_description = parent_seed_description
+    @varieties = []
     @@all << self #all instances get added into @@all array
   end
 
@@ -15,6 +13,10 @@ class SeedPicker::Seeds
   end
 
   ############### Helper Methods ###############
+
+  def self.get_varieties(seed)
+    @varieties << seed
+  end
 
   def self.get_parents #getting all parent seeds
     all_parents = self.all.collect { |seeds| seeds.parent_seed_name }

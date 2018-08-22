@@ -8,7 +8,7 @@ Clone the repository and run `bundle install`.
 
 ## Usage
 
-After installing the gem, run `seed-picker` to begin.
+After installing the gem, run `./bin/seed-picker` to begin.
 
 ## Development
 
